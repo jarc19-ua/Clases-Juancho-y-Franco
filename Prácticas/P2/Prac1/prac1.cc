@@ -91,7 +91,25 @@ void showMenu(){
          << "q- Quit" << endl
          << "Option: ";
 }
-
+void addTeam(){
+    int numeroActualEquipos=5;//no se como mirar el número de equipos
+    if(numeroActualEquipos>kMAXTEAMS){
+        error(ERR_MAX_TEAMS);
+    }
+    else{
+        cout<<"Enter team name: ";
+        string nombre;
+        cin>>nombre;
+        Team equipo1;
+        equipo1.id=0;
+        equipo1.name=nombre;//ver porque da fallo
+        equipo1.wins=0;
+        equipo1.losses=0;
+        equipo1.draws=0;
+        equipo1.points=0;
+        equipo1.players=NULL;//ver porque da fallo
+    }
+}
 // Función principal. Tendrás que añadir más código tuyo
 int main(){
     char option;
