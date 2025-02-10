@@ -125,8 +125,49 @@ Team addTeam(){
     } 
     return equipo;
 }
-void showTeams(){
+void showTeams() {
+    if (teams.empty()) {
+        std::cout << ERR_NO_TEAMS << std::endl;
+        return;
+    }
+
+    std::string teamName;
+    std::cout << "Enter team name: ";
+    std::getline(std::cin, teamName);
+
+    if (teamName.empty()) {// Mostrar información de todos los equipos
+        for (const auto& team : teams) {
+            std::cout << "Name: " << team.name << std::endl;
+            std::cout << "Wins: " << team.wins << std::endl;
+            std::cout << "Losses: " << team.losses << std::endl;
+            std::cout << "Draws: " << team.draws << std::endl;
+            std::cout << "Points: " << team.points << std::endl;
+            for (int i = 0; i < team.players.size(); ++i) {
+                std::cout << team.name << "-R" << i + 1 << ": " << team.players[i].goals << " goals" << std::endl;
+            }
+        }
+    } else {// Buscar el equipo por nombre
+        bool teamFound = false;
+        for (const auto& team : teams) {
+            if (team.name == teamName) {
+                teamFound = true;
+                std::cout << "Name: " << team.name << std::endl;
+                std::cout << "Wins: " << team.wins << std::endl;
+                std::cout << "Losses: " << team.losses << std::endl;
+                std::cout << "Draws: " << team.draws << std::endl;
+                std::cout << "Points: " << team.points << std::endl;
+                for (int i = 0; i < team.players.size(); ++i) {
+                    std::cout << team.name << "-R" << i + 1 << ": " << team.players[i].goals << " goals" << std::endl;
+                }
+                break;
+            }
+        }
+        if (!teamFound) {
+            std::cout << ERR_NOT_EXIST << std::endl;
+        }
+    }
 }
+
 // Función principal. Tendrás que añadir más código tuyo
 int main(){
     char option;
