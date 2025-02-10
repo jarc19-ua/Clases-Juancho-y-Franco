@@ -125,7 +125,8 @@ Team addTeam(){
     } 
     return equipo;
 }
-
+void showTeams(){
+}
 // Función principal. Tendrás que añadir más código tuyo
 int main(){
     char option;
