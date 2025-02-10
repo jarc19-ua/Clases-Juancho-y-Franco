@@ -3,7 +3,7 @@
 #include <cstring> // Para strcpy(), strcat() y strcmp()
 
 using namespace std;
-
+int ID=0;
 const int kTEAMNAME=40; // Máximo tamaño del nombre de un equipo
 const int kPLAYERNAME=50; // Máximo tamaño del nombre de un jugador
 const int kPLAYERS=5; // Número de jugadores por equipo
@@ -91,25 +91,41 @@ void showMenu(){
          << "q- Quit" << endl
          << "Option: ";
 }
-void addTeam(){
+Team addTeam(){
     int numeroActualEquipos=5;//no se como mirar el número de equipos
+    Team equipo;
     if(numeroActualEquipos>kMAXTEAMS){
         error(ERR_MAX_TEAMS);
     }
     else{
         cout<<"Enter team name: ";
-        string nombre;
+        char nombre[kTEAMNAME];
         cin>>nombre;
-        Team equipo1;
-        equipo1.id=0;
-        equipo1.name=nombre;//ver porque da fallo
-        equipo1.wins=0;
-        equipo1.losses=0;
-        equipo1.draws=0;
-        equipo1.points=0;
-        equipo1.players=NULL;//ver porque da fallo
-    }
+        equipo.id=ID;
+        ID++;
+        equipo.name=nombre;//ver porque da fallo
+        equipo.wins=0;
+        equipo.losses=0;
+        equipo.draws=0;
+        equipo.points=0;
+
+        for(int i=0;i<5;i++){
+            Player jugador;
+            string name=equipo.name;
+            char nombre[20]=name;//ver porque da fallo
+            for(int j=0;j<kPLAYERNAME;j++){
+                jugador.name[j]=nombre[j];
+            }
+            jugador.goals=0;
+            jugador.best=false;
+            equipo.players[i]=jugador;
+        }
+
+
+    } 
+    return equipo;
 }
+
 // Función principal. Tendrás que añadir más código tuyo
 int main(){
     char option;
