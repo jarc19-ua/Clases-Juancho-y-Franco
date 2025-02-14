@@ -100,10 +100,23 @@ Team addTeam(){
     else{
         cout<<"Enter team name: ";
         char nombre[kTEAMNAME];
-        cin>>nombre;
+        string nombreEquipo;
+        cin>>nombreEquipo;
         equipo.id=ID;
         ID++;
+
+
+
+//MODIFICACION
         equipo.name=nombre;//ver porque da fallo
+        
+        for (int j = 0; j < nombreEquipo.length(); j++)
+        {
+            equipo.name[j]=nombreEquipo[j];
+        }
+        
+        
+        
         equipo.wins=0;
         equipo.losses=0;
         equipo.draws=0;
@@ -112,7 +125,36 @@ Team addTeam(){
         for(int i=0;i<5;i++){
             Player jugador;
             string name=equipo.name;
-            char nombre[20]=name;//ver porque da fallo
+
+
+
+
+
+
+
+
+
+
+//MODIFICACION
+            char nombre[20];
+            //char nombre[20]=name;//ver porque da fallo
+            
+            
+            for(int j=0;j<name.length();j++)
+            nombre[i]=name[i];
+            
+           
+            
+
+
+
+
+
+
+
+
+
+
             for(int j=0;j<kPLAYERNAME;j++){
                 jugador.name[j]=nombre[j];
             }
