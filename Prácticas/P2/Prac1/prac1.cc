@@ -169,23 +169,23 @@ Team addTeam(){
 }
 void showTeams() {
     if (teams.empty()) {
-        std::cout << ERR_NO_TEAMS << std::endl;
+        cout << ERR_NO_TEAMS << endl;
         return;
     }
 
-    std::string teamName;
-    std::cout << "Enter team name: ";
-    std::getline(std::cin, teamName);
+    string teamName;
+    cout << "Enter team name: ";
+    getline(cin, teamName);
 
     if (teamName.empty()) {// Mostrar información de todos los equipos
         for (const auto& team : teams) {
-            std::cout << "Name: " << team.name << std::endl;
-            std::cout << "Wins: " << team.wins << std::endl;
-            std::cout << "Losses: " << team.losses << std::endl;
-            std::cout << "Draws: " << team.draws << std::endl;
-            std::cout << "Points: " << team.points << std::endl;
+            cout << "Name: " << team.name << endl;
+            cout << "Wins: " << team.wins << endl;
+            cout << "Losses: " << team.losses << endl;
+            cout << "Draws: " << team.draws << endl;
+            cout << "Points: " << team.points << endl;
             for (int i = 0; i < team.players.size(); ++i) {
-                std::cout << team.name << "-R" << i + 1 << ": " << team.players[i].goals << " goals" << std::endl;
+                cout << team.name << "-R" << i + 1 << ": " << team.players[i].goals << " goals" << endl;
             }
         }
     } else {// Buscar el equipo por nombre
@@ -193,19 +193,19 @@ void showTeams() {
         for (const auto& team : teams) {
             if (team.name == teamName) {
                 teamFound = true;
-                std::cout << "Name: " << team.name << std::endl;
-                std::cout << "Wins: " << team.wins << std::endl;
-                std::cout << "Losses: " << team.losses << std::endl;
-                std::cout << "Draws: " << team.draws << std::endl;
-                std::cout << "Points: " << team.points << std::endl;
+                cout << "Name: " << team.name << endl;
+                cout << "Wins: " << team.wins << endl;
+                cout << "Losses: " << team.losses << endl;
+                cout << "Draws: " << team.draws << endl;
+                cout << "Points: " << team.points << endl;
                 for (int i = 0; i < team.players.size(); ++i) {
-                    std::cout << team.name << "-R" << i + 1 << ": " << team.players[i].goals << " goals" << std::endl;
+                    cout << team.name << "-R" << i + 1 << ": " << team.players[i].goals << " goals" << endl;
                 }
                 break;
             }
         }
         if (!teamFound) {
-            std::cout << ERR_NOT_EXIST << std::endl;
+            cout << ERR_NOT_EXIST << endl;
         }
     }
 }
