@@ -1,0 +1,61 @@
+Programación 2 - Autocorrector práctica 1
+=========================================
+
+En primer lugar, hay que descomprimir el autocorrector con el siguiente
+comando en la carpeta donde tengas tu código fuente "prac1.cc":
+
+tar xvfz autocorrector-prac1.tgz
+
+Una vez descomprimido, entra en la carpeta "autocorrector-prac1" y ejecuta
+desde el terminal el siguiente comando:
+
+./autocorrectorP2p1.sh
+
+Este script buscará el fichero "prac1.cc" en la carpta padre y seguirá los
+siguientes pasos para la corrección:
+
+1- Se generan y compilan unos programas auxiliares ("mata" y "comparefiles")
+
+2- Se compila la práctica
+
+3- Se ejecutan las pruebas del directorio "pruebas" y se almacenan los
+resultados en el directorio "salida-obtenida". Se compara la salida obtenida con
+la salida correcta (generada con la práctica de los profesores), que se 
+encuentra en el directorio "salida-correcta-esperada".
+
+El autocorrector usa dos programas auxiliares: "mata", para parar la
+práctica en caso de que se cuelgue, y "comparefiles" para comparar dos
+ficheros de texto sin tener en cuenta espacios, guiones ni saltos de linea.
+Estos programas son generados y compilados por el propio autocorrector. No debes
+tocarlos.
+
+-----------------------------------------------------------
+
+Si alguna prueba da un error cuando se comprueba la salida, se mostrará un
+mensaje parecido al del siguiente ejemplo:
+
+Prueba 1...
+35c35
+< Wins: 21
+---
+> Wins: 14
+
+Esto significa que el programa ha obtenido un resultado distinto del
+esperado. En este ejemplo, el error se ha producido en la línea 35. La
+primera línea (<) se corresponde con la salida de tu práctica, y la
+segunda (>) con la salida correcta que debería haber producido.
+
+El autocorrector ignora las diferencias en los blancos, pero cuando hay
+un error y se muestran las diferencias entre ambas salidas, también aparecen
+como es lógico las diferencias en espacios en blanco, pero no son
+relevantes. Si aparece un mensaje de error, se debe a diferencias en
+otros caracteres que no son espacios en blanco.
+
+-----------------------------------------------------------
+
+NOTA IMPORTANTE: Para que el resultado del autocorrector sea fiable es 
+necesario tener un sistema operativo Linux con valgrind instalado.  En 
+caso de no tener el programa valgrind, puedes instalarlo mediante la 
+siguiente instrucción:
+
+sudo apt-get install valgrind
