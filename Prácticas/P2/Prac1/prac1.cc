@@ -3,13 +3,16 @@
 #include <cstring> // Para strcpy(), strcat() y strcmp()
 
 using namespace std;
+
+// Mis variables globales
 int ID = 0;
+
 const int kTEAMNAME = 40;   // Máximo tamaño del nombre de un equipo
 const int kPLAYERNAME = 50; // Máximo tamaño del nombre de un jugador
 const int kPLAYERS = 5;     // Número de jugadores por equipo
 const int kMAXTEAMS = 20;   // Número máximo de equipos
 const int kMINTEAMS = 2;    // Número mínimo de equipos
-
+Team equipos[kMAXTEAMS];
 // Registro para los jugadores
 struct Player
 {
@@ -108,10 +111,11 @@ void showMenu()
 }
 Team addTeam()
 {
-    int numeroActualEquipos = 5; // no se como mirar el número maximo de equipos
+    // no se como mirar el número maximo de equipos
+    int numeroActualEquipos = sizeof(equipos) / sizeof(equipos[0]);
     Team equipo;
 
-    if (ID > kMAXTEAMS)
+    if (numeroActualEquipos > kMAXTEAMS)
     {
         error(ERR_MAX_TEAMS);
     }
@@ -120,13 +124,13 @@ Team addTeam()
         string nombreEquipo = "";
         cout << "Enter team name: ";
         cin >> nombreEquipo;
-        
+
         equipo.id = ID;
         ID++;
-       
-        if ( (nombreEquipo.length() > kTEAMNAME) || (nombreEquipo.length() == 0))
-        {// Se pone el nombre por defecto
-            nombreEquipo = "Team_"+equipo.id;
+
+        if ((nombreEquipo.length() > kTEAMNAME) || (nombreEquipo.length() == 0))
+        { // Se pone el nombre por defecto
+            nombreEquipo = "Team_" + equipo.id;
         }
 
         // O bien se asigna el nombre por defecto o bien un nombre valido introducido por el usuario
@@ -135,44 +139,44 @@ Team addTeam()
             equipo.name[j] = nombreEquipo[j];
         }
 
-/* Antes
-        if ( (nombreEquipo.length() > kTEAMNAME) || (nombreEquipo.length() == 0))
-        {
-            // Se pone el nombre por defecto
-           
-            nombreEquipo = "Team_"+equipo.id;
-                       
-            for (int j = 0; j < nombreEquipo.length(); j++)
-            {
-                equipo.name[j] = nombreEquipo[j];
-            }
-            
-        }
-        else
-        {
-           
-            for (int j = 0; j < nombreEquipo.length(); j++)
-            {
-                equipo.name[j] = nombreEquipo[j];
-            }
+        /* Antes
+                if ( (nombreEquipo.length() > kTEAMNAME) || (nombreEquipo.length() == 0))
+                {
+                    // Se pone el nombre por defecto
 
-        }
+                    nombreEquipo = "Team_"+equipo.id;
 
-*/
+                    for (int j = 0; j < nombreEquipo.length(); j++)
+                    {
+                        equipo.name[j] = nombreEquipo[j];
+                    }
+
+                }
+                else
+                {
+
+                    for (int j = 0; j < nombreEquipo.length(); j++)
+                    {
+                        equipo.name[j] = nombreEquipo[j];
+                    }
+
+                }
+
+        */
 
         equipo.wins = 0;
         equipo.losses = 0;
         equipo.draws = 0;
         equipo.points = 0;
-        
 
-        for (int i = 0; i < kPLAYERS; i++)//bucle añadir jugadores
+        for (int i = 0; i < kPLAYERS; i++) // bucle añadir jugadores
         {
             Player jugador;
             string nombreJugador = equipo.name;
-            nombreJugador+="-R"+(i+1);
+            nombreJugador += "-R" + (i + 1);
 
-            for (int j = 0; j < nombreJugador.length(); j++){
+            for (int j = 0; j < nombreJugador.length(); j++)
+            {
                 jugador.name[j] = nombreJugador[i];
             }
 
@@ -181,39 +185,40 @@ Team addTeam()
             equipo.players[i] = jugador;
         }
     }
+
     return equipo;
 }
 void showTeams()
 {
-    if (teams.empty())
+    int numeroActualEquipos = sizeof(equipos) / sizeof(equipos[0]);
+    if (numeroActualEquipos == 0)
     {
-        cout << ERR_NO_TEAMS << endl;
-        return;
+        error( ERR_NO_TEAMS);
+        
     }
 
     string teamName;
     cout << "Enter team name: ";
-    getline(cin, teamName);
-
+    cin >> teamName;
     if (teamName.empty())
     { // Mostrar información de todos los equipos
-        for (const auto &team : teams)
+        for (Team team : equipos)
         {
             cout << "Name: " << team.name << endl;
             cout << "Wins: " << team.wins << endl;
             cout << "Losses: " << team.losses << endl;
             cout << "Draws: " << team.draws << endl;
             cout << "Points: " << team.points << endl;
-            for (int i = 0; i < team.players.size(); ++i)
+            for (Player player : team.players)
             {
-                cout << team.name << "-R" << i + 1 << ": " << team.players[i].goals << " goals" << endl;
+                cout << player.name << ": " << player.goals << " goals" << endl;
             }
         }
     }
     else
     { // Buscar el equipo por nombre
         bool teamFound = false;
-        for (const auto &team : teams)
+        for (Team team : equipos)
         {
             if (team.name == teamName)
             {
@@ -223,20 +228,55 @@ void showTeams()
                 cout << "Losses: " << team.losses << endl;
                 cout << "Draws: " << team.draws << endl;
                 cout << "Points: " << team.points << endl;
-                for (int i = 0; i < team.players.size(); ++i)
+                for (Player player : team.players)
                 {
-                    cout << team.name << "-R" << i + 1 << ": " << team.players[i].goals << " goals" << endl;
+                    cout << player.name << ": " << player.goals << " goals" << endl;
                 }
-                break;
             }
         }
+
         if (!teamFound)
         {
-            cout << ERR_NOT_EXIST << endl;
+           error(ERR_NOT_EXIST );
         }
     }
 }
+void deleteTeam(){
+    int numeroActualEquipos = sizeof(equipos) / sizeof(equipos[0]);
+    if (numeroActualEquipos == 0)
+    {
+        error( ERR_NO_TEAMS);
+    }
+    string teamName;
+    cout << "Enter team name: ";
+    cin >> teamName;
+   
+    if (teamName.empty())
+    {
+        error(ERR_EMPTY);
+    }
 
+    
+        bool teamFound = false;
+        for (Team team : equipos)
+        {
+            if (team.name == teamName)
+            {
+                teamFound = true;
+
+                for(int i=0;i<kPLAYERS;i++){
+                    team.players[i] = NULL;////HAY QUE MIRAR ESTO
+                }
+               
+            }
+        }
+
+        if (!teamFound)
+        {
+           error(ERR_NOT_EXIST );
+        }
+    
+}
 // Función principal. Tendrás que añadir más código tuyo
 int main()
 {
