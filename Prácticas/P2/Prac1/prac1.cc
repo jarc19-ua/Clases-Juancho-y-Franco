@@ -432,7 +432,7 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
         }
     }
 }
-
+void Funcion(){}
 // Función principal. Tendrás que añadir más código tuyo
 int main()
 {
