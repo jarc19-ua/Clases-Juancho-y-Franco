@@ -453,13 +453,16 @@ int main()
         switch (option)
         {
         case '1': // Llamar a la función "addTeam" para añadir un nuevo equipo
-        /*Holiwis*/
+        addTeam(contadorActualEquipos, ID, equipos);
             break;
         case '2': // Llamar a la función "addAllTeams" para añadir todos los equipos de una vez
+        addAllTeams(contadorActualEquipos, ID, equipos);
             break;
         case '3': // Llamar a la función "deleteTeam" para borrar un equipo
+        deleteTeam(contadorActualEquipos, equipos);
             break;
         case '4': // Llamar a la función "showTeams" para mostrar los datos de los equipos
+        showTeams(contadorActualEquipos, equipos);
             break;
         case '5': // Llamar a la función "playLeague" para simular los resultados de la competición
             break;
