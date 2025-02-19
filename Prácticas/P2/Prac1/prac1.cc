@@ -317,9 +317,39 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
                 }
                 for (int i = 0; i < numeroEquipos; i++)
                 {
-                    /* code */
+
+                    Team equipo;
+                    equipo.id = ID;
+
+                    string nombreEquipo = "Team_" + equipo.id;
+                    ID++;
+                    for (int j = 0; j < nombreEquipo.length(); j++)
+                    {
+                        equipo.name[j] = nombreEquipo[j];
+                    }
+
+                    equipo.wins = 0;
+                    equipo.losses = 0;
+                    equipo.draws = 0;
+                    equipo.points = 0;
+
+                    for (int i = 0; i < kPLAYERS; i++) // bucle añadir jugadores
+                    {
+                        Player jugador;
+                        string nombreJugador = equipo.name;
+                        nombreJugador += "-R" + (i + 1);
+
+                        for (int j = 0; j < nombreJugador.length(); j++)
+                        {
+                            jugador.name[j] = nombreJugador[i];
+                        }
+
+                        jugador.goals = 0;
+                        jugador.best = false;
+                        equipo.players[i] = jugador;
+                    }
+                    equipos.push_back(equipo);
                 }
-                
             }
             if (opcion == "N" || opcion == "n")
             {
@@ -350,6 +380,56 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
     }
     else
     {
+        int numeroEquipos;
+        bool numeroCorrecto = false;
+        while (!numeroCorrecto)
+        {
+            cout << "Enter number of teams: ";
+            cin >> numeroEquipos;
+            if (numeroEquipos < 2 || numeroEquipos > 20)
+            {
+                error(ERR_NUM_TEAMS);
+            }
+            else
+            {
+                numeroCorrecto = true;
+            }
+        }
+        for (int i = 0; i < numeroEquipos; i++)
+        {
+
+            Team equipo;
+            equipo.id = ID;
+
+            string nombreEquipo = "Team_" + equipo.id;
+            ID++;
+            for (int j = 0; j < nombreEquipo.length(); j++)
+            {
+                equipo.name[j] = nombreEquipo[j];
+            }
+
+            equipo.wins = 0;
+            equipo.losses = 0;
+            equipo.draws = 0;
+            equipo.points = 0;
+
+            for (int i = 0; i < kPLAYERS; i++) // bucle añadir jugadores
+            {
+                Player jugador;
+                string nombreJugador = equipo.name;
+                nombreJugador += "-R" + (i + 1);
+
+                for (int j = 0; j < nombreJugador.length(); j++)
+                {
+                    jugador.name[j] = nombreJugador[i];
+                }
+
+                jugador.goals = 0;
+                jugador.best = false;
+                equipo.players[i] = jugador;
+            }
+            equipos.push_back(equipo);
+        }
     }
 }
 
