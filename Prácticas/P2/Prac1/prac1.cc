@@ -1,18 +1,15 @@
 #include <iostream>
 #include <cstdlib> // Para rand() y srand()
 #include <cstring> // Para strcpy(), strcat() y strcmp()
-
+#include <vector>
 using namespace std;
-
-// Mis variables globales
-int ID = 0;
 
 const int kTEAMNAME = 40;   // Máximo tamaño del nombre de un equipo
 const int kPLAYERNAME = 50; // Máximo tamaño del nombre de un jugador
 const int kPLAYERS = 5;     // Número de jugadores por equipo
 const int kMAXTEAMS = 20;   // Número máximo de equipos
 const int kMINTEAMS = 2;    // Número mínimo de equipos
-Team equipos[kMAXTEAMS];
+
 // Registro para los jugadores
 struct Player
 {
@@ -109,13 +106,10 @@ void showMenu()
          << "q- Quit" << endl
          << "Option: ";
 }
-Team addTeam()
+void addTeam(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
 {
-    // no se como mirar el número maximo de equipos
-    int numeroActualEquipos = sizeof(equipos) / sizeof(equipos[0]);
-    Team equipo;
 
-    if (numeroActualEquipos > kMAXTEAMS)
+    if (contadorActualEquipos > kMAXTEAMS)
     {
         error(ERR_MAX_TEAMS);
     }
@@ -124,11 +118,11 @@ Team addTeam()
         string nombreEquipo = "";
         cout << "Enter team name: ";
         cin >> nombreEquipo;
-
+        Team equipo;
         equipo.id = ID;
         ID++;
 
-        if ((nombreEquipo.length() > kTEAMNAME) || (nombreEquipo.length() == 0))
+        if ((nombreEquipo.length() == 0))
         { // Se pone el nombre por defecto
             nombreEquipo = "Team_" + equipo.id;
         }
@@ -184,17 +178,15 @@ Team addTeam()
             jugador.best = false;
             equipo.players[i] = jugador;
         }
+        equipos.push_back(equipo);
     }
-
-    return equipo;
 }
-void showTeams()
+void showTeams(int &contadorActualEquipos, vector<Team> &equipos)
 {
-    int numeroActualEquipos = sizeof(equipos) / sizeof(equipos[0]);
-    if (numeroActualEquipos == 0)
+
+    if (contadorActualEquipos == 0)
     {
-        error( ERR_NO_TEAMS);
-        
+        error(ERR_NO_TEAMS);
     }
 
     string teamName;
@@ -237,49 +229,137 @@ void showTeams()
 
         if (!teamFound)
         {
-           error(ERR_NOT_EXIST );
+            error(ERR_NOT_EXIST);
         }
     }
 }
-void deleteTeam(){
-    int numeroActualEquipos = sizeof(equipos) / sizeof(equipos[0]);
-    if (numeroActualEquipos == 0)
-    {
-        error( ERR_NO_TEAMS);
-    }
-    string teamName;
-    cout << "Enter team name: ";
-    cin >> teamName;
-   
-    if (teamName.empty())
-    {
-        error(ERR_EMPTY);
-    }
+void deleteTeam(int &contadorActualEquipos, vector<Team> &equipos)
+{
 
-    
-        bool teamFound = false;
-        for (Team team : equipos)
+    if (contadorActualEquipos == 0)
+    {
+        error(ERR_NO_TEAMS);
+    }
+    else
+    {
+        string teamName;
+        cout << "Enter team name: ";
+        cin >> teamName;
+
+        if (teamName.empty())
         {
-            if (team.name == teamName)
+            error(ERR_EMPTY);
+        }
+        else
+        {
+            bool teamFound = false;
+            for (int i = 0; i < equipos.size(); i++)
             {
-                teamFound = true;
-
-                for(int i=0;i<kPLAYERS;i++){
-                    team.players[i] = NULL;////HAY QUE MIRAR ESTO
+                if (equipos[i].name == teamName)
+                {
+                    equipos.erase(equipos.begin() + i);
+                    teamFound = true;
+                    contadorActualEquipos--;
                 }
-               
+            }
+
+            /*
+                        for (Team team : equipos)
+                        {
+                            if (team.name == teamName)
+                            {
+                                teamFound = true;
+                                contadorActualEquipos--;
+                                for (int i = 0; i < kPLAYERS; i++)
+                                {
+                                    team.players[i] = NULL; ////HAY QUE MIRAR ESTO
+                                }
+                            }
+                        }
+
+                        */
+            if (!teamFound)
+            {
+                error(ERR_NOT_EXIST);
             }
         }
-
-        if (!teamFound)
-        {
-           error(ERR_NOT_EXIST );
-        }
-    
+    }
 }
+void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
+{
+    if (equipos.size() > 0)
+    {
+        string opcion;
+        bool opcionCorrecta = false;
+        while (!opcionCorrecta)
+        {
+            cout << "Do you want to delete existing teams (y/n)?";
+            cin >> opcion;
+
+            if (opcion == "y" || opcion == "Y")
+            {
+                opcionCorrecta = true;
+                equipos.clear();
+                int numeroEquipos;
+                bool numeroCorrecto = false;
+                while (!numeroCorrecto)
+                {
+                    cout << "Enter number of teams: ";
+                    cin >> numeroEquipos;
+                    if (numeroEquipos < 2 || numeroEquipos > 20)
+                    {
+                        error(ERR_NUM_TEAMS);
+                    }
+                    else
+                    {
+                        numeroCorrecto = true;
+                    }
+                }
+                for (int i = 0; i < numeroEquipos; i++)
+                {
+                    /* code */
+                }
+                
+            }
+            if (opcion == "N" || opcion == "n")
+            {
+                opcionCorrecta = true;
+                // Volver al menu principal
+            }
+        }
+        /*
+        cout<< "Do you want to delete existing teams (y/n)?";
+        cin>>opcion;
+
+        if(opcion == "y" || opcion == "Y"){
+            equipos.clear();
+            int numeroEquipos;
+            cout<<"Enter number of teams: ";
+            cin>>numeroEquipos;
+            if (numeroEquipos < 2 || numeroEquipos>20)
+            {
+                error(ERR_NUM_TEAMS);
+            }
+
+
+        }
+        if(opcion == "N" || opcion == "n"){
+            //Volver al menu principal
+        }
+    */
+    }
+    else
+    {
+    }
+}
+
 // Función principal. Tendrás que añadir más código tuyo
 int main()
 {
+
+    int ID = 0;
+    vector<Team> equipos;
+    int contadorActualEquipos = 0;
     char option;
 
     srand(888); // Fija la semilla del generador de números aleatorios. ¡NO TOCAR!
