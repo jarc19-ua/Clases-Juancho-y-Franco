@@ -433,6 +433,15 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
         }
     }
 }
+bool miComparacion(Team eq1, Team eq2) {
+    bool resultado;
+    if ( eq1.points < eq2.points) {
+      resultado = false;
+    } else {
+       resultado = true;
+    }
+    return resultado;
+  }
 void showStandings(vector<Team> &equipos, bool league){
     if (!league)
     {
@@ -440,8 +449,14 @@ void showStandings(vector<Team> &equipos, bool league){
     }
     else
     {
-        vector<Team> equiposOrdenados;
+        vector<Team> equiposOrdenados = equipos;
+        sort(equiposOrdenados.begin(),equiposOrdenados.end(),miComparacion);
 
+        for (int i = 0; i < equiposOrdenados.size(); i++)
+        {
+            cout<< equiposOrdenados[i].name<<"|"<<equiposOrdenados[i].wins<<"|"<<equiposOrdenados[i].draws<<"|"<<equiposOrdenados[i].losses<<"|"<<equiposOrdenados[i].points<<endl;
+        }
+        
 
     }
 }
