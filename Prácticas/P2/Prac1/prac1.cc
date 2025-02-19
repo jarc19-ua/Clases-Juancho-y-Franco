@@ -207,6 +207,7 @@ void showTeams(int &contadorActualEquipos, vector<Team> &equipos)
                 cout << player.name << ": " << player.goals << " goals" << endl;
             }
         }
+        
     }
     else
     { // Buscar el equipo por nombre
@@ -492,7 +493,7 @@ int main()
     vector<Team> equipos;
     int contadorActualEquipos = 0;
     char option;
-
+    bool league = true; /*Falta implementar este boleano*/
     srand(888); // Fija la semilla del generador de números aleatorios. ¡NO TOCAR!
 
     do
@@ -518,8 +519,10 @@ int main()
         case '5': // Llamar a la función "playLeague" para simular los resultados de la competición
             break;
         case '6': // Llamar a la función "showStandings" para mostrar la clasificación final
+        showStandings(equipos, league);
             break;
         case '7': // Llamar a la función "showBestPlayers" para mostrar los mejores jugadores de cada equipo
+        showBestPlayers(equipos, league);
             break;
         case 'q':
             break;
