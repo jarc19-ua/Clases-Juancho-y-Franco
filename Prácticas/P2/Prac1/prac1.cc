@@ -2,6 +2,7 @@
 #include <cstdlib> // Para rand() y srand()
 #include <cstring> // Para strcpy(), strcat() y strcmp()
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 const int kTEAMNAME = 40;   // Máximo tamaño del nombre de un equipo
@@ -432,9 +433,21 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
         }
     }
 }
-void showBestPlayers(vector<Team> &equipos){
+void showStandings(vector<Team> &equipos, bool league){
+    if (!league)
+    {
+        error(ERR_NO_LEAGUE);
+    }
+    else
+    {
+        vector<Team> equiposOrdenados;
+
+
+    }
+}
+void showBestPlayers(vector<Team> &equipos, bool league){
    
-    if (/*No se ha jugado competicion*/)
+    if (!league)
     {
         error(ERR_NO_LEAGUE);
     }
@@ -442,11 +455,19 @@ void showBestPlayers(vector<Team> &equipos){
     {
         for (int i = 0; i < equipos.size(); i++)
         {
-            //////////////////////////////////////////////////////////////////////////////////////////////////
-        }
-        
+            int maxGoles = 0;
+            string nombre;
+            for (int j = 0; j < 5; j++)
+            {
+                if (equipos[i].players[j].goals>maxGoles)
+                {
+                    maxGoles = equipos[i].players[j].goals;
+                    nombre = equipos[i].players[j].name;
+                }
+            }
+            cout<<equipos[i].name<<"|"<<nombre<<"|"<<maxGoles;   
+        }   
     }
-    
 }
 // Función principal. Tendrás que añadir más código tuyo
 int main()
