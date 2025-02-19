@@ -432,7 +432,22 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
         }
     }
 }
-void Funcion(){}
+void showBestPlayers(vector<Team> &equipos){
+   
+    if (/*No se ha jugado competicion*/)
+    {
+        error(ERR_NO_LEAGUE);
+    }
+    else
+    {
+        for (int i = 0; i < equipos.size(); i++)
+        {
+            //////////////////////////////////////////////////////////////////////////////////////////////////
+        }
+        
+    }
+    
+}
 // Función principal. Tendrás que añadir más código tuyo
 int main()
 {
