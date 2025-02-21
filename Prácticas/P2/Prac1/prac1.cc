@@ -3,6 +3,7 @@
 #include <cstring> // Para strcpy(), strcat() y strcmp()
 #include <vector>
 #include <algorithm>
+#include <bits/stdio2.h>
 using namespace std;
 
 const int kTEAMNAME = 40;   // Máximo tamaño del nombre de un equipo
@@ -116,22 +117,19 @@ void addTeam(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
     }
     else
     {
-        string nombreEquipo = "";
+        char nombreEquipo[kTEAMNAME];
         cout << "Enter team name: ";
         cin >> nombreEquipo;
+
         Team equipo;
         equipo.id = ID;
         ID++;
 
-        if ((nombreEquipo.length() == 0))
-        { // Se pone el nombre por defecto
-            nombreEquipo = "Team_" + equipo.id;
-        }
-
-        // O bien se asigna el nombre por defecto o bien un nombre valido introducido por el usuario
-        for (int j = 0; j < nombreEquipo.length(); j++)
+        cout << "Enter team name:";
+        cin.getline(equipos[contadorActualEquipos].name, kTEAMNAME);
+        if (strlen(equipos[contadorActualEquipos].name) == 0)
         {
-            equipo.name[j] = nombreEquipo[j];
+            sprintf(equipos[contadorActualEquipos].name, "Team_%d", equipo.id);
         }
 
         /* Antes
@@ -166,18 +164,9 @@ void addTeam(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
 
         for (int i = 0; i < kPLAYERS; i++) // bucle añadir jugadores
         {
-            Player jugador;
-            string nombreJugador = equipo.name;
-            nombreJugador += "-R" + (i + 1);
-
-            for (int j = 0; j < nombreJugador.length(); j++)
-            {
-                jugador.name[j] = nombreJugador[i];
-            }
-
-            jugador.goals = 0;
-            jugador.best = false;
-            equipo.players[i] = jugador;
+            sprintf(equipo.players[i].name, "%s-R%d", equipo.name, i + 1);
+            equipo.players[i].goals = 0;
+            equipo.players[i].best = false;
         }
         equipos.push_back(equipo);
     }
@@ -190,45 +179,45 @@ void showTeams(int &contadorActualEquipos, vector<Team> &equipos)
         error(ERR_NO_TEAMS);
     }
 
-    string teamName;
+    char teamName[kTEAMNAME];
     cout << "Enter team name: ";
-    cin >> teamName;
-    if (teamName.empty())
+    cin.getline(teamName, kTEAMNAME);
+    if (strlen(teamName) == 0)
     { // Mostrar información de todos los equipos
-        for (Team team : equipos)
+
+        for (int i = 0; i < equipos.size(); i++)
         {
-            cout << "Name: " << team.name << endl;
-            cout << "Wins: " << team.wins << endl;
-            cout << "Losses: " << team.losses << endl;
-            cout << "Draws: " << team.draws << endl;
-            cout << "Points: " << team.points << endl;
-            for (Player player : team.players)
+            cout << "Name: " << equipos[i].name << endl;
+            cout << "Wins: " << equipos[i].wins << endl;
+            cout << "Losses: " << equipos[i].losses << endl;
+            cout << "Draws: " << equipos[i].draws << endl;
+            cout << "Points: " << equipos[i].points << endl;
+            for (int j = 0; j < kPLAYERS; j++)
             {
-                cout << player.name << ": " << player.goals << " goals" << endl;
+                cout << equipos[i].players[j].name << ": " << equipos[i].players[j].goals << " goals" << endl;
             }
         }
-        
     }
     else
     { // Buscar el equipo por nombre
         bool teamFound = false;
-        for (Team team : equipos)
+ 
+        for (int i = 0; i < equipos.size(); i++)
         {
-            if (team.name == teamName)
+            if (strcmp(equipos[i].name, teamName) == 0)
             {
-                teamFound = true;
-                cout << "Name: " << team.name << endl;
-                cout << "Wins: " << team.wins << endl;
-                cout << "Losses: " << team.losses << endl;
-                cout << "Draws: " << team.draws << endl;
-                cout << "Points: " << team.points << endl;
-                for (Player player : team.players)
+                teamFound=true;
+                cout << "Name: " << equipos[i].name << endl;
+                cout << "Wins: " << equipos[i].wins << endl;
+                cout << "Losses: " << equipos[i].losses << endl;
+                cout << "Draws: " << equipos[i].draws << endl;
+                cout << "Points: " << equipos[i].points << endl;
+                for (int j = 0; j < kPLAYERS; j++)
                 {
-                    cout << player.name << ": " << player.goals << " goals" << endl;
+                    cout << equipos[i].players[j].name << ": " << equipos[i].players[j].goals << " goals" << endl;
                 }
             }
         }
-
         if (!teamFound)
         {
             error(ERR_NOT_EXIST);
@@ -244,11 +233,11 @@ void deleteTeam(int &contadorActualEquipos, vector<Team> &equipos)
     }
     else
     {
-        string teamName;
+        char teamName[kTEAMNAME];
         cout << "Enter team name: ";
-        cin >> teamName;
+        cin.getline(teamName, kTEAMNAME);
 
-        if (teamName.empty())
+        if (strlen(teamName) == 0)
         {
             error(ERR_EMPTY);
         }
@@ -291,14 +280,14 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
 {
     if (equipos.size() > 0)
     {
-        string opcion;
+        char opcion;
         bool opcionCorrecta = false;
         while (!opcionCorrecta)
         {
             cout << "Do you want to delete existing teams (y/n)?";
             cin >> opcion;
 
-            if (opcion == "y" || opcion == "Y")
+            if (opcion == 'y' || opcion == 'Y')
             {
                 opcionCorrecta = true;
                 equipos.clear();
@@ -319,41 +308,32 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
                 }
                 for (int i = 0; i < numeroEquipos; i++)
                 {
-
                     Team equipo;
                     equipo.id = ID;
 
-                    string nombreEquipo = "Team_" + equipo.id;
                     ID++;
-                    for (int j = 0; j < nombreEquipo.length(); j++)
-                    {
-                        equipo.name[j] = nombreEquipo[j];
-                    }
 
                     equipo.wins = 0;
                     equipo.losses = 0;
                     equipo.draws = 0;
                     equipo.points = 0;
 
+                    char nombreEquipo[kTEAMNAME];
+                    Team equipo;
+                    equipo.id = ID;
+                    ID++;
+                    sprintf(equipos[contadorActualEquipos].name, "Team_%d", equipo.id);
+
                     for (int i = 0; i < kPLAYERS; i++) // bucle añadir jugadores
                     {
-                        Player jugador;
-                        string nombreJugador = equipo.name;
-                        nombreJugador += "-R" + (i + 1);
-
-                        for (int j = 0; j < nombreJugador.length(); j++)
-                        {
-                            jugador.name[j] = nombreJugador[i];
-                        }
-
-                        jugador.goals = 0;
-                        jugador.best = false;
-                        equipo.players[i] = jugador;
+                        sprintf(equipo.players[i].name, "%s-R%d", equipo.name, i + 1);
+                        equipo.players[i].goals = 0;
+                        equipo.players[i].best = false;
                     }
                     equipos.push_back(equipo);
                 }
             }
-            if (opcion == "N" || opcion == "n")
+            if (opcion == 'N' || opcion == 'n')
             {
                 opcionCorrecta = true;
                 // Volver al menu principal
@@ -399,51 +379,47 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
         }
         for (int i = 0; i < numeroEquipos; i++)
         {
-
             Team equipo;
             equipo.id = ID;
 
-            string nombreEquipo = "Team_" + equipo.id;
             ID++;
-            for (int j = 0; j < nombreEquipo.length(); j++)
-            {
-                equipo.name[j] = nombreEquipo[j];
-            }
 
             equipo.wins = 0;
             equipo.losses = 0;
             equipo.draws = 0;
             equipo.points = 0;
 
+            char nombreEquipo[kTEAMNAME];
+            Team equipo;
+            equipo.id = ID;
+            ID++;
+            sprintf(equipos[contadorActualEquipos].name, "Team_%d", equipo.id);
+
             for (int i = 0; i < kPLAYERS; i++) // bucle añadir jugadores
             {
-                Player jugador;
-                string nombreJugador = equipo.name;
-                nombreJugador += "-R" + (i + 1);
-
-                for (int j = 0; j < nombreJugador.length(); j++)
-                {
-                    jugador.name[j] = nombreJugador[i];
-                }
-
-                jugador.goals = 0;
-                jugador.best = false;
-                equipo.players[i] = jugador;
+                sprintf(equipo.players[i].name, "%s-R%d", equipo.name, i + 1);
+                equipo.players[i].goals = 0;
+                equipo.players[i].best = false;
             }
             equipos.push_back(equipo);
         }
     }
 }
-bool miComparacion(Team eq1, Team eq2) {
+bool miComparacion(Team eq1, Team eq2)
+{
     bool resultado;
-    if ( eq1.points < eq2.points) {
-      resultado = false;
-    } else {
-       resultado = true;
+    if (eq1.points < eq2.points)
+    {
+        resultado = false;
+    }
+    else
+    {
+        resultado = true;
     }
     return resultado;
-  }
-void showStandings(vector<Team> &equipos, bool league){
+}
+void showStandings(vector<Team> &equipos, bool league)
+{
     if (!league)
     {
         error(ERR_NO_LEAGUE);
@@ -451,18 +427,79 @@ void showStandings(vector<Team> &equipos, bool league){
     else
     {
         vector<Team> equiposOrdenados = equipos;
-        sort(equiposOrdenados.begin(),equiposOrdenados.end(),miComparacion);
+        //sort(equiposOrdenados.begin(), equiposOrdenados.end(), miComparacion);
 
-        for (int i = 0; i < equiposOrdenados.size(); i++)
+        for (int i = 1; i < equipos.size(); i++)
         {
-            cout<< equiposOrdenados[i].name<<"|"<<equiposOrdenados[i].wins<<"|"<<equiposOrdenados[i].draws<<"|"<<equiposOrdenados[i].losses<<"|"<<equiposOrdenados[i].points<<endl;
+            for (int j = equipos.size()-1; j >=i; j--)
+            {
+                if (equiposOrdenados[j].points > equiposOrdenados[j-1].points)
+                {
+                    Team aux = equiposOrdenados[j];
+                    equiposOrdenados[j] = equiposOrdenados[j-1];
+                    equiposOrdenados[j-1] = aux;
+                }
+                
+            }
+            
         }
         
 
+
+
+
+        for(int i = 1; i < numTeams; i++){
+            for(int j = numTeams - 1; j >= i; j--){ //arrastra el mayor hasta la posicion i - 1
+                if(ordenado[j].points > ordenado[j-1].points){
+                    Team aux = ordenado[j];
+                    ordenado[j] = ordenado[j-1];
+                    ordenado[j-1] = aux;
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        for (int i = 0; i < equiposOrdenados.size(); i++)
+        {
+            cout << equiposOrdenados[i].name << "|" << equiposOrdenados[i].wins << "|" << equiposOrdenados[i].draws << "|" << equiposOrdenados[i].losses << "|" << equiposOrdenados[i].points << endl;
+        }
     }
 }
-void showBestPlayers(vector<Team> &equipos, bool league){
-   
+void showBestPlayers(vector<Team> &equipos, bool league)
+{
+
     if (!league)
     {
         error(ERR_NO_LEAGUE);
@@ -471,18 +508,16 @@ void showBestPlayers(vector<Team> &equipos, bool league){
     {
         for (int i = 0; i < equipos.size(); i++)
         {
-            int maxGoles = 0;
-            string nombre;
+
             for (int j = 0; j < 5; j++)
             {
-                if (equipos[i].players[j].goals>maxGoles)
+                if (equipos[i].players[j].best)
                 {
-                    maxGoles = equipos[i].players[j].goals;
-                    nombre = equipos[i].players[j].name;
+                    cout << equipos[i].name << "|" << equipos[i].players[i].name << "|" << equipos[i].players[i].goals;
                 }
             }
-            cout<<equipos[i].name<<"|"<<nombre<<"|"<<maxGoles;   
-        }   
+            // cout<<equipos[i].name<<"|"<<nombre<<"|"<<maxGoles;
+        }
     }
 }
 // Función principal. Tendrás que añadir más código tuyo
@@ -494,7 +529,7 @@ int main()
     int contadorActualEquipos = 0;
     char option;
     bool league = true; /*Falta implementar este boleano*/
-    srand(888); // Fija la semilla del generador de números aleatorios. ¡NO TOCAR!
+    srand(888);         // Fija la semilla del generador de números aleatorios. ¡NO TOCAR!
 
     do
     {
@@ -505,24 +540,24 @@ int main()
         switch (option)
         {
         case '1': // Llamar a la función "addTeam" para añadir un nuevo equipo
-        addTeam(contadorActualEquipos, ID, equipos);
+            addTeam(contadorActualEquipos, ID, equipos);
             break;
         case '2': // Llamar a la función "addAllTeams" para añadir todos los equipos de una vez
-        addAllTeams(contadorActualEquipos, ID, equipos);
+            addAllTeams(contadorActualEquipos, ID, equipos);
             break;
         case '3': // Llamar a la función "deleteTeam" para borrar un equipo
-        deleteTeam(contadorActualEquipos, equipos);
+            deleteTeam(contadorActualEquipos, equipos);
             break;
         case '4': // Llamar a la función "showTeams" para mostrar los datos de los equipos
-        showTeams(contadorActualEquipos, equipos);
+            showTeams(contadorActualEquipos, equipos);
             break;
         case '5': // Llamar a la función "playLeague" para simular los resultados de la competición
             break;
         case '6': // Llamar a la función "showStandings" para mostrar la clasificación final
-        showStandings(equipos, league);
+            showStandings(equipos, league);
             break;
         case '7': // Llamar a la función "showBestPlayers" para mostrar los mejores jugadores de cada equipo
-        showBestPlayers(equipos, league);
+            showBestPlayers(equipos, league);
             break;
         case 'q':
             break;
