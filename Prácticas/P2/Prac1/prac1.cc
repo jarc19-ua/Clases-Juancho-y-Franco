@@ -117,45 +117,24 @@ void addTeam(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
     }
     else
     {
-        char nombreEquipo[kTEAMNAME];
+      /* char nombreEquipo[kTEAMNAME];
         cout << "Enter team name: ";
-        cin >> nombreEquipo;
+        cin >> nombreEquipo;*/
 
         Team equipo;
         equipo.id = ID;
         ID++;
 
         cout << "Enter team name:";
+        
+       
         cin.getline(equipos[contadorActualEquipos].name, kTEAMNAME);
+       
         if (strlen(equipos[contadorActualEquipos].name) == 0)
         {
             sprintf(equipos[contadorActualEquipos].name, "Team_%d", equipo.id);
         }
 
-        /* Antes
-                if ( (nombreEquipo.length() > kTEAMNAME) || (nombreEquipo.length() == 0))
-                {
-                    // Se pone el nombre por defecto
-
-                    nombreEquipo = "Team_"+equipo.id;
-
-                    for (int j = 0; j < nombreEquipo.length(); j++)
-                    {
-                        equipo.name[j] = nombreEquipo[j];
-                    }
-
-                }
-                else
-                {
-
-                    for (int j = 0; j < nombreEquipo.length(); j++)
-                    {
-                        equipo.name[j] = nombreEquipo[j];
-                    }
-
-                }
-
-        */
 
         equipo.wins = 0;
         equipo.losses = 0;
