@@ -311,7 +311,6 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
                 {
                     Team equipo;
                     equipo.id = ID;
-
                     ID++;
 
                     equipo.wins = 0;
@@ -320,10 +319,8 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
                     equipo.points = 0;
 
                     char nombreEquipo[kTEAMNAME];
-                    Team equipo;
-                    equipo.id = ID;
-                    ID++;
-                    sprintf(equipos[contadorActualEquipos].name, "Team_%d", equipo.id);
+                    
+                    sprintf(equipo.name, "Team_%d", equipo.id);
 
                     for (int i = 0; i < kPLAYERS; i++) // bucle añadir jugadores
                     {
@@ -391,10 +388,8 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
             equipo.points = 0;
 
             char nombreEquipo[kTEAMNAME];
-            Team equipo;
-            equipo.id = ID;
-            ID++;
-            sprintf(equipos[contadorActualEquipos].name, "Team_%d", equipo.id);
+           
+            sprintf(equipo.name, "Team_%d", equipo.id);
 
             for (int i = 0; i < kPLAYERS; i++) // bucle añadir jugadores
             {
