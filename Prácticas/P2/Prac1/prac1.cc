@@ -186,7 +186,7 @@ void showTeams(int &contadorActualEquipos, vector<Team> &equipos)
     if (strlen(teamName) == 0)
     { // Mostrar información de todos los equipos
 
-        for (int i = 0; i < equipos.size(); i++)
+        for (long unsigned int i = 0; i < equipos.size(); i++)
         {
             cout << "Name: " << equipos[i].name << endl;
             cout << "Wins: " << equipos[i].wins << endl;
@@ -203,7 +203,7 @@ void showTeams(int &contadorActualEquipos, vector<Team> &equipos)
     { // Buscar el equipo por nombre
         bool teamFound = false;
  
-        for (int i = 0; i < equipos.size(); i++)
+        for (long unsigned int i = 0; i < equipos.size(); i++)
         {
             if (strcmp(equipos[i].name, teamName) == 0)
             {
@@ -246,7 +246,7 @@ void deleteTeam(int &contadorActualEquipos, vector<Team> &equipos)
         else
         {
             bool teamFound = false;
-            for (int i = 0; i < equipos.size(); i++)
+            for (long unsigned int i = 0; i < equipos.size(); i++)
             {
                 if (strcmp(equipos[i].name, teamName))
                 {
@@ -318,8 +318,6 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
                     equipo.losses = 0;
                     equipo.draws = 0;
                     equipo.points = 0;
-
-                    char nombreEquipo[kTEAMNAME];
                     
                     sprintf(equipo.name, "Team_%d", equipo.id);
 
@@ -389,7 +387,7 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
             equipo.draws = 0;
             equipo.points = 0;
 
-            char nombreEquipo[kTEAMNAME];
+            
            
             sprintf(equipo.name, "Team_%d", equipo.id);
 
@@ -400,7 +398,7 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
                 equipo.players[i].best = false;
             }
             equipos.push_back(equipo);
-            contadorActualEquipos;
+            contadorActualEquipos++;
         }
     }
 }
@@ -415,9 +413,9 @@ void showStandings(vector<Team> &equipos, bool league)
     {
         vector<Team> equiposOrdenados = equipos;
 
-        for (int i = 1; i < equipos.size(); i++)
+        for (long unsigned int i = 1; i < equipos.size(); i++)
         {
-            for (int j = equipos.size()-1; j >=i; j--)
+            for (long unsigned int j = equipos.size()-1; j >=i; j--)
             {
                 if (equiposOrdenados[j].points > equiposOrdenados[j-1].points)
                 {
@@ -430,7 +428,7 @@ void showStandings(vector<Team> &equipos, bool league)
             
         }
 
-        for (int i = 0; i < equiposOrdenados.size(); i++)
+        for (long unsigned int i = 0; i < equiposOrdenados.size(); i++)
         {
             cout << equiposOrdenados[i].name << "|" << equiposOrdenados[i].wins << "|" << equiposOrdenados[i].draws << "|" << equiposOrdenados[i].losses << "|" << equiposOrdenados[i].points << endl;
         }
@@ -445,7 +443,7 @@ void showBestPlayers(vector<Team> &equipos, bool league)
     }
     else
     {
-        for (int i = 0; i < equipos.size(); i++)
+        for (long unsigned int i = 0; i < equipos.size(); i++)
         {
 
             for (int j = 0; j < 5; j++)
