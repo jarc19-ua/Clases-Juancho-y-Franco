@@ -224,6 +224,7 @@ void showTeams(int &contadorActualEquipos, vector<Team> &equipos)
         }
     }
 }
+
 void deleteTeam(int &contadorActualEquipos, vector<Team> &equipos)
 {
 
