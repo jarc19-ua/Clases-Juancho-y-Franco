@@ -3,7 +3,7 @@
 #include <cstring> // Para strcpy(), strcat() y strcmp()
 #include <vector>
 #include <algorithm>
-#include <bits/stdio2.h>
+
 using namespace std;
 
 const int kTEAMNAME = 40;   // Máximo tamaño del nombre de un equipo
@@ -169,6 +169,7 @@ void addTeam(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
             equipo.players[i].best = false;
         }
         equipos.push_back(equipo);
+        contadorActualEquipos++;
     }
 }
 void showTeams(int &contadorActualEquipos, vector<Team> &equipos)
@@ -247,7 +248,7 @@ void deleteTeam(int &contadorActualEquipos, vector<Team> &equipos)
             bool teamFound = false;
             for (int i = 0; i < equipos.size(); i++)
             {
-                if (equipos[i].name == teamName)
+                if (strcmp(equipos[i].name, teamName))
                 {
                     equipos.erase(equipos.begin() + i);
                     teamFound = true;
@@ -329,6 +330,7 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
                         equipo.players[i].best = false;
                     }
                     equipos.push_back(equipo);
+                    contadorActualEquipos++;
                 }
             }
             if (opcion == 'N' || opcion == 'n')
@@ -398,6 +400,7 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
                 equipo.players[i].best = false;
             }
             equipos.push_back(equipo);
+            contadorActualEquipos;
         }
     }
 }
@@ -449,7 +452,7 @@ void showBestPlayers(vector<Team> &equipos, bool league)
             {
                 if (equipos[i].players[j].best)
                 {
-                    cout << equipos[i].name << "|" << equipos[i].players[i].name << "|" << equipos[i].players[i].goals;
+                    cout << equipos[i].name << "|" << equipos[i].players[j].name << "|" << equipos[i].players[j].goals;
                 }
             }
             
