@@ -405,19 +405,6 @@ void addAllTeams(int &contadorActualEquipos, int &ID, vector<Team> &equipos)
         }
     }
 }
-bool miComparacion(Team eq1, Team eq2)
-{
-    bool resultado;
-    if (eq1.points < eq2.points)
-    {
-        resultado = false;
-    }
-    else
-    {
-        resultado = true;
-    }
-    return resultado;
-}
 
 void showStandings(vector<Team> &equipos, bool league)
 {
@@ -443,45 +430,6 @@ void showStandings(vector<Team> &equipos, bool league)
             }
             
         }
-        
-
-
-
-
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         for (int i = 0; i < equiposOrdenados.size(); i++)
         {
