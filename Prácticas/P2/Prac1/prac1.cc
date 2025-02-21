@@ -2,7 +2,7 @@
 #include <cstdlib> // Para rand() y srand()
 #include <cstring> // Para strcpy(), strcat() y strcmp()
 #include <vector>
-#include <algorithm>
+
 
 using namespace std;
 
