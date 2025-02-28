@@ -8,7 +8,7 @@ using namespace std;
 const int KMAXNIF = 10;
 const int KMAXNAME = 50;
 const int KMAXTELEPHONE = 14;
-
+//anytamaxgwyn
 // Registro para los pacientes
 struct Patient
 {
