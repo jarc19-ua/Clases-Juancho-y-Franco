@@ -159,7 +159,7 @@ void viewPatient(){
 
     cout << "Enter NIF:" << endl;
     cin >> nif;
-    
+    //
 }
 /*
 Función principal: Tendrás que añadir más código tuyo
