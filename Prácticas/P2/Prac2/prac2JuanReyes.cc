@@ -179,6 +179,10 @@ void viewPatient()
 
     cout << "Enter NIF:" << endl;
     cin >> nif;
+<<<<<<< HEAD
+=======
+    //
+>>>>>>> 985694269d02c93c96da68b0ba00bc3f17396785
 }
 /*
 Función principal: Tendrás que añadir más código tuyo
