@@ -8,7 +8,7 @@ using namespace std;
 const int KMAXNIF = 10;
 const int KMAXNAME = 50;
 const int KMAXTELEPHONE = 14;
-//anytamaxgwyn
+
 // Registro para los pacientes
 struct Patient
 {
@@ -131,35 +131,54 @@ void addPatient()
     string name;
     string telephone;
 
+    bool nifValido = false;
+        
+    do{
 
-    cout << "Enter NIF:" << endl;
-    cin >> nif;
-    // Realizar comprobaciones
-    /**/
-    cout << "Enter name:" << endl;
-    cin >> name;
-    // Realizar comprobaciones searchPatient
+            cout << "Enter NIF:" << endl;
+            cin >> nif;
+            if (nif.size() != 9)
+            {
+                error(ERR_WRONG_NIF);
+            }
+            else
+            {
+                nifValido = true;
+            for(int i = 0; i<8; i++){
+                
+                if(isdigit(nif[i])==false){
+                    nifValido=false;
+                        // falta comprobar si la ultima es una letra
+                }
+            }
 
-    cout << "Enter telephone:" << endl;
-    cin >> telephone;
-    // Realizar comprobaciones
-    /**/
+         
+            }
+        }
+        while (nifValido == false);
 
+        cout << "Enter name:" << endl;
+        cin >> name;
+        // Realizar comprobaciones searchPatient
 
+        cout << "Enter telephone:" << endl;
+        cin >> telephone;
+        // Realizar comprobaciones
+        /**/
 
-    //Aqui los datos estan bien
-    Patient paciente;
-    paciente.name = name;
-    paciente.nif = nif;
-    paciente.telephone = telephone;
-}
+        // Aqui los datos estan bien
+        Patient paciente;
+        paciente.name = name;
+        paciente.nif = nif;
+        paciente.telephone = telephone;
+    }
 
-void viewPatient(){
+void viewPatient()
+{
     string nif;
 
     cout << "Enter NIF:" << endl;
     cin >> nif;
-    
 }
 /*
 Función principal: Tendrás que añadir más código tuyo
