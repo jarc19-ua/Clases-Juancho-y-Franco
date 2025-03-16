@@ -124,65 +124,107 @@ void showMenu()
          << "q- Quit" << endl
          << "Option: ";
 }
-
-void addPatient()
+int searchPatient(string nif, Database& data)
+{
+    return -1;
+}
+void addPatient(Database& data)
 {
     string nif;
     string name;
     string telephone;
-
     bool nifValido = false;
-        
-    do{
+    do
+    {
+        cout << "Enter NIF:" << endl;
+        cin >> nif;
 
-            cout << "Enter NIF:" << endl;
-            cin >> nif;
-            if (nif.size() != 9)
+        if (nif.size() == 9)
+        {
+            nifValido = true;
+            for (int i = 0; i < 8; i++)
             {
-                error(ERR_WRONG_NIF);
-            }
-            else
-            {
-                nifValido = true;
-            for(int i = 0; i<8; i++){
-                
-                if(isdigit(nif[i])==false){
-                    nifValido=false;
-                        // falta comprobar si la ultima es una letra
+                if (!isdigit(nif[i]))
+                {
+                    nifValido = false;
                 }
             }
-
-         
+            if (!isalpha(nif[8]))
+            {
+                nifValido = false;
             }
         }
-        while (nifValido == false);
 
-        cout << "Enter name:" << endl;
-        cin >> name;
-        // Realizar comprobaciones searchPatient
+        if (!nifValido)
+        {
+            error(ERR_WRONG_NIF);
+        }
 
-        cout << "Enter telephone:" << endl;
-        cin >> telephone;
-        // Realizar comprobaciones
-        /**/
+        if (searchPatient(nif, data) == -1 && nifValido) // Falta implementar funcion search Patients
+        {
 
-        // Aqui los datos estan bien
-        Patient paciente;
-        paciente.name = name;
-        paciente.nif = nif;
-        paciente.telephone = telephone;
-    }
+            bool nombreValido = false;
+            do{
+                cout << "Enter name:" << endl;
+                cin >> name;
+                if (name.size()>=3)
+                {
+                    nombreValido = true;
+                }else
+                {
+                    error(ERR_WRONG_NAME);
+                }
+            }while(!nombreValido);
+            
 
-void viewPatient()
+            bool telefonoValido = false;
+            do
+            {
+                cout << "Enter telephone:" << endl;
+                cin >> telephone;
+                if(telephone[0] == '+' && telephone.size()<=13 && telephone.size()>=11){
+                    telefonoValido = true;
+                }else{
+                    error(ERR_WRONG_TELEPHONE);
+                }
+            } while (!telefonoValido);
+            
+           
+            
+
+            // Aqui los datos estan bien
+            Patient paciente;
+            paciente.name = name;
+            paciente.nif = nif;
+            paciente.telephone = telephone;
+
+            data.patients.push_back(paciente);
+        }
+
+    } while (!nifValido);
+}
+
+
+void viewPatient(Database& data)
 {
     string nif;
+    bool nifValido = false;
+    do
+    {
+        cout << "Enter NIF:" << endl;
+        cin >> nif;
 
-    cout << "Enter NIF:" << endl;
-    cin >> nif;
-<<<<<<< HEAD
-=======
+        if (searchPatient(nif,data) == -1)
+        {
+            nifValido = true;
+        }else{
+            error(ERR_PATIENT_NOT_EXISTS);
+        }
+    } while (!nifValido);
+    
+   
+    
     //
->>>>>>> 985694269d02c93c96da68b0ba00bc3f17396785
 }
 /*
 Función principal: Tendrás que añadir más código tuyo
@@ -203,8 +245,10 @@ int main(int argc, char *argv[])
         switch (option)
         {
         case '1': // Llamar a la función "addPatient" para añadir una nueva ficha de paciente
-            break;
+            addPatient(data);
+        break;
         case '2': // Llamar a la función "viewPatient" para ver la información de un paciente
+            viewPatient(data);
             break;
         case '3': // Llamar a la función "deletePatient" para eliminar una ficha de paciente
             break;
