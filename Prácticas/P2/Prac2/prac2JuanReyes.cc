@@ -259,9 +259,21 @@ void deletePatient(Database &data)
     cin >> nif;
     do
     {
-        if (nif == "")
+        if (nif == ""){
+            //TODO: Nif en blanco volver al meny principal
+        }
+        int posicion=searchPatient(nif,data);
+        if(posicion == -1){
+            error(ERR_PATIENT_NOT_EXISTS);
 
+        }else{
+            data.patients. // TODO: Eliminar paciente
+        }
     } while (!nifValido)
+}
+
+void savePatients(Database& data){
+    
 }
 
 /*
