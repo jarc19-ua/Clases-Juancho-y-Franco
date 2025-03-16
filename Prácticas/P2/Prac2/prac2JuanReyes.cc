@@ -128,7 +128,7 @@ void showMenu()
 int searchPatient(string nif, Database &data)
 {
 int posicion = -1;
-for(int i = 0; i<data.patients.size()){
+for(int i = 0; i<data.patients.size();i++){
     if(data.patients[i].nif==nif)
     posicion=i;
 }
