@@ -241,8 +241,8 @@ void viewPatient(Database &data) // TODO: Mostrar analisis
             bool hayAnalisys = false;
 
             for (int i = 0; i < data.analysis.size(); i++)
-            { 
-                if (strcmp(data.analysis[i].nif,paciente.nif.c_str())==0)
+            {
+                if (strcmp(data.analysis[i].nif, paciente.nif.c_str()) == 0)
                 {
                     hayAnalisys = true;
                     cout << "id\tdate\theight\tweight" << endl;
@@ -258,30 +258,33 @@ void viewPatient(Database &data) // TODO: Mostrar analisis
             error(ERR_PATIENT_NOT_EXISTS);
         }
     } while (!nifValido);
-
-    //
 }
 
 void deletePatient(Database &data)
 {
     bool nifValido = false;
     string nif;
-    cout << "Enter nif" << endl;
-    cin >> nif;
+    
     do
     {
+    cout << "Enter nif" << endl;
+    cin >> nif;
         if (nif == "")
         {
-            // TODO: Nif en blanco volver al meny principal
-        }
-        int posicion = searchPatient(nif, data);
-        if (posicion == -1)
-        {
-            error(ERR_PATIENT_NOT_EXISTS);
+            nifValido = true;
         }
         else
         {
-            //  data.patients. // TODO: Eliminar paciente
+            int posicion = searchPatient(nif, data);
+            if (posicion == -1)
+            {
+                error(ERR_PATIENT_NOT_EXISTS);
+            }
+            else
+            {
+                // if (strcmp(data.analysis[i].nif,paciente.nif.c_str())==0)
+                //   data.patients. // TODO: Eliminar paciente
+            }
         }
     } while (!nifValido);
 }
