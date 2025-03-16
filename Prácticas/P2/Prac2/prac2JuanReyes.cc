@@ -3,6 +3,7 @@
 #include <fstream> // Para usar ficheros
 #include <vector>  // Para usar vector
 #include <cctype>  // isdigit() isalpha()
+#include <string.h>
 using namespace std;
 
 const int KMAXNIF = 10;
@@ -124,9 +125,10 @@ void showMenu()
          << "q- Quit" << endl
          << "Option: ";
 }
-int searchPatient(string nif, Database& data)
+int searchPatient(string nif, Database& data) // TODO: Falta implementar Esta funcion
 {
-    return -1;
+
+    return 0;
 }
 void addPatient(Database& data)
 {
@@ -160,7 +162,7 @@ void addPatient(Database& data)
             error(ERR_WRONG_NIF);
         }
 
-        if (searchPatient(nif, data) == -1 && nifValido) // Falta implementar funcion search Patients
+        if (searchPatient(nif, data) != -1 && nifValido) // Falta implementar funcion search Patients
         {
 
             bool nombreValido = false;
@@ -205,7 +207,7 @@ void addPatient(Database& data)
 }
 
 
-void viewPatient(Database& data)
+void viewPatient(Database& data) // TODO: Mostrar analisis
 {
     string nif;
     bool nifValido = false;
@@ -219,16 +221,30 @@ void viewPatient(Database& data)
         if (posicion != -1)
         {
             nifValido = true;
-            
-            cout<< "NIF: " << data.patients[posicion].nif << endl;
-            cout<< "Name: " << data.patients[posicion].name << endl;
-            cout<< "Telephone: " << data.patients[posicion].telephone << endl;
+            Patient paciente = data.patients[posicion];
+            cout<< "NIF: " << paciente.nif << endl;
+            cout<< "Name: " << paciente.name << endl;
+            cout<< "Telephone: " << paciente.telephone << endl;
 
             bool hayAnalisys=false;
-            for(const auto &analisis:data.analysis){   // Revisar el auto
-                hayAnalisys=true
-                cout << id
+
+            for(int i =0;i<data.analysis.size();i++){   // Revisar Error
+               
+               if (/*strcmp(data.analysis[i].nif,)paciente.nif)==0*/ true)
+               {
+                hayAnalisys=true;
+                cout << "id\tdate\theight\tweight"<<endl;
+                for (int j = 0; j < data.analysis.size(); j++)
+                {
+                    cout<<data.analysis[j].id<< data.analysis[j].weight<<data.analysis[j].height;
+                }
+                
+               }
+               
+               
             } 
+
+            
         }else{
             error(ERR_PATIENT_NOT_EXISTS);
         }
