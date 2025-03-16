@@ -267,9 +267,9 @@ void deletePatient(Database &data)
             error(ERR_PATIENT_NOT_EXISTS);
 
         }else{
-            data.patients. // TODO: Eliminar paciente
+          //  data.patients. // TODO: Eliminar paciente
         }
-    } while (!nifValido)
+    } while (!nifValido);
 }
 
 void savePatients(Database& data){
