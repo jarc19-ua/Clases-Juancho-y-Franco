@@ -263,13 +263,13 @@ void viewPatient(Database &data) // TODO: Mostrar analisis
 void deletePatient(Database &data)
 {
     bool nifValido = false;
-    string nif;
+    string nif = "";
     
     do
     {
-    cout << "Enter nif" << endl;
+    cout << "Enter NIF:" << endl;
     cin >> nif;
-        if (nif == "")
+        if (nif.empty())
         {
             nifValido = true;
         }
@@ -284,6 +284,10 @@ void deletePatient(Database &data)
             {
                 // TODO: Eliminar analisis
                 data.patients.erase(data.patients.begin()+posicion); 
+                nifValido=true;
+
+                //TODO ELIMINAR COUT
+                cout<<"Paciente "+ nif+ " eliminado"<<endl;
             }
         }
     } while (!nifValido);
@@ -318,6 +322,7 @@ int main(int argc, char *argv[])
             viewPatient(data);
             break;
         case '3': // Llamar a la función "deletePatient" para eliminar una ficha de paciente
+        deletePatient(data);
             break;
         case '4': // Llamar a la función "savePatients" para guardar las fichas de pacientes en fichero binario
             break;
