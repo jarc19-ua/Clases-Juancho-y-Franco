@@ -125,13 +125,15 @@ void showMenu()
          << "q- Quit" << endl
          << "Option: ";
 }
+
 int searchPatient(string nif, Database &data)
 {
-int posicion = -1;
-for(int i = 0; i<data.patients.size();i++){
-    if(data.patients[i].nif==nif)
-    posicion=i;
-}
+    int posicion = -1;
+    for (int i = 0; i < data.patients.size(); i++)
+    {
+        if (data.patients[i].nif == nif)
+            posicion = i;
+    }
     return posicion;
 }
 void addPatient(Database &data)
@@ -207,7 +209,9 @@ void addPatient(Database &data)
                 paciente.telephone = telephone;
 
                 data.patients.push_back(paciente);
-            }else{
+            }
+            else
+            {
                 error(ERR_PATIENT_EXISTS);
             }
         }
@@ -237,9 +241,8 @@ void viewPatient(Database &data) // TODO: Mostrar analisis
             bool hayAnalisys = false;
 
             for (int i = 0; i < data.analysis.size(); i++)
-            { // Revisar Error
-
-                if (/*strcmp(data.analysis[i].nif,)paciente.nif)==0*/ true)
+            { 
+                if (strcmp(data.analysis[i].nif,paciente.nif.c_str())==0)
                 {
                     hayAnalisys = true;
                     cout << "id\tdate\theight\tweight" << endl;
