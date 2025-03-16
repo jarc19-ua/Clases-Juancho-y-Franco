@@ -214,9 +214,21 @@ void viewPatient(Database& data)
         cout << "Enter NIF:" << endl;
         cin >> nif;
 
-        if (searchPatient(nif,data) == -1)
+        int posicion = searchPatient(nif, data);
+
+        if (posicion != -1)
         {
             nifValido = true;
+            
+            cout<< "NIF: " << data.patients[posicion].nif << endl;
+            cout<< "Name: " << data.patients[posicion].name << endl;
+            cout<< "Telephone: " << data.patients[posicion].telephone << endl;
+
+            bool hayAnalisys=false;
+            for(const auto &analisis:data.analysis){   // Revisar el auto
+                hayAnalisys=true
+                cout << id
+            } 
         }else{
             error(ERR_PATIENT_NOT_EXISTS);
         }
