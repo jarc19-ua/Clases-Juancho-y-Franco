@@ -125,10 +125,14 @@ void showMenu()
          << "q- Quit" << endl
          << "Option: ";
 }
-int searchPatient(string nif, Database &data) // TODO: Falta implementar Esta funcion
+int searchPatient(string nif, Database &data)
 {
-
-    return 0;
+int posicion = -1;
+for(int i = 0; i<data.patients.size()){
+    if(data.patients[i].nif==nif)
+    posicion=i;
+}
+    return posicion;
 }
 void addPatient(Database &data)
 {
