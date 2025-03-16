@@ -161,47 +161,51 @@ void addPatient(Database &data)
         {
             error(ERR_WRONG_NIF);
         }
-
-        if (searchPatient(nif, data) != -1 && nifValido) // Falta implementar funcion search Patients
+        else
         {
-
-            bool nombreValido = false;
-            do
+            if (searchPatient(nif, data) == -1)
             {
-                cout << "Enter name:" << endl;
-                cin >> name;
-                if (name.size() >= 3)
-                {
-                    nombreValido = true;
-                }
-                else
-                {
-                    error(ERR_WRONG_NAME);
-                }
-            } while (!nombreValido);
 
-            bool telefonoValido = false;
-            do
-            {
-                cout << "Enter telephone:" << endl;
-                cin >> telephone;
-                if (telephone[0] == '+' && telephone.size() <= 13 && telephone.size() >= 11)
+                bool nombreValido = false;
+                do
                 {
-                    telefonoValido = true;
-                }
-                else
+                    cout << "Enter name:" << endl;
+                    cin >> name;
+                    if (name.size() >= 3)
+                    {
+                        nombreValido = true;
+                    }
+                    else
+                    {
+                        error(ERR_WRONG_NAME);
+                    }
+                } while (!nombreValido);
+
+                bool telefonoValido = false;
+                do
                 {
-                    error(ERR_WRONG_TELEPHONE);
-                }
-            } while (!telefonoValido);
+                    cout << "Enter telephone:" << endl;
+                    cin >> telephone;
+                    if (telephone[0] == '+' && telephone.size() <= 13 && telephone.size() >= 11)
+                    {
+                        telefonoValido = true;
+                    }
+                    else
+                    {
+                        error(ERR_WRONG_TELEPHONE);
+                    }
+                } while (!telefonoValido);
 
-            // Aqui los datos estan bien
-            Patient paciente;
-            paciente.name = name;
-            paciente.nif = nif;
-            paciente.telephone = telephone;
+                // Aqui los datos estan bien
+                Patient paciente;
+                paciente.name = name;
+                paciente.nif = nif;
+                paciente.telephone = telephone;
 
-            data.patients.push_back(paciente);
+                data.patients.push_back(paciente);
+            }else{
+                error(ERR_PATIENT_EXISTS);
+            }
         }
 
     } while (!nifValido);
@@ -259,21 +263,24 @@ void deletePatient(Database &data)
     cin >> nif;
     do
     {
-        if (nif == ""){
-            //TODO: Nif en blanco volver al meny principal
+        if (nif == "")
+        {
+            // TODO: Nif en blanco volver al meny principal
         }
-        int posicion=searchPatient(nif,data);
-        if(posicion == -1){
+        int posicion = searchPatient(nif, data);
+        if (posicion == -1)
+        {
             error(ERR_PATIENT_NOT_EXISTS);
-
-        }else{
-          //  data.patients. // TODO: Eliminar paciente
+        }
+        else
+        {
+            //  data.patients. // TODO: Eliminar paciente
         }
     } while (!nifValido);
 }
 
-void savePatients(Database& data){
-    
+void savePatients(Database &data)
+{
 }
 
 /*
