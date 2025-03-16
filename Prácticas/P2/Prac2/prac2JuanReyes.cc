@@ -282,8 +282,8 @@ void deletePatient(Database &data)
             }
             else
             {
-                // if (strcmp(data.analysis[i].nif,paciente.nif.c_str())==0)
-                //   data.patients. // TODO: Eliminar paciente
+                // TODO: Eliminar analisis
+                data.patients.erase(data.patients.begin()+posicion); 
             }
         }
     } while (!nifValido);
