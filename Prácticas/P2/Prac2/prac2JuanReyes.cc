@@ -125,12 +125,12 @@ void showMenu()
          << "q- Quit" << endl
          << "Option: ";
 }
-int searchPatient(string nif, Database& data) // TODO: Falta implementar Esta funcion
+int searchPatient(string nif, Database &data) // TODO: Falta implementar Esta funcion
 {
 
     return 0;
 }
-void addPatient(Database& data)
+void addPatient(Database &data)
 {
     string nif;
     string name;
@@ -166,33 +166,34 @@ void addPatient(Database& data)
         {
 
             bool nombreValido = false;
-            do{
+            do
+            {
                 cout << "Enter name:" << endl;
                 cin >> name;
-                if (name.size()>=3)
+                if (name.size() >= 3)
                 {
                     nombreValido = true;
-                }else
+                }
+                else
                 {
                     error(ERR_WRONG_NAME);
                 }
-            }while(!nombreValido);
-            
+            } while (!nombreValido);
 
             bool telefonoValido = false;
             do
             {
                 cout << "Enter telephone:" << endl;
                 cin >> telephone;
-                if(telephone[0] == '+' && telephone.size()<=13 && telephone.size()>=11){
+                if (telephone[0] == '+' && telephone.size() <= 13 && telephone.size() >= 11)
+                {
                     telefonoValido = true;
-                }else{
+                }
+                else
+                {
                     error(ERR_WRONG_TELEPHONE);
                 }
             } while (!telefonoValido);
-            
-           
-            
 
             // Aqui los datos estan bien
             Patient paciente;
@@ -206,8 +207,7 @@ void addPatient(Database& data)
     } while (!nifValido);
 }
 
-
-void viewPatient(Database& data) // TODO: Mostrar analisis
+void viewPatient(Database &data) // TODO: Mostrar analisis
 {
     string nif;
     bool nifValido = false;
@@ -222,38 +222,48 @@ void viewPatient(Database& data) // TODO: Mostrar analisis
         {
             nifValido = true;
             Patient paciente = data.patients[posicion];
-            cout<< "NIF: " << paciente.nif << endl;
-            cout<< "Name: " << paciente.name << endl;
-            cout<< "Telephone: " << paciente.telephone << endl;
+            cout << "NIF: " << paciente.nif << endl;
+            cout << "Name: " << paciente.name << endl;
+            cout << "Telephone: " << paciente.telephone << endl;
 
-            bool hayAnalisys=false;
+            bool hayAnalisys = false;
 
-            for(int i =0;i<data.analysis.size();i++){   // Revisar Error
-               
-               if (/*strcmp(data.analysis[i].nif,)paciente.nif)==0*/ true)
-               {
-                hayAnalisys=true;
-                cout << "id\tdate\theight\tweight"<<endl;
-                for (int j = 0; j < data.analysis.size(); j++)
+            for (int i = 0; i < data.analysis.size(); i++)
+            { // Revisar Error
+
+                if (/*strcmp(data.analysis[i].nif,)paciente.nif)==0*/ true)
                 {
-                    cout<<data.analysis[j].id<< data.analysis[j].weight<<data.analysis[j].height;
+                    hayAnalisys = true;
+                    cout << "id\tdate\theight\tweight" << endl;
+                    for (int j = 0; j < data.analysis.size(); j++)
+                    {
+                        cout << data.analysis[j].id << data.analysis[j].weight << data.analysis[j].height;
+                    }
                 }
-                
-               }
-               
-               
-            } 
-
-            
-        }else{
+            }
+        }
+        else
+        {
             error(ERR_PATIENT_NOT_EXISTS);
         }
     } while (!nifValido);
-    
-   
-    
+
     //
 }
+
+void deletePatient(Database &data)
+{
+    bool nifValido = false;
+    string nif;
+    cout << "Enter nif" << endl;
+    cin >> nif;
+    do
+    {
+        if (nif == "")
+
+    } while (!nifValido)
+}
+
 /*
 Función principal: Tendrás que añadir más código tuyo
 return: 0
@@ -274,7 +284,7 @@ int main(int argc, char *argv[])
         {
         case '1': // Llamar a la función "addPatient" para añadir una nueva ficha de paciente
             addPatient(data);
-        break;
+            break;
         case '2': // Llamar a la función "viewPatient" para ver la información de un paciente
             viewPatient(data);
             break;
