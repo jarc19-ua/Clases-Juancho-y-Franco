@@ -293,10 +293,91 @@ void deletePatient(Database &data)
     } while (!nifValido);
 }
 
-void savePatients(Database &data)
-{
+void savePatients(const Database &data){
+    ofstream file ("patients.bin", ios::binary);
+    if(file){
+        for(size_t i = 0; i < data.patients.size(); i++){
+            PatientBin pBin;
+            strncpy(pBin.nif, data.patients[i].nif.c_str(), KMAXNIF);
+            strncpy(pBin.name, data.patients[i].name.c_str(), KMAXNAME);
+            strncpy(pBin.telephone, data.patients[i].telephone.c_str(), KMAXTELEPHONE);
+            file.write(reinterpret_cast<const char*>(&pBin), sizeof(PatientBin));
+        }
+        file.close();
+        cout << "Patients saved succesfully!"<<endl;
+    } else{
+        cout << "ERROR: Unable to save patients" << endl;
+    }
 }
 
+void addAnanlysis(Database &data){
+    string nif;
+    cout << "Entre NIF: " << endl;
+    cin >> nif;
+    int index = -1;
+
+    if(!nif.empty()){
+        //Buscar si existe el paciente
+        for(size_t i = 0; i < data.patients.size() && index == -1; i++){
+            if(data.patients[i].nif == nif){
+                index = i;
+            }
+        }
+    }
+    if(index != -1){
+        //Pedimos Fecha
+        Date date;
+        cout << "Enter date (day/month/year): " << endl;
+        cin >> date.day >> date.month >> date.year;
+        if(date.day >=1 && date.day <= 31 && date.month >=1 && date.month <= 12 && date.year >= 2025 && date.year <= 2050){
+            // Pedimos Peso
+            float weight;
+            cout << "Enter weight: " <<endl;
+            cin >> weight;
+
+            if(weight > 0){
+                //Pedimos Altura
+                float height;
+                cout << "Enter height: " << endl;
+                cin >> height;
+
+                if(height > 0){
+                    //Crear el analisis y guardarlo en la Database
+                    Analysis newAnalysis;
+                    newAnalysis.id = data.nextId++;
+                    strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF); //TODO: Comprobar que puedo usar el strcnpy y el c_str 
+                    newAnalysis.dateAnalysis = date;
+                    newAnalysis.weight = weight;
+                    newAnalysis.height = height;
+
+                    data.analysis.push_back(newAnalysis);
+                    cout << "Analysis added succesfully!" << endl;
+                } else{
+                    error(ERR_WRONG_NUMBER);
+                }
+            }else{
+                error(ERR_WRONG_NUMBER);
+            }
+        }else{
+            error(ERR_WRONG_DATE);
+        }
+    }else{
+        error(ERR_PATIENT_NOT_EXISTS);
+    }
+}
+
+void exportAnalysis(const Database &data){
+    ofstream file("analysis.bin", ios::binary);
+    if(file){
+        for(size_t i = 0; i < data.analysis.size(); i++){
+            file.write(reinterpret_cast<const char*>(&data.analysis[i]), sizeof(Analysis));
+        }
+        file.close();
+        cout << "Analysis exported succesfully!" << endl;
+    } else{
+        cout << "EROR: Unable to export analysis" << endl;
+    }
+}
 /*
 Función principal: Tendrás que añadir más código tuyo
 return: 0
