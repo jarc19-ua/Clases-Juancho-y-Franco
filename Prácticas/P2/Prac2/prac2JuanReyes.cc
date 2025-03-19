@@ -333,11 +333,11 @@ void addAnalysis(Database &data)
                 do
                 {
                     cout << "Enter date (day/month/year):" << endl; // 12/3/2025
-                    std::cin >> date.day;
-                    std::cin >> slash;
-                    std::cin >> date.month;
-                    std::cin >> slash;
-                    std::cin >> date.year;
+                    cin >> date.day;
+                    cin >> slash;
+                    cin >> date.month;
+                    cin >> slash;
+                    cin >> date.year;
 
                     if (date.day >= 1 && date.day <= 31 && date.month >= 1 && date.month <= 12 && date.year >= 2025 && date.year <= 2050)
                     {
@@ -412,9 +412,59 @@ void exportAnalysis(const Database &data)
             fichero.write((const char *)&data.analysis[i], sizeof(Analysis));
         }
         fichero.close();
-        
     }
+}
 
+void importAnalysis(Database &data)
+{
+    // Abrir el archivo binario para leer
+    ifstream fichero("analysis.bin", ios::binary);
+    if(fichero.is_open())
+    {
+
+        // Abrir el archivo de texto para registrar los NIF de pacientes no encontrados
+        ofstream wrongPatientsFile("wrong_patients.txt", ios::app); // Abrir en modo append
+        if (!wrongPatientsFile)
+        {
+            cerr << "ERROR: Could not open wrong_patients.txt." << endl;
+            return;
+        }
+
+        // Leer las analíticas del archivo binario
+        while (fichero)
+        {
+            Analysis analysis;
+            fichero.read(reinterpret_cast<char *>(&analysis), sizeof(Analysis));
+
+            if (fichero.gcount() < sizeof(Analysis))
+            {
+                break; // Fin del archivo
+            }
+
+            // Verificar si el paciente existe en la base de datos
+            int patientIndex = searchPatient(data.patients, analysis.nif);
+            if (patientIndex == -1)
+            {
+                // Si el paciente no existe, escribir el NIF en el archivo wrong_patients.txt
+                wrongPatientsFile << analysis.nif << endl;
+                continue; // No agregar esta analítica a la base de datos
+            }
+
+            // Asignar un nuevo ID para la analítica
+            analysis.id = data.nextId++;
+
+            // Agregar la analítica a la base de datos
+            data.analysis.push_back(analysis);
+        }
+
+        // Cerrar los archivos
+        fichero.close();
+        wrongPatientsFile.close();
+    }
+    else
+    {
+        error(ERR_FILE); //TODO Preguntar al profe porque en el enunciado pone ERR_FILE_NOT_EXISTS y en la practica pone ERR_FILE
+    }
 }
 /*
 Función principal: Tendrás que añadir más código tuyo
@@ -450,6 +500,7 @@ int main(int argc, char *argv[])
             addAnalysis(data);
             break;
         case '6': // Llamar a la función "exportAnalysis" para exportar las analiticas realizadas a fichero binario
+            exportAnalysis(data);
             break;
         case '7': // Llamar a la función "importAnalysis" para importar las analiticas en fichero binario
             break;
