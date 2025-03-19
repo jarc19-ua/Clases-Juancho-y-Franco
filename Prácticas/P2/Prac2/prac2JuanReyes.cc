@@ -294,19 +294,16 @@ void deletePatient(Database &data)
 }
 
 void savePatients(const Database &data){
-    ofstream file ("patients.bin", ios::binary);
-    if(file){
-        for(size_t i = 0; i < data.patients.size(); i++){
-            PatientBin pBin;
-            strncpy(pBin.nif, data.patients[i].nif.c_str(), KMAXNIF);
-            strncpy(pBin.name, data.patients[i].name.c_str(), KMAXNAME);
-            strncpy(pBin.telephone, data.patients[i].telephone.c_str(), KMAXTELEPHONE);
-            file.write(reinterpret_cast<const char*>(&pBin), sizeof(PatientBin));
+    ofstream fichero ("patients.bin", ios::binary);
+    if(fichero.is_open()){
+        for(int i = 0; i < data.patients.size(); i++){
+            PatientBin pacienteBinario;
+            strncpy(pacienteBinario.nif, data.patients[i].nif.c_str(), KMAXNIF);
+            strncpy(pacienteBinario.name, data.patients[i].name.c_str(), KMAXNAME);
+            strncpy(pacienteBinario.telephone, data.patients[i].telephone.c_str(), KMAXTELEPHONE);
+            fichero.write((const char *)&pacienteBinario, sizeof(PatientBin));
         }
-        file.close();
-        cout << "Patients saved succesfully!"<<endl;
-    } else{
-        cout << "ERROR: Unable to save patients" << endl;
+        fichero.close();
     }
 }
 
@@ -318,7 +315,7 @@ void addAnanlysis(Database &data){
 
     if(!nif.empty()){
         //Buscar si existe el paciente
-        for(size_t i = 0; i < data.patients.size() && index == -1; i++){
+        for(int i = 0; i < data.patients.size() && index == -1; i++){
             if(data.patients[i].nif == nif){
                 index = i;
             }
@@ -337,7 +334,6 @@ void addAnanlysis(Database &data){
 
             if(weight > 0){
                 //Pedimos Altura
-                //Pedimos datos
                 float height;
                 cout << "Enter height: " << endl;
                 cin >> height;
@@ -346,7 +342,7 @@ void addAnanlysis(Database &data){
                     //Crear el analisis y guardarlo en la Database
                     Analysis newAnalysis;
                     newAnalysis.id = data.nextId++;
-                    strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF); 
+                    strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF); //TODO: Comprobar que puedo usar el strcnpy y el c_str 
                     newAnalysis.dateAnalysis = date;
                     newAnalysis.weight = weight;
                     newAnalysis.height = height;
@@ -370,7 +366,7 @@ void addAnanlysis(Database &data){
 void exportAnalysis(const Database &data){
     ofstream file("analysis.bin", ios::binary);
     if(file){
-        for(size_t i = 0; i < data.analysis.size(); i++){
+        for(int i = 0; i < data.analysis.size(); i++){
             file.write(reinterpret_cast<const char*>(&data.analysis[i]), sizeof(Analysis));
         }
         file.close();
