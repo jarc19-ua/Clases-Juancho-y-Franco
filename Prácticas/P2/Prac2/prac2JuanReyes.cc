@@ -286,8 +286,7 @@ void deletePatient(Database &data)
                 data.patients.erase(data.patients.begin() + posicion);
                 nifValido = true;
 
-                // TODO ELIMINAR COUT
-                cout << "Paciente " + nif + " eliminado" << endl;
+               
             }
         }
     } while (!nifValido);
@@ -414,56 +413,58 @@ void exportAnalysis(const Database &data)
         fichero.close();
     }
 }
-//Hola
+
 void importAnalysis(Database &data)
 {
     // Abrir el archivo binario para leer
     ifstream fichero("analysis.bin", ios::binary);
-    if(fichero.is_open())
+    if (fichero.is_open())
     {
 
         // Abrir el archivo de texto para registrar los NIF de pacientes no encontrados
         ofstream wrongPatientsFile("wrong_patients.txt", ios::app); // Abrir en modo append
-        if (!wrongPatientsFile)
+        if (wrongPatientsFile.is_open())
         {
-            cerr << "ERROR: Could not open wrong_patients.txt." << endl;
-            return;
-        }
 
-        // Leer las analíticas del archivo binario
-        while (fichero)
-        {
-            Analysis analysis;
-            fichero.read(reinterpret_cast<char *>(&analysis), sizeof(Analysis));
-
-            if (fichero.gcount() < sizeof(Analysis))
+            // Leer las analíticas del archivo binario
+            while (fichero)
             {
-                break; // Fin del archivo
+                Analysis analysis;
+                fichero.read(reinterpret_cast<char *>(&analysis), sizeof(Analysis));
+
+                if (fichero.gcount() < sizeof(Analysis))
+                {
+                    break; // Fin del archivo
+                }
+
+                // Verificar si el paciente existe en la base de datos
+                int patientIndex = searchPatient(data.patients, analysis.nif);
+                if (patientIndex == -1)
+                {
+                    // Si el paciente no existe, escribir el NIF en el archivo wrong_patients.txt
+                    wrongPatientsFile << analysis.nif << endl;
+                    continue; // No agregar esta analítica a la base de datos
+                }
+
+                // Asignar un nuevo ID para la analítica
+                analysis.id = data.nextId++;
+
+                // Agregar la analítica a la base de datos
+                data.analysis.push_back(analysis);
             }
 
-            // Verificar si el paciente existe en la base de datos
-            int patientIndex = searchPatient(data.patients, analysis.nif);
-            if (patientIndex == -1)
-            {
-                // Si el paciente no existe, escribir el NIF en el archivo wrong_patients.txt
-                wrongPatientsFile << analysis.nif << endl;
-                continue; // No agregar esta analítica a la base de datos
-            }
-
-            // Asignar un nuevo ID para la analítica
-            analysis.id = data.nextId++;
-
-            // Agregar la analítica a la base de datos
-            data.analysis.push_back(analysis);
+            // Cerrar los archivos
+        }else
+        {
+            error(ERR_FILE);// TODO Preguntar al profe porque en el enunciado pone ERR_FILE_NOT_EXISTS y en la practica pone ERR_FILE
         }
-
-        // Cerrar los archivos
+        
         fichero.close();
         wrongPatientsFile.close();
     }
     else
     {
-        error(ERR_FILE); //TODO Preguntar al profe porque en el enunciado pone ERR_FILE_NOT_EXISTS y en la practica pone ERR_FILE
+        error(ERR_FILE); // TODO Preguntar al profe porque en el enunciado pone ERR_FILE_NOT_EXISTS y en la practica pone ERR_FILE
     }
 }
 /*
