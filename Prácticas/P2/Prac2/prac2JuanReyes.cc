@@ -356,7 +356,7 @@ void addAnalysis(Database &data)
                             if (weight > 0)
                             {
                                 pesoValido=true;
-                                bool alturaValida;
+                                bool alturaValida=false;
                                 float height;
                                 string altura;
                                 do{
