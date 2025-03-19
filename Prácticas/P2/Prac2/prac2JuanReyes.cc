@@ -348,40 +348,39 @@ void addAnalysis(Database &data)
                         // Pedimos Peso
                         do
                         {
-
                             cout << "Enter weight: " << endl;
                             cin >> peso;
                             weight = stof(peso);
-
                             if (weight > 0)
                             {
-                                pesoValido=true;
-                                bool alturaValida=false;
+                                pesoValido = true;
+                                bool alturaValida = false;
                                 float height;
                                 string altura;
-                                do{
-                                cout << "Enter height: " << endl;
-                                cin >> altura;
-                                height = stof(altura);
+                                do
+                                {
+                                    cout << "Enter height: " << endl;
+                                    cin >> altura;
+                                    height = stof(altura);
 
-                                if (height > 0)
-                                {
-                                    alturaValida = true;
-                                    // Crear el analisis y guardarlo en la Database
-                                    Analysis newAnalysis;
-                                    newAnalysis.id = data.nextId++;
-                                    strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF);
-                                    newAnalysis.dateAnalysis = date;
-                                    newAnalysis.weight = weight;
-                                    newAnalysis.height = height;
-                                    data.analysis.push_back(newAnalysis);
-                                    cout << "Analysis added succesfully!" << endl;
-                                }
-                                else
-                                {
-                                    error(ERR_WRONG_NUMBER);
-                                }
-                            }while(!alturaValida);
+                                    if (height > 0)
+                                    {
+                                        alturaValida = true;
+                                        // Crear el analisis y guardarlo en la Database
+                                        Analysis newAnalysis;
+                                        newAnalysis.id = data.nextId;
+                                        data.nextId++;
+                                        strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF);
+                                        newAnalysis.dateAnalysis = date;
+                                        newAnalysis.weight = weight;
+                                        newAnalysis.height = height;
+                                        data.analysis.push_back(newAnalysis);
+                                    }
+                                    else
+                                    {
+                                        error(ERR_WRONG_NUMBER);
+                                    }
+                                } while (!alturaValida);
                             }
                             else
                             {
@@ -413,12 +412,9 @@ void exportAnalysis(const Database &data)
             file.write(reinterpret_cast<const char *>(&data.analysis[i]), sizeof(Analysis));
         }
         file.close();
-        cout << "Analysis exported succesfully!" << endl;
+        
     }
-    else
-    {
-        cout << "EROR: Unable to export analysis" << endl;
-    }
+
 }
 /*
 Función principal: Tendrás que añadir más código tuyo
