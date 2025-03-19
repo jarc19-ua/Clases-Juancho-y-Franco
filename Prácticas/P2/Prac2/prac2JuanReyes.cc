@@ -361,7 +361,7 @@ void addAnalysis(Database &data)
                                 string altura;
                                 do{
                                 cout << "Enter height: " << endl;
-                                cin >> height;
+                                cin >> altura;
                                 height = stof(altura);
 
                                 if (height > 0)
