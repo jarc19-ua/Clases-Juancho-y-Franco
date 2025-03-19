@@ -264,11 +264,11 @@ void deletePatient(Database &data)
 {
     bool nifValido = false;
     string nif = "";
-    
+
     do
     {
-    cout << "Enter NIF:" << endl;
-    cin >> nif;
+        cout << "Enter NIF:" << endl;
+        cin >> nif;
         if (nif.empty())
         {
             nifValido = true;
@@ -283,20 +283,23 @@ void deletePatient(Database &data)
             else
             {
                 // TODO: Eliminar analisis
-                data.patients.erase(data.patients.begin()+posicion); 
-                nifValido=true;
+                data.patients.erase(data.patients.begin() + posicion);
+                nifValido = true;
 
-                //TODO ELIMINAR COUT
-                cout<<"Paciente "+ nif+ " eliminado"<<endl;
+                // TODO ELIMINAR COUT
+                cout << "Paciente " + nif + " eliminado" << endl;
             }
         }
     } while (!nifValido);
 }
 
-void savePatients(const Database &data){
-    ofstream fichero ("patients.bin", ios::binary);
-    if(fichero.is_open()){
-        for(int i = 0; i < data.patients.size(); i++){
+void savePatients(const Database &data)
+{
+    ofstream fichero("patients.bin", ios::binary);
+    if (fichero.is_open())
+    {
+        for (int i = 0; i < data.patients.size(); i++)
+        {
             PatientBin pacienteBinario;
             strncpy(pacienteBinario.nif, data.patients[i].nif.c_str(), KMAXNIF);
             strncpy(pacienteBinario.name, data.patients[i].name.c_str(), KMAXNAME);
@@ -307,70 +310,107 @@ void savePatients(const Database &data){
     }
 }
 
-void addAnanlysis(Database &data){
+void addAnalysis(Database &data)
+{
     string nif;
-    cout << "Entre NIF: " << endl;
-    cin >> nif;
-    int index = -1;
+    bool nifValido = false;
+    do
+    {
+        cout << "Enter NIF: " << endl;
+        cin >> nif;
+        if (!nif.empty())
+        {
+            int posicion = searchPatient(nif, data);
 
-    if(!nif.empty()){
-        //Buscar si existe el paciente
-        for(int i = 0; i < data.patients.size() && index == -1; i++){
-            if(data.patients[i].nif == nif){
-                index = i;
+            if (posicion != -1)
+            {
+                nifValido = true;
+                // Pedimos Fecha
+                Date date;
+                string fecha;
+                char slash; // Para leer los '/' del formato de fecha
+                bool fechaValida = false;
+                do
+                {
+                    cout << "Enter date (day/month/year):" << endl; // 12/3/2025
+                    std::cin >> date.day;
+                    std::cin >> slash;
+                    std::cin >> date.month;
+                    std::cin >> slash;
+                    std::cin >> date.year;
+
+                    if (date.day >= 1 && date.day <= 31 && date.month >= 1 && date.month <= 12 && date.year >= 2025 && date.year <= 2050)
+                    {
+                        fechaValida = true;
+                        bool pesoValido = false;
+                        float weight;
+                        string peso;
+                        // Pedimos Peso
+                        do
+                        {
+                            /* code */
+
+                            cout << "Enter weight: " << endl;
+                            cin >> peso;
+                            weight = stof(peso);
+
+                            if (weight > 0)
+                            {
+                                pesoValido=true;
+                                float height;
+                                cout << "Enter height: " << endl;
+                                cin >> height;
+                                if (height > 0)
+                                {
+                                    // Crear el analisis y guardarlo en la Database
+                                    Analysis newAnalysis;
+                                    newAnalysis.id = data.nextId++;
+                                    strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF);
+                                    newAnalysis.dateAnalysis = date;
+                                    newAnalysis.weight = weight;
+                                    newAnalysis.height = height;
+                                    data.analysis.push_back(newAnalysis);
+                                    cout << "Analysis added succesfully!" << endl;
+                                }
+                                else
+                                {
+                                    error(ERR_WRONG_NUMBER);
+                                }
+                            }
+                            else
+                            {
+                                error(ERR_WRONG_NUMBER);
+                            }
+                        } while (!pesoValido);
+                    }
+                    else
+                    {
+                        error(ERR_WRONG_DATE);
+                    }
+                } while (!fechaValida);
+            }
+            else
+            {
+                error(ERR_PATIENT_NOT_EXISTS);
             }
         }
-    }
-    if(index != -1){
-        //Pedimos Fecha
-        Date date;
-        cout << "Enter date (day/month/year): " << endl;
-        cin >> date.day >> date.month >> date.year;
-        if(date.day >=1 && date.day <= 31 && date.month >=1 && date.month <= 12 && date.year >= 2025 && date.year <= 2050){
-            // Pedimos Peso
-            float weight;
-            cout << "Enter weight: " <<endl;
-            cin >> weight;
-
-            if(weight > 0){
-                //Pedimos Altura
-                float height;
-                cout << "Enter height: " << endl;
-                cin >> height;
-                if(height > 0){
-                    //Crear el analisis y guardarlo en la Database
-                    Analysis newAnalysis;
-                    newAnalysis.id = data.nextId++;
-                    strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF); 
-                    newAnalysis.dateAnalysis = date;
-                    newAnalysis.weight = weight;
-                    newAnalysis.height = height;
-
-                    data.analysis.push_back(newAnalysis);
-                    cout << "Analysis added succesfully!" << endl;
-                } else{
-                    error(ERR_WRONG_NUMBER);
-                }
-            }else{
-                error(ERR_WRONG_NUMBER);
-            }
-        }else{
-            error(ERR_WRONG_DATE);
-        }
-    }else{
-        error(ERR_PATIENT_NOT_EXISTS);
-    }
+    } while (!nifValido);
 }
 
-void exportAnalysis(const Database &data){
+void exportAnalysis(const Database &data)
+{
     ofstream file("analysis.bin", ios::binary);
-    if(file){
-        for(int i = 0; i < data.analysis.size(); i++){
-            file.write(reinterpret_cast<const char*>(&data.analysis[i]), sizeof(Analysis));
+    if (file)
+    {
+        for (int i = 0; i < data.analysis.size(); i++)
+        {
+            file.write(reinterpret_cast<const char *>(&data.analysis[i]), sizeof(Analysis));
         }
         file.close();
         cout << "Analysis exported succesfully!" << endl;
-    } else{
+    }
+    else
+    {
         cout << "EROR: Unable to export analysis" << endl;
     }
 }
@@ -399,11 +439,13 @@ int main(int argc, char *argv[])
             viewPatient(data);
             break;
         case '3': // Llamar a la función "deletePatient" para eliminar una ficha de paciente
-        deletePatient(data);
+            deletePatient(data);
             break;
         case '4': // Llamar a la función "savePatients" para guardar las fichas de pacientes en fichero binario
+            savePatients(data);
             break;
         case '5': // Llamar a la función "addAnalysis" para anadir una analítica
+            addAnalysis(data);
             break;
         case '6': // Llamar a la función "exportAnalysis" para exportar las analiticas realizadas a fichero binario
             break;
