@@ -348,7 +348,6 @@ void addAnalysis(Database &data)
                         // Pedimos Peso
                         do
                         {
-                            /* code */
 
                             cout << "Enter weight: " << endl;
                             cin >> peso;
@@ -357,11 +356,17 @@ void addAnalysis(Database &data)
                             if (weight > 0)
                             {
                                 pesoValido=true;
+                                bool alturaValida;
                                 float height;
+                                string altura;
+                                do{
                                 cout << "Enter height: " << endl;
                                 cin >> height;
+                                height = stof(altura);
+
                                 if (height > 0)
                                 {
+                                    alturaValida = true;
                                     // Crear el analisis y guardarlo en la Database
                                     Analysis newAnalysis;
                                     newAnalysis.id = data.nextId++;
@@ -376,6 +381,7 @@ void addAnalysis(Database &data)
                                 {
                                     error(ERR_WRONG_NUMBER);
                                 }
+                            }while(!alturaValida);
                             }
                             else
                             {
