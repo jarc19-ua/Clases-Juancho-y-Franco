@@ -342,7 +342,7 @@ void addAnanlysis(Database &data){
                     //Crear el analisis y guardarlo en la Database
                     Analysis newAnalysis;
                     newAnalysis.id = data.nextId++;
-                    strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF); //TODO: Comprobar que puedo usar el strcnpy y el c_str 
+                    strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF); 
                     newAnalysis.dateAnalysis = date;
                     newAnalysis.weight = weight;
                     newAnalysis.height = height;
