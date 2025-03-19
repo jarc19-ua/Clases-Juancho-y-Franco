@@ -337,6 +337,7 @@ void addAnanlysis(Database &data){
 
             if(weight > 0){
                 //Pedimos Altura
+                //Pedimos datos
                 float height;
                 cout << "Enter height: " << endl;
                 cin >> height;
