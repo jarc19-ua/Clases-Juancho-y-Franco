@@ -219,7 +219,7 @@ void addPatient(Database &data)
     } while (!nifValido);
 }
 
-void viewPatient(Database &data) // TODO: Mostrar analisis
+void viewPatient(Database &data) 
 {
     string nif;
     bool nifValido = false;
@@ -245,10 +245,10 @@ void viewPatient(Database &data) // TODO: Mostrar analisis
                 if (strcmp(data.analysis[i].nif, paciente.nif.c_str()) == 0)
                 {
                     hayAnalisys = true;
-                    cout << "id\tdate\theight\tweight" << endl;
+                    cout << "id\tdate\theight\tweight" << endl;// TODO: Mostrar analisis
                     for (int j = 0; j < data.analysis.size(); j++)
                     {
-                        cout << data.analysis[j].id << data.analysis[j].weight << data.analysis[j].height;
+                        cout << data.analysis[j].id << data.analysis[j].weight << data.analysis[j].height;// TODO: Mostrar analisis
                     }
                 }
             }
@@ -282,9 +282,11 @@ void deletePatient(Database &data)
             }
             else
             {
-                // TODO: Eliminar analisis
+                // TODO: Eliminar analisis con un for, comparando el nif del paciente con el nif del analisis
+                // El analisis se elimina antes del paciente
                 data.patients.erase(data.patients.begin() + posicion);
                 nifValido = true;
+
             }
         }
     } while (!nifValido);
