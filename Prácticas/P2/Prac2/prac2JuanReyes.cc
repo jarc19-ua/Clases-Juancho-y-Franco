@@ -404,14 +404,14 @@ void addAnalysis(Database &data)
 
 void exportAnalysis(const Database &data)
 {
-    ofstream file("analysis.bin", ios::binary);
-    if (file)
+    ofstream fichero("analysis.bin", ios::binary);
+    if (fichero.is_open())
     {
         for (int i = 0; i < data.analysis.size(); i++)
         {
-            file.write(reinterpret_cast<const char *>(&data.analysis[i]), sizeof(Analysis));
+            fichero.write((const char *)&data.analysis[i], sizeof(Analysis));
         }
-        file.close();
+        fichero.close();
         
     }
 
