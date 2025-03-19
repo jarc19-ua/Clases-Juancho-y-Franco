@@ -285,8 +285,6 @@ void deletePatient(Database &data)
                 // TODO: Eliminar analisis
                 data.patients.erase(data.patients.begin() + posicion);
                 nifValido = true;
-
-               
             }
         }
     } while (!nifValido);
@@ -416,49 +414,36 @@ void exportAnalysis(const Database &data)
 
 void importAnalysis(Database &data)
 {
-    // Abrir el archivo binario para leer
+//Leemos fichero
     ifstream fichero("analysis.bin", ios::binary);
     if (fichero.is_open())
     {
-
-        // Abrir el archivo de texto para registrar los NIF de pacientes no encontrados
-        ofstream wrongPatientsFile("wrong_patients.txt", ios::app); // Abrir en modo append
+        //abrimos fichero
+        ofstream wrongPatientsFile("wrong_patients.txt", ios::app);
         if (wrongPatientsFile.is_open())
         {
-
-            // Leer las analíticas del archivo binario
             while (fichero)
             {
                 Analysis analysis;
-                fichero.read(reinterpret_cast<char *>(&analysis), sizeof(Analysis));
-
-                if (fichero.gcount() < sizeof(Analysis))
+                fichero.read((char *)&analysis, sizeof(Analysis));
+                int posicion = searchPatient(analysis.nif, data);
+                if (posicion == -1)
                 {
-                    break; // Fin del archivo
-                }
-
-                // Verificar si el paciente existe en la base de datos
-                int patientIndex = searchPatient(data.patients, analysis.nif);
-                if (patientIndex == -1)
-                {
-                    // Si el paciente no existe, escribir el NIF en el archivo wrong_patients.txt
                     wrongPatientsFile << analysis.nif << endl;
-                    continue; // No agregar esta analítica a la base de datos
                 }
-
-                // Asignar un nuevo ID para la analítica
-                analysis.id = data.nextId++;
-
-                // Agregar la analítica a la base de datos
-                data.analysis.push_back(analysis);
+                else
+                {
+                    analysis.id = data.nextId;
+                    data.nextId++;
+                    data.analysis.push_back(analysis);
+                }
             }
-
-            // Cerrar los archivos
-        }else
-        {
-            error(ERR_FILE);// TODO Preguntar al profe porque en el enunciado pone ERR_FILE_NOT_EXISTS y en la practica pone ERR_FILE
         }
-        
+        else
+        {
+            error(ERR_FILE); // TODO Preguntar al profe porque en el enunciado pone ERR_FILE_NOT_EXISTS y en la practica pone ERR_FILE
+        }
+
         fichero.close();
         wrongPatientsFile.close();
     }
