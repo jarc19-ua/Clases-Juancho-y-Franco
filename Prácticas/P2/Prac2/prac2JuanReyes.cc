@@ -454,6 +454,32 @@ void importAnalysis(Database &data)
         error(ERR_FILE); // TODO Preguntar al profe porque en el enunciado pone ERR_FILE_NOT_EXISTS y en la practica pone ERR_FILE
     }
 }
+
+void Statistics(Database &data){
+    for(int i = 0; data.analysis.size(); i++){
+        float weight = data.analysis[0].weight;
+        float height = data.analysis[0].height;
+        weight / (height*height);
+        float IMC = weight / (height*height);
+        cout << data.analysis[i].nif << ";";
+        cout << data.analysis[i].dateAnalysis.day << "/" << data.analysis[i].dateAnalysis.month << "/" << data.analysis[i].dateAnalysis.year << ";";
+        cout << data.analysis[i].weight << ";";
+        cout << data.analysis[i].height << ";";
+
+        if(IMC < 18.5){
+            cout << "Underweight" << endl;
+        }
+        if(IMC >= 18.5 && IMC <= 24.9){
+            cout << "Healthy" << endl;
+        }
+        if(IMC >=25.0 && IMC <=29.9){
+            cout << "Overweight" << endl;
+        }
+        if(IMC >= 30.0){
+            cout << "Obesity" << endl;
+        }
+    }
+}
 /*
 Función principal: Tendrás que añadir más código tuyo
 return: 0
