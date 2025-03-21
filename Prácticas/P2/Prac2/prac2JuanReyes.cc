@@ -544,8 +544,10 @@ int main(int argc, char *argv[])
             exportAnalysis(data);
             break;
         case '7': // Llamar a la función "importAnalysis" para importar las analiticas en fichero binario
+            importAnalysis(data);
             break;
         case '8': // Llamar a la función "statistics" para guardar las preguntas en fichero
+        Statistics(data);
             break;
         case 'q': // Salir del programa
             break;
