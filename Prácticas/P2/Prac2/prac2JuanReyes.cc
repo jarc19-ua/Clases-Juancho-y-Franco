@@ -238,17 +238,22 @@ void viewPatient(Database &data)
             cout << "Name: " << paciente.name << endl;
             cout << "Telephone: " << paciente.telephone << endl;
 
-            bool hayAnalisys = false;
+            bool ExAnalysis = false;
 
             for (int i = 0; i < data.analysis.size(); i++)
             {
                 if (strcmp(data.analysis[i].nif, paciente.nif.c_str()) == 0)
                 {
-                    hayAnalisys = true;
-                    cout << "id\tdate\theight\tweight" << endl; // TODO: Mostrar analisis
+                    ExAnalysis = true;
+                    cout << "id\tdate\theight\tweight" << endl; 
                     for (int j = 0; j < data.analysis.size(); j++)
                     {
-                        cout << data.analysis[j].id << data.analysis[j].weight << data.analysis[j].height; // TODO: Mostrar analisis
+                        cout << data.analysis[j].id << "\t";
+                        cout << data.analysis[j].dateAnalysis.day << "/";
+                        cout << data.analysis[j].dateAnalysis.month << "/";
+                        cout << data.analysis[j].dateAnalysis.year << "\t";
+                        cout << data.analysis[j].weight << "\t";
+                        cout<< data.analysis[j].height << endl; 
                     }
                 }
             }
@@ -282,6 +287,7 @@ void deletePatient(Database &data)
             }
             else
             {
+                for(int = 0; )
                 // TODO: Eliminar analisis con un for, comparando el nif del paciente con el nif del analisis
                 // El analisis se elimina antes del paciente
                 data.patients.erase(data.patients.begin() + posicion);
@@ -314,7 +320,7 @@ void addAnalysis(Database &data)
     bool nifValido = false;
     do
     {
-        cout << "Enter NIF: " << endl;
+        cout << "Enter NIF:" << endl;
         cin >> nif;
         if (!nif.empty())
         {
@@ -346,7 +352,7 @@ void addAnalysis(Database &data)
                         // Pedimos Peso
                         do
                         {
-                            cout << "Enter weight: " << endl;
+                            cout << "Enter weight:" << endl;
                             cin >> peso;
                             weight = stof(peso);
                             if (weight > 0)
@@ -357,7 +363,7 @@ void addAnalysis(Database &data)
                                 string altura;
                                 do
                                 {
-                                    cout << "Enter height: " << endl;
+                                    cout << "Enter height:" << endl;
                                     cin >> altura;
                                     height = stof(altura);
 
