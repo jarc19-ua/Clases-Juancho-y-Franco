@@ -513,6 +513,58 @@ void Statistics(Database &data)
     }
 }
 
+
+
+
+
+/*
+bool Argumentos(int argc, char *argv[], string &inputFile, bool &ignore,
+                bool &tabla_it_matrix, bool &camino2D) {
+
+    if (argc == 1) {
+        show_usage();
+        return false;
+    }
+
+    for (int i = 1; i < argc; i++) {
+        if ((string)argv[i] == "--ignore-naive")
+            ignore = true;
+
+        else if ((string)argv[i] == "--p2D")
+            camino2D = true;
+        else if ((string)argv[i] == "-t")
+            tabla_it_matrix = true;
+
+        else if ((string)argv[i] == "-f") {
+            // Comprobamos que no sea el último argumento
+            if (i != argc - 1) {
+                inputFile = argv[i + 1];
+                i++;
+            } else {
+                cerr << "ERROR: missing filename." << endl;
+                show_usage();
+            
+            }
+        } else {
+            cerr << "ERROR: unknown option " << argv[i] << "." << endl;
+            show_usage();
+            return false;
+        }
+    }
+
+    return true;
+}
+*/
+
+
+
+
+
+
+
+
+
+
 /*
 Función principal: Tendrás que añadir más código tuyo
 return: 0
