@@ -287,9 +287,13 @@ void deletePatient(Database &data)
             }
             else
             {
-                for(int = 0; )
-                // TODO: Eliminar analisis con un for, comparando el nif del paciente con el nif del analisis
-                // El analisis se elimina antes del paciente
+                for(int i = 0; data.analysis.size(); i++){
+                    if(strcmp(data.analysis[i].nif, nif.c_str())){
+                        //TODO:Eliminar analitica
+                    }
+
+                }
+                //TODO: Eliminar paciente
                 data.patients.erase(data.patients.begin() + posicion);
                 nifValido = true;
             }
