@@ -219,7 +219,7 @@ void addPatient(Database &data)
     } while (!nifValido);
 }
 
-void viewPatient(Database &data) 
+void viewPatient(Database &data)
 {
     string nif;
     bool nifValido = false;
@@ -245,10 +245,10 @@ void viewPatient(Database &data)
                 if (strcmp(data.analysis[i].nif, paciente.nif.c_str()) == 0)
                 {
                     hayAnalisys = true;
-                    cout << "id\tdate\theight\tweight" << endl;// TODO: Mostrar analisis
+                    cout << "id\tdate\theight\tweight" << endl; // TODO: Mostrar analisis
                     for (int j = 0; j < data.analysis.size(); j++)
                     {
-                        cout << data.analysis[j].id << data.analysis[j].weight << data.analysis[j].height;// TODO: Mostrar analisis
+                        cout << data.analysis[j].id << data.analysis[j].weight << data.analysis[j].height; // TODO: Mostrar analisis
                     }
                 }
             }
@@ -286,7 +286,6 @@ void deletePatient(Database &data)
                 // El analisis se elimina antes del paciente
                 data.patients.erase(data.patients.begin() + posicion);
                 nifValido = true;
-
             }
         }
     } while (!nifValido);
@@ -416,11 +415,11 @@ void exportAnalysis(const Database &data)
 
 void importAnalysis(Database &data)
 {
-//Leemos fichero
+    // Leemos fichero
     ifstream fichero("analysis.bin", ios::binary);
     if (fichero.is_open())
     {
-        //abrimos fichero
+        // abrimos fichero
         ofstream wrongPatientsFile("wrong_patients.txt", ios::app);
         if (wrongPatientsFile.is_open())
         {
@@ -455,31 +454,59 @@ void importAnalysis(Database &data)
     }
 }
 
-void Statistics(Database &data){
-    for(int i = 0; data.analysis.size(); i++){
-        float weight = data.analysis[0].weight;
-        float height = data.analysis[0].height;
-        weight / (height*height);
-        float IMC = weight / (height*height);
-        cout << data.analysis[i].nif << ";";
-        cout << data.analysis[i].dateAnalysis.day << "/" << data.analysis[i].dateAnalysis.month << "/" << data.analysis[i].dateAnalysis.year << ";";
-        cout << data.analysis[i].weight << ";";
-        cout << data.analysis[i].height << ";";
+void Statistics(Database &data)
+{
+    int day;
+    int month;
+    int year;
+    char nif[KMAXNIF];
+    float weight;
+    float height;
+    float IMC;
+    for (int i = 0; data.analysis.size(); i++)
+    {
+        day = data.analysis[i].dateAnalysis.day;
+        month = data.analysis[i].dateAnalysis.month;
+        year = data.analysis[i].dateAnalysis.year;
+        weight = data.analysis[i].weight;
+        height = data.analysis[i].height;
+        IMC = weight / (height * height);
+        strcpy(nif, data.analysis[i].nif);
 
-        if(IMC < 18.5){
+        cout << nif << ";";
+        if (day < 10)
+        {
+            cout << "0";
+        }
+        cout << day << "/";
+        if (month < 10)
+        {
+            cout << "0";
+        }
+        cout << month << "/";
+        cout << year << ";";
+        cout << weight << ";";
+        cout << height << ";";
+
+        if (IMC < 18.5)
+        {
             cout << "Underweight" << endl;
         }
-        if(IMC >= 18.5 && IMC <= 24.9){
+        if (IMC >= 18.5 && IMC <= 24.9)
+        {
             cout << "Healthy" << endl;
         }
-        if(IMC >=25.0 && IMC <=29.9){
+        if (IMC >= 25.0 && IMC <= 29.9)
+        {
             cout << "Overweight" << endl;
         }
-        if(IMC >= 30.0){
+        if (IMC >= 30.0)
+        {
             cout << "Obesity" << endl;
         }
     }
 }
+
 /*
 Función principal: Tendrás que añadir más código tuyo
 return: 0
