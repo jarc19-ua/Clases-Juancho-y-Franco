@@ -237,12 +237,13 @@ void viewPatient(Database &data)
             cout << "NIF: " << paciente.nif << endl;
             cout << "Name: " << paciente.name << endl;
             cout << "Telephone: " << paciente.telephone << endl;
-
+            //Aqui daba error porque ponia 'bool hayAnalysis = false;' y no se usaba
             //TODO: mismo error que en searchPatient size_t != int .size
             for (size_t i = 0; i < data.analysis.size(); i++)
             {
                 if (strcmp(data.analysis[i].nif, paciente.nif.c_str()) == 0)
                 {
+                    //Aqui daba error porque ponia 'hayAnalysis = true;' y no se usaba
                     cout << "id\tdate\theight\tweight" << endl;
                     //TODO: mismo error que en searchPatient size_t != int .size
                     for (size_t j = 0; j < data.analysis.size(); j++)
