@@ -56,7 +56,7 @@ struct Database
 enum Error
 {
     ERR_ARGS,
-    ERR_FILE,
+    ERR_FILE_NOT_EXISTS,
     ERR_OPTION,
     ERR_PATIENT_EXISTS,
     ERR_PATIENT_NOT_EXISTS,
@@ -79,7 +79,7 @@ void error(Error e)
     case ERR_ARGS:
         cout << "ERROR: wrong arguments" << endl;
         break;
-    case ERR_FILE:
+    case ERR_FILE_NOT_EXISTS:
         cout << "ERROR: cannot open file" << endl;
         break;
     case ERR_OPTION:
@@ -492,7 +492,7 @@ void importAnalysis(Database &data)
         }
         else
         {
-            error(ERR_FILE); // TODO Preguntar al profe porque en el enunciado pone ERR_FILE_NOT_EXISTS y en la practica pone ERR_FILE
+            error(ERR_FILE_NOT_EXISTS); 
         }
 
         fichero.close();
@@ -500,7 +500,7 @@ void importAnalysis(Database &data)
     }
     else
     {
-        error(ERR_FILE); // TODO Preguntar al profe porque en el enunciado pone ERR_FILE_NOT_EXISTS y en la practica pone ERR_FILE
+        error(ERR_FILE_NOT_EXISTS); 
     }
 }
 
