@@ -245,7 +245,7 @@ void viewPatient(Database &data)
                 if (strcmp(data.analysis[i].nif, paciente.nif.c_str()) == 0)
                 {
                     ExAnalysis = true;
-                    cout << "id\tdate\theight\tweight" << endl; 
+                    cout << "id\tdate\theight\tweight" << endl;
                     for (int j = 0; j < data.analysis.size(); j++)
                     {
                         cout << data.analysis[j].id << "\t";
@@ -253,7 +253,7 @@ void viewPatient(Database &data)
                         cout << data.analysis[j].dateAnalysis.month << "/";
                         cout << data.analysis[j].dateAnalysis.year << "\t";
                         cout << data.analysis[j].weight << "\t";
-                        cout<< data.analysis[j].height << endl; 
+                        cout << data.analysis[j].height << endl;
                     }
                 }
             }
@@ -287,13 +287,14 @@ void deletePatient(Database &data)
             }
             else
             {
-                for(int i = 0; data.analysis.size(); i++){
-                    if(strcmp(data.analysis[i].nif, nif.c_str())){
-                        //TODO:Eliminar analitica
+                for (int i = 0; data.analysis.size(); i++)
+                {
+                    if (strcmp(data.analysis[i].nif, nif.c_str()))
+                    {
+                        // TODO:Eliminar analitica
                     }
-
                 }
-                //TODO: Eliminar paciente
+                // TODO: Eliminar paciente
                 data.patients.erase(data.patients.begin() + posicion);
                 nifValido = true;
             }
@@ -301,6 +302,43 @@ void deletePatient(Database &data)
     } while (!nifValido);
 }
 
+/*   Posible solucion al apartado 7.3 deletePatients
+
+void deletePatient(Database &data)
+{
+    bool nifValido = false;
+    string nif;
+
+    while (!nifValido){
+        cout << "Enter NIF:" << endl;
+        cin >> nif;
+
+        if (nif.empty()){
+            nifValido = true;
+        }else{
+            int posicion = searchPatient(nif, data);
+            if(posicion == -1){
+                error(ERR_PATIENT_NOT_EXISTS);
+            }else{
+                //Eliminamos las analiticas del paciente
+                vector<Analysis>::iterator it = data.analysis.begin();
+                while(it != data.analysis.end()){
+                    if(strcmp((*it).nif, nif.c_str()) == 0){
+                        it = data.analysis.erase(it); // Actualizamos y Borramos el iterador
+                    }else{
+                        ++it;  // Solo avanza si no borra
+                    }
+                }
+            }// Eliminamos el paciente
+            data.patients.erase(data.patients.begin() + posicion);
+            nifValido = true;
+        }
+    }
+    
+}
+
+
+*/
 void savePatients(const Database &data)
 {
     ofstream fichero("patients.bin", ios::binary);
@@ -517,10 +555,6 @@ void Statistics(Database &data)
     }
 }
 
-
-
-
-
 /*
 bool Argumentos(int argc, char *argv[], string &inputFile, bool &ignore,
                 bool &tabla_it_matrix, bool &camino2D) {
@@ -547,7 +581,7 @@ bool Argumentos(int argc, char *argv[], string &inputFile, bool &ignore,
             } else {
                 cerr << "ERROR: missing filename." << endl;
                 show_usage();
-            
+
             }
         } else {
             cerr << "ERROR: unknown option " << argv[i] << "." << endl;
@@ -559,15 +593,6 @@ bool Argumentos(int argc, char *argv[], string &inputFile, bool &ignore,
     return true;
 }
 */
-
-
-
-
-
-
-
-
-
 
 /*
 Función principal: Tendrás que añadir más código tuyo
@@ -609,7 +634,7 @@ int main(int argc, char *argv[])
             importAnalysis(data);
             break;
         case '8': // Llamar a la función "statistics" para guardar las preguntas en fichero
-        Statistics(data);
+            Statistics(data);
             break;
         case 'q': // Salir del programa
             break;
