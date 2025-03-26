@@ -293,7 +293,6 @@ void deletePatient(Database &data)
             }
             else
             {
-            
                 for (int i = 0; data.analysis.size();)
                 {
                     if (strcmp(data.analysis[i].nif, nif.c_str()))
