@@ -126,38 +126,35 @@ void showMenu()
          << "Option: ";
 }
 
-//TODO: Acabar la comprobacion de argumentos
-bool Argumentos(int argc, char *argv[], string &inputFile, bool &mostrarEstadisticas) {
+// TODO: Acabar la comprobacion de argumentos
+bool Argumentos(int argc, char *argv[], string &inputFile, bool &mostrarEstadisticas)
+{
 
-        if (argc == 1)
+    if (argc == 1)
+    {
+        return false;
+    }
+
+    for (int i = 1; i < argc; i++)
+    {
+        if ((string)argv[i] == "-s")
+            mostrarEstadisticas = true;
+        else if ((string)argv[i] == "-f")
         {
-            return false;
-        }
-    
-        for (int i = 1; i < argc; i++)
-        {
-            if ((string)argv[i] == "-s")
-                mostrarEstadisticas = true;
-            else if ((string)argv[i] == "-f")
+            // Comprobamos que no sea el último argumento
+            if (i != argc - 1)
             {
-                // Comprobamos que no sea el último argumento
-                if (i != argc - 1)
-                {
-                    inputFile = argv[i + 1];
-                    i++;
-                }
-                else
-                {
-                    error(ERR_FILE_NOT_EXISTS);
-                }
+                inputFile = argv[i + 1];
+                i++;
+            }
+            else
+            {
+                error(ERR_FILE_NOT_EXISTS);
             }
         }
-        return true;
+    }
+    return true;
 }
-
-
-
-
 
 int searchPatient(string nif, Database &data)
 {
@@ -331,8 +328,10 @@ void deletePatient(Database &data)
                     if (strcmp(data.analysis[i].nif, nif.c_str()))
                     {
                         // TODO: Comprobar que funciona
-                        data.analysis.erase(data.analysis.begin()+i);
-                    }else{
+                        data.analysis.erase(data.analysis.begin() + i);
+                    }
+                    else
+                    {
                         i++;
                     }
                 }
@@ -369,7 +368,7 @@ void deletePatient(Database &data)
                         it = data.analysis.erase(it); // Actualizamos y Borramos el iterador
                     }else{
                         ++it;  // Solo avanza si no borra
-                    } 
+                    }
                 }
             }// Eliminamos el paciente
             data.patients.erase(data.patients.begin() + posicion);
@@ -642,48 +641,53 @@ return: 0
 */
 int main(int argc, char *argv[])
 {
-    Database data;
-    data.nextId = 1;
-    char option;
-
-    do
+    string fichero="";
+    bool mostrarEstadisticas = false;
+    if (Argumentos(argc, argv, fichero, mostrarEstadisticas))
     {
-        showMenu();
-        cin >> option;
-        cin.ignore();
 
-        switch (option)
+        Database data;
+        data.nextId = 1;
+        char option;
+
+        do
         {
-        case '1': // Llamar a la función "addPatient" para añadir una nueva ficha de paciente
-            addPatient(data);
-            break;
-        case '2': // Llamar a la función "viewPatient" para ver la información de un paciente
-            viewPatient(data);
-            break;
-        case '3': // Llamar a la función "deletePatient" para eliminar una ficha de paciente
-            deletePatient(data);
-            break;
-        case '4': // Llamar a la función "savePatients" para guardar las fichas de pacientes en fichero binario
-            savePatients(data);
-            break;
-        case '5': // Llamar a la función "addAnalysis" para anadir una analítica
-            addAnalysis(data);
-            break;
-        case '6': // Llamar a la función "exportAnalysis" para exportar las analiticas realizadas a fichero binario
-            exportAnalysis(data);
-            break;
-        case '7': // Llamar a la función "importAnalysis" para importar las analiticas en fichero binario
-            importAnalysis(data);
-            break;
-        case '8': // Llamar a la función "statistics" para guardar las preguntas en fichero
-            Statistics(data);
-            break;
-        case 'q': // Salir del programa
-            break;
-        default:
-            error(ERR_OPTION);
-        }
-    } while (option != 'q');
+            showMenu();
+            cin >> option;
+            cin.ignore();
 
+            switch (option)
+            {
+            case '1': // Llamar a la función "addPatient" para añadir una nueva ficha de paciente
+                addPatient(data);
+                break;
+            case '2': // Llamar a la función "viewPatient" para ver la información de un paciente
+                viewPatient(data);
+                break;
+            case '3': // Llamar a la función "deletePatient" para eliminar una ficha de paciente
+                deletePatient(data);
+                break;
+            case '4': // Llamar a la función "savePatients" para guardar las fichas de pacientes en fichero binario
+                savePatients(data);
+                break;
+            case '5': // Llamar a la función "addAnalysis" para anadir una analítica
+                addAnalysis(data);
+                break;
+            case '6': // Llamar a la función "exportAnalysis" para exportar las analiticas realizadas a fichero binario
+                exportAnalysis(data);
+                break;
+            case '7': // Llamar a la función "importAnalysis" para importar las analiticas en fichero binario
+                importAnalysis(data);
+                break;
+            case '8': // Llamar a la función "statistics" para guardar las preguntas en fichero
+                Statistics(data);
+                break;
+            case 'q': // Salir del programa
+                break;
+            default:
+                error(ERR_OPTION);
+            }
+        } while (option != 'q');
+    }
     return 0;
 }
