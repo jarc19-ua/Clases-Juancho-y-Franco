@@ -293,11 +293,15 @@ void deletePatient(Database &data)
             }
             else
             {
-                for (int i = 0; data.analysis.size(); i++)
+            
+                for (int i = 0; data.analysis.size();)
                 {
                     if (strcmp(data.analysis[i].nif, nif.c_str()))
                     {
                         // TODO:Eliminar analitica
+                        data.analysis.erase(data.analysis.begin()+i);
+                    }else{
+                        i++;
                     }
                 }
                 // TODO: Eliminar paciente
