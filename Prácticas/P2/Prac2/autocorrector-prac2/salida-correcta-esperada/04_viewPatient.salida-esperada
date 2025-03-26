@@ -1,0 +1,132 @@
+1- Add patient
+2- View Patient
+3- Delete patient
+4- Save patients
+5- Add analysis
+6- Export analysis
+7- Import analysis
+8- Statistics
+q- Quit
+Option: Enter NIF: Enter name: Enter telephone: 1- Add patient
+2- View Patient
+3- Delete patient
+4- Save patients
+5- Add analysis
+6- Export analysis
+7- Import analysis
+8- Statistics
+q- Quit
+Option: Enter NIF: Enter date (day/month/year): Enter weight: Enter height: 1- Add patient
+2- View Patient
+3- Delete patient
+4- Save patients
+5- Add analysis
+6- Export analysis
+7- Import analysis
+8- Statistics
+q- Quit
+Option: Enter NIF: Enter date (day/month/year): Enter weight: Enter height: 1- Add patient
+2- View Patient
+3- Delete patient
+4- Save patients
+5- Add analysis
+6- Export analysis
+7- Import analysis
+8- Statistics
+q- Quit
+Option: Enter NIF: Enter date (day/month/year): Enter weight: Enter height: 1- Add patient
+2- View Patient
+3- Delete patient
+4- Save patients
+5- Add analysis
+6- Export analysis
+7- Import analysis
+8- Statistics
+q- Quit
+Option: Enter NIF: Enter date (day/month/year): Enter weight: Enter height: 1- Add patient
+2- View Patient
+3- Delete patient
+4- Save patients
+5- Add analysis
+6- Export analysis
+7- Import analysis
+8- Statistics
+q- Quit
+Option: Enter NIF: Enter date (day/month/year): Enter weight: Enter height: 1- Add patient
+2- View Patient
+3- Delete patient
+4- Save patients
+5- Add analysis
+6- Export analysis
+7- Import analysis
+8- Statistics
+q- Quit
+Option: Enter NIF: ERROR: patient does not exist
+Enter NIF: 1- Add patient
+2- View Patient
+3- Delete patient
+4- Save patients
+5- Add analysis
+6- Export analysis
+7- Import analysis
+8- Statistics
+q- Quit
+Option: Enter NIF: NIF: 44444444P
+Name: Laura Ramos
+Telephone: +55555555555
+Id	Date		Height	Weight
+2	01/01/2050	150	90
+3	07/07/2030	190	45
+1- Add patient
+2- View Patient
+3- Delete patient
+4- Save patients
+5- Add analysis
+6- Export analysis
+7- Import analysis
+8- Statistics
+q- Quit
+Option: Enter NIF: NIF: 44333222Q
+Name: Manuel Rodriguez
+Telephone: +34667743662
+Id	Date		Height	Weight
+1	30/02/2030	210	105
+1- Add patient
+2- View Patient
+3- Delete patient
+4- Save patients
+5- Add analysis
+6- Export analysis
+7- Import analysis
+8- Statistics
+q- Quit
+Option: Enter NIF: ERROR: wrong NIF 
+Enter NIF: ERROR: patient does not exist
+Enter NIF: NIF: 21444709T
+Name: Carlos Sainz
+Telephone: +346198344678
+Id	Date		Height	Weight
+4	24/03/2041	174	56.0106
+5	31/12/2050	160	150
+1- Add patient
+2- View Patient
+3- Delete patient
+4- Save patients
+5- Add analysis
+6- Export analysis
+7- Import analysis
+8- Statistics
+q- Quit
+Option: Enter NIF: NIF: 99888777A
+Name: Brhadaranyakopanishadvivekachudamani Erreh
+Telephone: +45999888876
+1- Add patient
+2- View Patient
+3- Delete patient
+4- Save patients
+5- Add analysis
+6- Export analysis
+7- Import analysis
+8- Statistics
+q- Quit
+Option: 
