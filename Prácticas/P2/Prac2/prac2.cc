@@ -138,7 +138,6 @@ bool Argumentos(int argc, char *argv[], string &inputFile, bool &mostrarEstadist
         {
             if ((string)argv[i] == "-s")
                 mostrarEstadisticas = true;
-    
             else if ((string)argv[i] == "-f")
             {
                 // Comprobamos que no sea el último argumento
