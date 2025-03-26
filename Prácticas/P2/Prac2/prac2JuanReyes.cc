@@ -333,7 +333,7 @@ void deletePatient(Database &data)
                         it = data.analysis.erase(it); // Actualizamos y Borramos el iterador
                     }else{
                         ++it;  // Solo avanza si no borra
-                    }
+                    } 
                 }
             }// Eliminamos el paciente
             data.patients.erase(data.patients.begin() + posicion);
