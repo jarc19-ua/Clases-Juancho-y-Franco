@@ -298,7 +298,7 @@ void deletePatient(Database &data)
                 {
                     if (strcmp(data.analysis[i].nif, nif.c_str()))
                     {
-                        // TODO:Eliminar analitica
+                        // TODO: Comprobar que funciona
                         data.analysis.erase(data.analysis.begin()+i);
                     }else{
                         i++;
