@@ -126,6 +126,41 @@ void showMenu()
          << "Option: ";
 }
 
+//TODO: Acabar la comprobacion de argumentos
+bool Argumentos(int argc, char *argv[], string &inputFile, bool &mostrarEstadisticas) {
+
+        if (argc == 1)
+        {
+    
+            return false;
+        }
+    
+        for (int i = 1; i < argc; i++)
+        {
+            if ((string)argv[i] == "-s")
+                mostrarEstadisticas = true;
+    
+            else if ((string)argv[i] == "-f")
+            {
+                // Comprobamos que no sea el último argumento
+                if (i != argc - 1)
+                {
+                    inputFile = argv[i + 1];
+                    i++;
+                }
+                else
+                {
+                    error(ERR_FILE_NOT_EXISTS);
+                }
+            }
+        }
+        return true;
+}
+
+
+
+
+
 int searchPatient(string nif, Database &data)
 {
     int posicion = -1;
@@ -303,7 +338,7 @@ void deletePatient(Database &data)
                         i++;
                     }
                 }
-                // TODO: Eliminar paciente
+                // TODO: Comprobar que funciona
                 data.patients.erase(data.patients.begin() + posicion);
                 nifValido = true;
             }
