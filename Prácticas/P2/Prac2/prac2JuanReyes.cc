@@ -126,7 +126,7 @@ void showMenu()
          << "Option: ";
 }
 
-int searchPatient(string nif, Database &data) //TODO: daba error en el bucle for por usar un int con un .size
+int searchPatient(string nif, Database &data) // TODO: daba error en el bucle for por usar un int con un .size
 {
     int posicion = -1;
     for (size_t i = 0; i < data.patients.size(); i++)
@@ -227,40 +227,43 @@ void viewPatient(Database &data)
     {
         cout << "Enter NIF:" << endl;
         cin >> nif;
-
-        int posicion = searchPatient(nif, data);
-
-        if (posicion != -1)
+        if (!nif.empty())
         {
-            nifValido = true;
-            Patient paciente = data.patients[posicion];
-            cout << "NIF: " << paciente.nif << endl;
-            cout << "Name: " << paciente.name << endl;
-            cout << "Telephone: " << paciente.telephone << endl;
-            //Aqui daba error porque ponia 'bool hayAnalysis = false;' y no se usaba
-            //TODO: mismo error que en searchPatient size_t != int .size
-            for (size_t i = 0; i < data.analysis.size(); i++)
+
+            int posicion = searchPatient(nif, data);
+
+            if (posicion != -1)
             {
-                if (strcmp(data.analysis[i].nif, paciente.nif.c_str()) == 0)
+                nifValido = true;
+                Patient paciente = data.patients[posicion];
+                cout << "NIF: " << paciente.nif << endl;
+                cout << "Name: " << paciente.name << endl;
+                cout << "Telephone: " << paciente.telephone << endl;
+                // Aqui daba error porque ponia 'bool hayAnalysis = false;' y no se usaba
+                // TODO: mismo error que en searchPatient size_t != int .size
+                for (size_t i = 0; i < data.analysis.size(); i++)
                 {
-                    //Aqui daba error porque ponia 'hayAnalysis = true;' y no se usaba
-                    cout << "id\tdate\theight\tweight" << endl;
-                    //TODO: mismo error que en searchPatient size_t != int .size
-                    for (size_t j = 0; j < data.analysis.size(); j++)
+                    if (strcmp(data.analysis[i].nif, paciente.nif.c_str()) == 0)
                     {
-                        cout << data.analysis[j].id << "\t";
-                        cout << data.analysis[j].dateAnalysis.day << "/";
-                        cout << data.analysis[j].dateAnalysis.month << "/";
-                        cout << data.analysis[j].dateAnalysis.year << "\t";
-                        cout << data.analysis[j].weight << "\t";
-                        cout << data.analysis[j].height << endl;
+                        // Aqui daba error porque ponia 'hayAnalysis = true;' y no se usaba
+                        cout << "id\tdate\theight\tweight" << endl;
+                        // TODO: mismo error que en searchPatient size_t != int .size
+                        for (size_t j = 0; j < data.analysis.size(); j++)
+                        {
+                            cout << data.analysis[j].id << "\t";
+                            cout << data.analysis[j].dateAnalysis.day << "/";
+                            cout << data.analysis[j].dateAnalysis.month << "/";
+                            cout << data.analysis[j].dateAnalysis.year << "\t";
+                            cout << data.analysis[j].weight << "\t";
+                            cout << data.analysis[j].height << endl;
+                        }
                     }
                 }
             }
-        }
-        else
-        {
-            error(ERR_PATIENT_NOT_EXISTS);
+            else
+            {
+                error(ERR_PATIENT_NOT_EXISTS);
+            }
         }
     } while (!nifValido);
 }
@@ -334,7 +337,7 @@ void deletePatient(Database &data)
             nifValido = true;
         }
     }
-    
+
 }
 
 
@@ -344,7 +347,7 @@ void savePatients(const Database &data)
     ofstream fichero("patients.bin", ios::binary);
     if (fichero.is_open())
     {
-        //TODO: mismo error que en searchPatient size_t != int .size
+        // TODO: mismo error que en searchPatient size_t != int .size
         for (size_t i = 0; i < data.patients.size(); i++)
         {
             PatientBin pacienteBinario;
@@ -454,7 +457,7 @@ void exportAnalysis(const Database &data)
     ofstream fichero("analysis.bin", ios::binary);
     if (fichero.is_open())
     {
-        //TODO: mismo error que en searchPatient size_t != int .size
+        // TODO: mismo error que en searchPatient size_t != int .size
         for (size_t i = 0; i < data.analysis.size(); i++)
         {
             fichero.write((const char *)&data.analysis[i], sizeof(Analysis));
@@ -492,7 +495,7 @@ void importAnalysis(Database &data)
         }
         else
         {
-            error(ERR_FILE_NOT_EXISTS); 
+            error(ERR_FILE_NOT_EXISTS);
         }
 
         fichero.close();
@@ -500,7 +503,7 @@ void importAnalysis(Database &data)
     }
     else
     {
-        error(ERR_FILE_NOT_EXISTS); 
+        error(ERR_FILE_NOT_EXISTS);
     }
 }
 
