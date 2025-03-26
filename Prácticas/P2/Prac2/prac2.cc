@@ -131,7 +131,6 @@ bool Argumentos(int argc, char *argv[], string &inputFile, bool &mostrarEstadist
 
         if (argc == 1)
         {
-    
             return false;
         }
     
