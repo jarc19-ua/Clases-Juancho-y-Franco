@@ -247,7 +247,6 @@ void viewPatient(Database &data)
                     {
                         // Aqui daba error porque ponia 'hayAnalysis = true;' y no se usaba
                         cout << "id\tdate\theight\tweight" << endl;
-                        // TODO: mismo error que en searchPatient size_t != int .size
                         for (size_t j = 0; j < data.analysis.size(); j++)
                         {
                             cout << data.analysis[j].id << "\t";
@@ -351,7 +350,6 @@ void savePatients(const Database &data)
     ofstream fichero("patients.bin", ios::binary);
     if (fichero.is_open())
     {
-        // TODO: mismo error que en searchPatient size_t != int .size
         for (size_t i = 0; i < data.patients.size(); i++)
         {
             PatientBin pacienteBinario;
@@ -461,7 +459,6 @@ void exportAnalysis(const Database &data)
     ofstream fichero("analysis.bin", ios::binary);
     if (fichero.is_open())
     {
-        // TODO: mismo error que en searchPatient size_t != int .size
         for (size_t i = 0; i < data.analysis.size(); i++)
         {
             fichero.write((const char *)&data.analysis[i], sizeof(Analysis));
