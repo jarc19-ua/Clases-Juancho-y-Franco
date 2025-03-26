@@ -265,6 +265,10 @@ void viewPatient(Database &data)
                 error(ERR_PATIENT_NOT_EXISTS);
             }
         }
+        else
+        {
+            nifValido = true;
+        }
     } while (!nifValido);
 }
 
