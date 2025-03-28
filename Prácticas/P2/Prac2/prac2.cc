@@ -129,11 +129,7 @@ void showMenu()
 // TODO: Acabar la comprobacion de argumentos
 bool Argumentos(int argc, char *argv[], string &inputFile, bool &mostrarEstadisticas)
 {
-
-    if (argc == 1)
-    {
-        return false;
-    }
+    // ./prac2 -s  -f analisis.txt
 
     for (int i = 1; i < argc; i++)
     {
@@ -159,7 +155,7 @@ bool Argumentos(int argc, char *argv[], string &inputFile, bool &mostrarEstadist
 int searchPatient(string nif, Database &data)
 {
     int posicion = -1;
-    for (size_t i = 0; i < data.patients.size(); i++)
+    for (int i = 0; i < (int)data.patients.size(); i++)
     {
         if (data.patients[i].nif == nif)
             posicion = i;
@@ -271,13 +267,13 @@ void viewPatient(Database &data)
                 cout << "Telephone: " << paciente.telephone << endl;
                 // Aqui daba error porque ponia 'bool hayAnalysis = false;' y no se usaba
 
-                for (size_t i = 0; i < data.analysis.size(); i++)
+                for (int i = 0; i < data.analysis.size(); i++)
                 {
                     if (strcmp(data.analysis[i].nif, paciente.nif.c_str()) == 0)
                     {
                         // Aqui daba error porque ponia 'hayAnalysis = true;' y no se usaba
                         cout << "id\tdate\theight\tweight" << endl;
-                        for (size_t j = 0; j < data.analysis.size(); j++)
+                        for (int j = 0; j < data.analysis.size(); j++)
                         {
                             cout << data.analysis[j].id << "\t";
                             cout << data.analysis[j].dateAnalysis.day << "/";
@@ -385,7 +381,7 @@ void savePatients(const Database &data)
     ofstream fichero("patients.bin", ios::binary);
     if (fichero.is_open())
     {
-        for (size_t i = 0; i < data.patients.size(); i++)
+        for (int i = 0; i < data.patients.size(); i++)
         {
             PatientBin pacienteBinario;
             strncpy(pacienteBinario.nif, data.patients[i].nif.c_str(), KMAXNIF);
@@ -494,7 +490,7 @@ void exportAnalysis(const Database &data)
     ofstream fichero("analysis.bin", ios::binary);
     if (fichero.is_open())
     {
-        for (size_t i = 0; i < data.analysis.size(); i++)
+        for (int i = 0; i < data.analysis.size(); i++)
         {
             fichero.write((const char *)&data.analysis[i], sizeof(Analysis));
         }
@@ -648,7 +644,7 @@ int main(int argc, char *argv[])
 
         Database data;
         data.nextId = 1;
-        char option;
+        char option='q';
 
         do
         {
@@ -688,6 +684,8 @@ int main(int argc, char *argv[])
                 error(ERR_OPTION);
             }
         } while (option != 'q');
+    }else{
+        cout<<"Los argumentos no estan bien";
     }
     return 0;
 }
