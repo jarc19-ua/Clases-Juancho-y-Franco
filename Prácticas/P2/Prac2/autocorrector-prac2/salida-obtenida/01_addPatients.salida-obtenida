@@ -31,8 +31,16 @@ Option: Enter NIF: ERROR: wrong NIF
 Enter NIF: ERROR: wrong NIF
 Enter NIF: ERROR: wrong NIF
 Enter NIF: ERROR: wrong NIF
-Enter NIF: ERROR: wrong NIF
-Enter NIF: Enter name: ERROR: wrong name
+Enter NIF: 1- Add patient
+2- View Patient
+3- Delete patient
+4- Save patients
+5- Add analysis
+6- Export analysis
+7- Import analysis
+8- Statistics
+q- Quit
+Option: Enter NIF: Enter name: ERROR: wrong name
 Enter name: Enter telephone: ERROR: wrong telephone number
 Enter telephone: ERROR: wrong telephone number
 Enter telephone: ERROR: wrong telephone number
