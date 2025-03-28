@@ -155,7 +155,7 @@ bool Argumentos(int argc, char *argv[], string &inputFile, bool &mostrarEstadist
 int searchPatient(string nif, Database &data)
 {
     int posicion = -1;
-    for (size_t i = 0; i < (int)data.patients.size(); i++)
+    for (size_t i = 0; i < data.patients.size(); i++)
     {
         if (data.patients[i].nif == nif)
             posicion = i;
