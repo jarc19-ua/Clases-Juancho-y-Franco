@@ -364,7 +364,7 @@ void savePatients(const Database &data)
 }
 
 void addAnalysis(Database &data)
-{
+{ 
     string nif;
     bool nifValido = false;
     do
@@ -386,12 +386,12 @@ void addAnalysis(Database &data)
                 do
                 {
                     cout << "Enter date (day/month/year):" << endl; // 12/3/2025
-                    getline(cin,date.day);
-                    getline(cin,slash);
-                    getline(cin,date.month);
-                    getline(cin,slash);
-                    getline(cin,date.year);
-
+                  
+                    cin >> date.day;
+                    cin >> slash;
+                    cin >> date.month;
+                    cin >> slash;
+                    cin >> date.year;
                     if (date.day >= 1 && date.day <= 31 && date.month >= 1 && date.month <= 12 && date.year >= 2025 && date.year <= 2050)
                     {
                         fechaValida = true;
