@@ -239,6 +239,7 @@ void addPatient(Database &data)
             else
             {
                 error(ERR_PATIENT_EXISTS);
+                nifValido = true;
             }
         }
 
@@ -288,6 +289,8 @@ void viewPatient(Database &data)
             else
             {
                 error(ERR_PATIENT_NOT_EXISTS);
+                nifValido = true;
+
             }
         }
         else
@@ -480,6 +483,7 @@ void addAnalysis(Database &data)
             else
             {
                 error(ERR_PATIENT_NOT_EXISTS);
+                nifValido = true;
             }
         }
     } while (!nifValido);
