@@ -134,7 +134,7 @@ void showMenu()
          << "Option: ";
 }
 
-// TODO: Acabar la comprobacion de argumentos
+
 bool Argumentos(int argc, char *argv[], bool &fichero, string nombreFichero, bool &mostrarEstadisticas)
 {
     bool resultado = true;
@@ -343,7 +343,7 @@ void deletePatient(Database &data)
                 {
                     if (strcmp(data.analysis[i].nif, nif.c_str()))
                     {
-                        // TODO: Comprobar que funciona
+                        
                         data.analysis.erase(data.analysis.begin() + i);
                     }
                     else
@@ -351,7 +351,7 @@ void deletePatient(Database &data)
                         i++;
                     }
                 }
-                // TODO: Comprobar que funciona
+               
                 data.patients.erase(data.patients.begin() + posicion);
                 nifValido = true;
             }
@@ -483,7 +483,7 @@ void exportAnalysis(const Database &data)
     }
 }
 
-// TODO JUAN
+
 
 void importAnalysis(Database &data)
 {
@@ -519,8 +519,8 @@ void importAnalysis(Database &data)
     wrongPatientsFile.close();
 }
 /*
-// CHICO UNI
-void importAnalysis(vector<Analysis> &analysis, vector<Patient> &patients, Database &data)
+// TODO:CHICO UNI
+void importAnalysi//  JUANs(vector<Analysis> &analysis, vector<Patient> &patients, Database &data)
 {
     ifstream archivo("analysis.bin", ios::binary); // Abre archivo binario
     ofstream txt("wrong_patients.txt", ios::app);  // Agrega al final del archivo
