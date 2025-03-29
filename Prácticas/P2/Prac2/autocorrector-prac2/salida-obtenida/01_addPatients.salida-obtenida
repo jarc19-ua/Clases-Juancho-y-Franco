@@ -27,10 +27,10 @@ Option: ERROR: wrong option
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: ERROR: wrong NIF 
-Enter NIF: ERROR: wrong NIF 
-Enter NIF: ERROR: wrong NIF 
-Enter NIF: ERROR: wrong NIF 
+Option: Enter NIF: ERROR: wrong NIF
+Enter NIF: ERROR: wrong NIF
+Enter NIF: ERROR: wrong NIF
+Enter NIF: ERROR: wrong NIF
 Enter NIF: 1- Add patient
 2- View Patient
 3- Delete patient
@@ -40,8 +40,8 @@ Enter NIF: 1- Add patient
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: Enter name: ERROR: wrong name 
-Enter name: ERROR: wrong name 
+Option: Enter NIF: Enter name: ERROR: wrong name
+Enter name: ERROR: wrong name
 Enter name: Enter telephone: ERROR: wrong telephone number
 Enter telephone: ERROR: wrong telephone number
 Enter telephone: ERROR: wrong telephone number
