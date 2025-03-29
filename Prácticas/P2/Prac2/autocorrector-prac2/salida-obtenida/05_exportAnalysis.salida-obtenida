@@ -7,7 +7,7 @@
 7- Import analysis
 8- Statistics
 q- Quit
-Option: 1- Add patient
+Option: Enter NIF: Enter name: Enter telephone: 1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -16,13 +16,7 @@ Option: 1- Add patient
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: NIF: 44444444P
-Name: Laura Ramos
-Telephone: +55555555555
-Id	Date		Height	Weight
-3	01/01/2050	150	90
-4	07/07/2030	190	45
-1- Add patient
+Option: Enter NIF: Enter date (day/month/year): Enter weight: Enter height: 1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -31,8 +25,7 @@ Id	Date		Height	Weight
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: ERROR: patient does not exist
-Enter NIF: 1- Add patient
+Option: Enter NIF: Enter date (day/month/year): Enter weight: Enter height: 1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -41,7 +34,7 @@ Enter NIF: 1- Add patient
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: 1- Add patient
+Option: Enter NIF: Enter date (day/month/year): Enter weight: Enter height: 1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -50,8 +43,7 @@ Option: Enter NIF: 1- Add patient
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: ERROR: patient does not exist
-Enter NIF: 1- Add patient
+Option: Enter NIF: Enter date (day/month/year): Enter weight: Enter height: 1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -60,8 +52,7 @@ Enter NIF: 1- Add patient
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: ERROR: patient does not exist
-Enter NIF: 1- Add patient
+Option: Enter NIF: Enter date (day/month/year): Enter weight: Enter height: 1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -70,42 +61,7 @@ Enter NIF: 1- Add patient
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: NIF: 44333222Q
-Name: Manuel Rodriguez
-Telephone: +34667743662
-Id	Date		Height	Weight
-2	30/02/2030	210	105
-6	12/07/2029	162	78.6
-7	24/03/2041	174	56.0106
-1- Add patient
-2- View Patient
-3- Delete patient
-4- Save patients
-5- Add analysis
-6- Export analysis
-7- Import analysis
-8- Statistics
-q- Quit
-Option: Enter NIF: 1- Add patient
-2- View Patient
-3- Delete patient
-4- Save patients
-5- Add analysis
-6- Export analysis
-7- Import analysis
-8- Statistics
-q- Quit
-Option: Enter NIF: ERROR: patient does not exist
-Enter NIF: 1- Add patient
-2- View Patient
-3- Delete patient
-4- Save patients
-5- Add analysis
-6- Export analysis
-7- Import analysis
-8- Statistics
-q- Quit
-Option: 1- Add patient
+Option: Enter NIF: Enter date (day/month/year): Enter weight: Enter height: 1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
