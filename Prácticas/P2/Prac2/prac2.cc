@@ -243,21 +243,6 @@ void addPatient(Database &data)
         }
         else
         {
-            /*if (nif.size() == 9)
-            {
-                nifValido = true;
-                for (int i = 0; i < 8; i++)
-                {
-                    if (!isdigit(nif[i]))
-                    {
-                        nifValido = false;
-                    }
-                }
-                if (!isalpha(nif[8]))
-                {
-                    nifValido = false;
-                }
-            }*/
             nifValido = ValidarNif(nif);
             if (nifValido)
             {
@@ -428,6 +413,9 @@ void savePatients(const Database &data)
             strncpy(pacienteBinario.nif, data.patients[i].nif.c_str(), KMAXNIF);
             strncpy(pacienteBinario.name, data.patients[i].name.c_str(), KMAXNAME);
             strncpy(pacienteBinario.telephone, data.patients[i].telephone.c_str(), KMAXTELEPHONE);
+            pacienteBinario.name[KMAXNAME - 1] = '\0'; 
+            pacienteBinario.nif[KMAXNIF - 1] = '\0'; 
+            pacienteBinario.telephone[KMAXTELEPHONE - 1] = '\0'; 
             fichero.write((const char *)&pacienteBinario, sizeof(PatientBin));
         }
         fichero.flush();
