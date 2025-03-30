@@ -104,7 +104,7 @@ void error(Error e)
         cout << "ERROR: wrong NIF" << endl;
         break;
     case ERR_WRONG_NUMBER:
-        cout << "ERROR: wrong name " << endl;
+        cout << "ERROR: wrong number " << endl;
         break;
     case ERR_WRONG_TELEPHONE:
         cout << "ERROR: wrong telephone number" << endl;
@@ -379,7 +379,7 @@ void addAnalysis(Database &data)
 
     do
     {
-        cout << "Enter NIF:" ;
+        cout << "Enter NIF:";
         getline(cin, nif);
         if (nif.empty())
         {
@@ -430,9 +430,7 @@ void addAnalysis(Database &data)
     // Pedimos Peso
     do
     {
-        cout << "Enter weight:" << endl;
-         //getline(cin, peso);
-         //weight = stof(peso);
+        cout << "Enter weight:";
         cin >> weight;
         if (weight > 0)
         {
@@ -442,15 +440,13 @@ void addAnalysis(Database &data)
         {
             error(ERR_WRONG_NUMBER);
         }
-    }
-
-    while (!pesoValido);
+    } while (!pesoValido);
     bool alturaValida = false;
     float height;
     string altura;
     do
     {
-        cout << "Enter height:" << endl;
+        cout << "Enter height:";
         // getline(cin, altura);
         // height = stof(altura);
         cin >> height;
