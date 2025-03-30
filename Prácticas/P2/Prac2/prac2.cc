@@ -595,11 +595,16 @@ void importAnalysi//  JUANs(vector<Analysis> &analysis, vector<Patient> &patient
 
 void Statistics(Database &data)
 {
+    ofstream txt("statistics.txt", ios::trunc);
     float IMC = 0;
+
+    
+
     for (size_t i = 0; i < data.analysis.size(); i++)
     {
         cout << data.analysis[i].nif << ";";
-
+        txt <<data.analysis[i].nif << ";";
+        
         if (data.analysis[i].dateAnalysis.day < 10 && data.analysis[i].dateAnalysis.day >= 1)
         {
             cout << "0";
