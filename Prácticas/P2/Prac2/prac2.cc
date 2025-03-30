@@ -608,35 +608,49 @@ void Statistics(Database &data)
         if (data.analysis[i].dateAnalysis.day < 10 && data.analysis[i].dateAnalysis.day >= 1)
         {
             cout << "0";
+            txt << "0";
         }
         cout << data.analysis[i].dateAnalysis.day << "/";
         if (data.analysis[i].dateAnalysis.month < 10 && data.analysis[i].dateAnalysis.day >= 1)
         {
             cout << "0";
+            txt << "0";
+
         }
         cout << data.analysis[i].dateAnalysis.month << "/";
+        txt << data.analysis[i].dateAnalysis.month << "/";
+
         cout << data.analysis[i].dateAnalysis.year << ";";
+        txt << data.analysis[i].dateAnalysis.year << ";";
 
         cout << data.analysis[i].weight << ";";
+        txt << data.analysis[i].weight << ";";
+
         cout << data.analysis[i].height << ";";
+        txt << data.analysis[i].height << ";";
+
         float altura = data.analysis[i].height / 100;
         IMC = data.analysis[i].weight / (altura * altura);
 
         if (IMC < 18.5)
         {
             cout << "Underweight" << endl;
+            txt << "Underweight" << endl;
         }
         if (IMC >= 18.5 && IMC < 25)
         {
             cout << "Healthy" << endl;
+            txt << "Healthy" << endl;
         }
         if (IMC >= 25.0 && IMC < 30)
         {
             cout << "Overweight" << endl;
+            txt << "Overweight" << endl;
         }
         if (IMC >= 30.0)
         {
             cout << "Obesity" << endl;
+            txt << "Obesity" << endl;
         }
     }
 }
