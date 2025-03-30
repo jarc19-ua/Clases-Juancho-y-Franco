@@ -407,9 +407,9 @@ void savePatients(const Database &data)
             strncpy(pacienteBinario.nif, data.patients[i].nif.c_str(), KMAXNIF);
             strncpy(pacienteBinario.name, data.patients[i].name.c_str(), KMAXNAME);
             strncpy(pacienteBinario.telephone, data.patients[i].telephone.c_str(), KMAXTELEPHONE);
-            pacienteBinario.name[KMAXNAME - 1] = '\0'; 
-            pacienteBinario.nif[KMAXNIF - 1] = '\0'; 
-            pacienteBinario.telephone[KMAXTELEPHONE - 1] = '\0'; 
+            pacienteBinario.name[KMAXNAME - 1] = '\0';
+            pacienteBinario.nif[KMAXNIF - 1] = '\0';
+            pacienteBinario.telephone[KMAXTELEPHONE - 1] = '\0';
             fichero.write((const char *)&pacienteBinario, sizeof(PatientBin));
         }
         fichero.flush();
@@ -451,7 +451,7 @@ void addAnalysis(Database &data)
     bool fechaValida = false;
     do
     {
-        cout << "Enter date (day/month/year):"; 
+        cout << "Enter date (day/month/year):";
         cin >> date.day;
         cin >> slash;
         cin >> date.month;
@@ -555,42 +555,6 @@ void importAnalysis(Database &data)
     fichero.close();
     wrongPatientsFile.close();
 }
-
-/*
-// TODO:CHICO UNI
-void importAnalysi//  JUANs(vector<Analysis> &analysis, vector<Patient> &patients, Database &data)
-{
-    ifstream archivo("analysis.bin", ios::binary); // Abre archivo binario
-    ofstream txt("wrong_patients.txt", ios::app);  // Agrega al final del archivo
-
-    if (!archivo || !txt)
-    {
-        error(ERR_FILE);
-    }
-    else
-    {
-        Analysis analBin;
-        while (archivo.read(reinterpret_cast<char *>(&analBin), sizeof(Analysis)))
-        {
-            string aux(analBin.nif); // Convierte nif de char[] a string
-            int a = searchPatient(patients, aux);
-
-            if (a == -1)
-            {
-                txt << aux << "\n"; // Guarda NIF en wrong_patients.txt
-            }
-            else
-            {
-                Analysis saveAn = analBin;  // Copia la analítica
-                saveAn.id = data.nextId++;  // Asigna un nuevo ID
-                analysis.push_back(saveAn); // Agrega al vector analysis
-            }
-        }
-    }
-    archivo.close();
-    txt.close();
-}*/
-
 void Statistics(Database &data)
 {
     ofstream txt("statistics.txt", ios::trunc);
