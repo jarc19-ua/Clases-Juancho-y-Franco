@@ -177,6 +177,33 @@ int searchPatient(string nif, Database &data)
     return posicion;
 }
 
+bool ValidarNif(string nif)
+{
+    bool nifValido = false;
+    if (nif.size() == 9)
+    {
+        nifValido = true;
+        for (int i = 0; i < 8; i++)
+        {
+            if (!isdigit(nif[i]))
+            {
+                nifValido = false;
+            }
+        }
+        if (!isalpha(nif[8]))
+        {
+            nifValido = false;
+        }
+    }
+
+    if (!nifValido)
+    {
+        error(ERR_WRONG_NIF);
+    }
+
+    return nifValido;
+}
+
 void addPatient(Database &data)
 {
     string nif;
@@ -193,7 +220,7 @@ void addPatient(Database &data)
         }
         else
         {
-            if (nif.size() == 9)
+            /*if (nif.size() == 9)
             {
                 nifValido = true;
                 for (int i = 0; i < 8; i++)
@@ -207,13 +234,9 @@ void addPatient(Database &data)
                 {
                     nifValido = false;
                 }
-            }
-
-            if (!nifValido)
-            {
-                error(ERR_WRONG_NIF);
-            }
-            else
+            }*/
+            nifValido = ValidarNif(nif);
+            if (nifValido)
             {
                 if (searchPatient(nif, data) != -1)
                 {
@@ -269,19 +292,24 @@ void addPatient(Database &data)
 void viewPatient(Database &data)
 {
     string nif;
-    int posicion;
+    int posicion = -1;
     do
     {
-        cout << "Enter NIF: " ;
+        cout << "Enter NIF: ";
         getline(cin, nif);
         if (nif.empty())
         {
             return;
         }
-        posicion = searchPatient(nif, data);
-        if (posicion == -1)
+
+        if (ValidarNif(nif))
         {
-            error(ERR_PATIENT_NOT_EXISTS);
+            posicion = searchPatient(nif, data);
+
+            if (posicion == -1)
+            {
+                error(ERR_PATIENT_NOT_EXISTS);
+            }
         }
     } while (posicion == -1);
     Patient paciente = data.patients[posicion];
@@ -289,19 +317,29 @@ void viewPatient(Database &data)
     cout << "Name: " << paciente.name << endl;
     cout << "Telephone: " << paciente.telephone << endl;
     bool hayAnalisis = true;
-    for (size_t i = 0; i < data.analysis.size(); i++)
+    // for (size_t i = 0; i < data.analysis.size(); i++)
     {
-        if (strcmp(data.analysis[i].nif, paciente.nif.c_str()) == 0)
+
+        for (size_t j = 0; j < data.analysis.size(); j++)
         {
-            if (hayAnalisis)
+
+            if (data.analysis[j].nif == paciente.nif)
             {
-                cout << "Id\tDate\tHeight\tWeight" << endl;
-                hayAnalisis = false;
-            }
-            for (size_t j = 0; j < data.analysis.size(); j++)
-            {
+                if (hayAnalisis)
+                {
+                    cout << "Id\tDate\tHeight\tWeight" << endl;
+                    hayAnalisis = false;
+                }
                 cout << data.analysis[j].id << "\t";
+                if (data.analysis[j].dateAnalysis.day < 10 && data.analysis[j].dateAnalysis.day >= 1)
+                {
+                    cout << "0";
+                }
                 cout << data.analysis[j].dateAnalysis.day << "/";
+                if (data.analysis[j].dateAnalysis.month < 10 && data.analysis[j].dateAnalysis.day >= 1)
+                {
+                    cout << "0";
+                }
                 cout << data.analysis[j].dateAnalysis.month << "/";
                 cout << data.analysis[j].dateAnalysis.year << "\t";
                 cout << data.analysis[j].height << "\t";
@@ -318,11 +356,16 @@ void deletePatient(Database &data)
 
     do
     {
-        cout << "Enter NIF:" ;
+        cout << "Enter NIF:";
         getline(cin, nif);
         if (nif.empty())
         {
-            nifValido = true;
+            return;
+        }
+        if (!ValidarNif(nif))
+        {
+            error(ERR_WRONG_NIF);
+            nifValido = false;
         }
         else
         {
@@ -330,23 +373,21 @@ void deletePatient(Database &data)
             if (posicion == -1)
             {
                 error(ERR_PATIENT_NOT_EXISTS);
+                nifValido = false;
             }
             else
             {
-                for (size_t i = 0; data.analysis.size();)
-                {
-                    if (strcmp(data.analysis[i].nif, nif.c_str()))
-                    {
 
-                        data.analysis.erase(data.analysis.begin() + i);
-                    }
-                    else
+                data.patients.erase(data.patients.begin() + posicion);
+
+                for (size_t i = data.analysis.size() - 1; i > 0; i--)
+                {
+                    if (strcmp(data.analysis[i].nif, nif.c_str()) == 0)
                     {
-                        i++;
+                        data.analysis.erase(data.analysis.begin() + i);
                     }
                 }
 
-                data.patients.erase(data.patients.begin() + posicion);
                 nifValido = true;
             }
         }
@@ -554,13 +595,68 @@ void importAnalysi//  JUANs(vector<Analysis> &analysis, vector<Patient> &patient
 
 void Statistics(Database &data)
 {
-    int day;
-    int month;
-    int year;
-    char nif[KMAXNIF];
-    float weight;
-    float height;
-    float IMC;
+    float IMC = 0;
+    for (size_t i = 0; i < data.analysis.size(); i++)
+    {
+        cout << data.analysis[i].nif << ";";
+
+        if (data.analysis[i].dateAnalysis.day < 10 && data.analysis[i].dateAnalysis.day >= 1)
+        {
+            cout << "0";
+        }
+        cout << data.analysis[i].dateAnalysis.day << "/";
+        if (data.analysis[i].dateAnalysis.month < 10 && data.analysis[i].dateAnalysis.day >= 1)
+        {
+            cout << "0";
+        }
+        cout << data.analysis[i].dateAnalysis.month << "/";
+        cout << data.analysis[i].dateAnalysis.year << ";";
+
+        cout << data.analysis[i].weight << ";";
+        cout << data.analysis[i].height << ";";
+        float altura = data.analysis[i].height/100;
+        IMC = data.analysis[i].weight / (altura * altura);
+
+        if (IMC < 18.5)
+        {
+            cout << "Underweight" << endl;
+        }
+        if (IMC >= 18.5 && IMC < 25)
+        {
+            cout << "Healthy" << endl;
+        }
+        if (IMC >= 25.0 && IMC < 30)
+        {
+            cout << "Overweight" << endl;
+        }
+        if (IMC >= 30.0)
+        {
+            cout << "Obesity" << endl;
+        }
+    }
+
+    /* ifstream fichero("analitics.txt");
+     string nif, fecha, peso, altura, IMC, linea;
+     stringstream ss(linea);
+     while (getline(fichero, linea))
+     {
+
+         getline(ss, nif, ';');
+         getline(ss, fecha, ';');
+         getline(ss, peso, ';');
+         getline(ss, altura, ';');
+         getline(ss, IMC, '\n');
+
+             cout << nif << ";";
+             cout << fecha << ";";
+             cout << peso << ";";
+             cout << altura << ";";
+             cout << IMC << ";";
+
+     }
+     fichero.close();*/
+
+    /*
     for (size_t i = 0; data.analysis.size(); i++)
     {
         day = data.analysis[i].dateAnalysis.day;
@@ -603,6 +699,7 @@ void Statistics(Database &data)
             cout << "Obesity" << endl;
         }
     }
+    */
 }
 void loadPatients(Database &data)
 {

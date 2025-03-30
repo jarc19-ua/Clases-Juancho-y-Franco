@@ -75,16 +75,8 @@ Option: Enter NIF: NIF: 44444444P
 Name: Laura Ramos
 Telephone: +55555555555
 Id	Date	Height	Weight
-1	30/2/2030	210	105
-2	1/1/2050	150	90
-3	7/7/2030	190	45
-4	24/3/2041	174	56.0106
-5	31/12/2050	160	150
-1	30/2/2030	210	105
-2	1/1/2050	150	90
-3	7/7/2030	190	45
-4	24/3/2041	174	56.0106
-5	31/12/2050	160	150
+2	01/01/2050	150	90
+3	07/07/2030	190	45
 1- Add patient
 2- View Patient
 3- Delete patient
@@ -98,11 +90,7 @@ Option: Enter NIF: NIF: 44333222Q
 Name: Manuel Rodriguez
 Telephone: +34667743662
 Id	Date	Height	Weight
-1	30/2/2030	210	105
-2	1/1/2050	150	90
-3	7/7/2030	190	45
-4	24/3/2041	174	56.0106
-5	31/12/2050	160	150
+1	30/02/2030	210	105
 1- Add patient
 2- View Patient
 3- Delete patient
@@ -112,21 +100,13 @@ Id	Date	Height	Weight
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: ERROR: patient does not exist
+Option: Enter NIF: ERROR: wrong NIF
 Enter NIF: ERROR: patient does not exist
 Enter NIF: NIF: 21444709T
 Name: Carlos Sainz
 Telephone: +346198344678
 Id	Date	Height	Weight
-1	30/2/2030	210	105
-2	1/1/2050	150	90
-3	7/7/2030	190	45
-4	24/3/2041	174	56.0106
-5	31/12/2050	160	150
-1	30/2/2030	210	105
-2	1/1/2050	150	90
-3	7/7/2030	190	45
-4	24/3/2041	174	56.0106
+4	24/03/2041	174	56.0106
 5	31/12/2050	160	150
 1- Add patient
 2- View Patient
