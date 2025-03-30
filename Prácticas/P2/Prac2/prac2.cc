@@ -614,7 +614,7 @@ void Statistics(Database &data)
 
         cout << data.analysis[i].weight << ";";
         cout << data.analysis[i].height << ";";
-        float altura = data.analysis[i].height/100;
+        float altura = data.analysis[i].height / 100;
         IMC = data.analysis[i].weight / (altura * altura);
 
         if (IMC < 18.5)
@@ -634,72 +634,6 @@ void Statistics(Database &data)
             cout << "Obesity" << endl;
         }
     }
-
-    /* ifstream fichero("analitics.txt");
-     string nif, fecha, peso, altura, IMC, linea;
-     stringstream ss(linea);
-     while (getline(fichero, linea))
-     {
-
-         getline(ss, nif, ';');
-         getline(ss, fecha, ';');
-         getline(ss, peso, ';');
-         getline(ss, altura, ';');
-         getline(ss, IMC, '\n');
-
-             cout << nif << ";";
-             cout << fecha << ";";
-             cout << peso << ";";
-             cout << altura << ";";
-             cout << IMC << ";";
-
-     }
-     fichero.close();*/
-
-    /*
-    for (size_t i = 0; data.analysis.size(); i++)
-    {
-        day = data.analysis[i].dateAnalysis.day;
-        month = data.analysis[i].dateAnalysis.month;
-        year = data.analysis[i].dateAnalysis.year;
-        weight = data.analysis[i].weight;
-        height = data.analysis[i].height;
-        IMC = weight / (height * height);
-        strcpy(nif, data.analysis[i].nif);
-
-        cout << nif << ";";
-        if (day < 10)
-        {
-            cout << "0";
-        }
-        cout << day << "/";
-        if (month < 10)
-        {
-            cout << "0";
-        }
-        cout << month << "/";
-        cout << year << ";";
-        cout << weight << ";";
-        cout << height << ";";
-
-        if (IMC < 18.5)
-        {
-            cout << "Underweight" << endl;
-        }
-        if (IMC >= 18.5 && IMC <= 24.9)
-        {
-            cout << "Healthy" << endl;
-        }
-        if (IMC >= 25.0 && IMC <= 29.9)
-        {
-            cout << "Overweight" << endl;
-        }
-        if (IMC >= 30.0)
-        {
-            cout << "Obesity" << endl;
-        }
-    }
-    */
 }
 void loadPatients(Database &data)
 {
