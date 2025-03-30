@@ -272,7 +272,7 @@ void viewPatient(Database &data)
     int posicion;
     do
     {
-        cout << "Enter NIF: " << endl;
+        cout << "Enter NIF: " ;
         getline(cin, nif);
         if (nif.empty())
         {
@@ -318,7 +318,7 @@ void deletePatient(Database &data)
 
     do
     {
-        cout << "Enter NIF:" << endl;
+        cout << "Enter NIF:" ;
         getline(cin, nif);
         if (nif.empty())
         {
