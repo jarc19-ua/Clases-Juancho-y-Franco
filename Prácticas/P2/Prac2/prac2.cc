@@ -611,6 +611,7 @@ void Statistics(Database &data)
             txt << "0";
         }
         cout << data.analysis[i].dateAnalysis.day << "/";
+        txt << data.analysis[i].dateAnalysis.day << "/";
         if (data.analysis[i].dateAnalysis.month < 10 && data.analysis[i].dateAnalysis.day >= 1)
         {
             cout << "0";
