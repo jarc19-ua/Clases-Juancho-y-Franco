@@ -134,7 +134,6 @@ void showMenu()
          << "Option: ";
 }
 
-
 bool Argumentos(int argc, char *argv[], bool &fichero, string nombreFichero, bool &mostrarEstadisticas)
 {
     bool resultado = true;
@@ -343,7 +342,7 @@ void deletePatient(Database &data)
                 {
                     if (strcmp(data.analysis[i].nif, nif.c_str()))
                     {
-                        
+
                         data.analysis.erase(data.analysis.begin() + i);
                     }
                     else
@@ -351,7 +350,7 @@ void deletePatient(Database &data)
                         i++;
                     }
                 }
-               
+
                 data.patients.erase(data.patients.begin() + posicion);
                 nifValido = true;
             }
@@ -375,99 +374,106 @@ void savePatients(const Database &data)
         fichero.close();
     }
 }
-//TODO ARREGLAR ADDanalISIS: JUAN
-//TODO Mirar en la practica del chico de la uni
+// TODO ARREGLAR ADDanalISIS: JUAN
+// TODO Mirar en la practica del chico de la uni
 void addAnalysis(Database &data)
 {
     string nif;
     bool nifValido = false;
+    int posicion;
+
     do
     {
         cout << "Enter NIF:" << endl;
         getline(cin, nif);
-        if (!nif.empty())
+        if (nif.empty())
         {
-            int posicion = searchPatient(nif, data);
-
-            if (posicion != -1)
-            {
-                nifValido = true;
-                // Pedimos Fecha
-                Date date;
-                string fecha;
-                char slash; // Para leer los '/' del formato de fecha
-                bool fechaValida = false;
-                do
-                {
-                    cout << "Enter date (day/month/year):" << endl; // 12/3/2025
-
-                    cin >> date.day;
-                    cin >> slash;
-                    cin >> date.month;
-                    cin >> slash;
-                    cin >> date.year;
-                    if (date.day >= 1 && date.day <= 31 && date.month >= 1 && date.month <= 12 && date.year >= 2025 && date.year <= 2050)
-                    {
-                        fechaValida = true;
-                        bool pesoValido = false;
-                        float weight;
-                        string peso;
-                        // Pedimos Peso
-                        do
-                        {
-                            cout << "Enter weight:" << endl;
-                            getline(cin, peso);
-                            weight = stof(peso);
-                            if (weight > 0)
-                            {
-                                pesoValido = true;
-                                bool alturaValida = false;
-                                float height;
-                                string altura;
-                                do
-                                {
-                                    cout << "Enter height:" << endl;
-                                    getline(cin, altura);
-                                    height = stof(altura);
-
-                                    if (height > 0)
-                                    {
-                                        alturaValida = true;
-                                        // Crear el analisis y guardarlo en la Database
-                                        Analysis newAnalysis;
-                                        newAnalysis.id = data.nextId;
-                                        data.nextId++;
-                                        strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF);
-                                        newAnalysis.dateAnalysis = date;
-                                        newAnalysis.weight = weight;
-                                        newAnalysis.height = height;
-                                        data.analysis.push_back(newAnalysis);
-                                    }
-                                    else
-                                    {
-                                        error(ERR_WRONG_NUMBER);
-                                    }
-                                } while (!alturaValida);
-                            }
-                            else
-                            {
-                                error(ERR_WRONG_NUMBER);
-                            }
-                        } while (!pesoValido);
-                    }
-                    else
-                    {
-                        error(ERR_WRONG_DATE);
-                    }
-                } while (!fechaValida);
-            }
-            else
-            {
-                error(ERR_PATIENT_NOT_EXISTS);
-                nifValido = true;
-            }
+            return;
         }
+
+        posicion = searchPatient(nif, data);
+        if (posicion == -1)
+        {
+            error(ERR_PATIENT_NOT_EXISTS);
+            nifValido = false;
+        }
+        else
+        {
+            nifValido = true;
+        }
+
+    
     } while (!nifValido);
+
+    nifValido = true;
+    // Pedimos Fecha
+    Date date;
+    string fecha;
+    char slash; // Para leer los '/' del formato de fecha
+    bool fechaValida = false;
+    do
+    {
+        cout << "Enter date (day/month/year):" << endl; // 12/3/2025
+
+        cin >> date.day;
+        cin >> slash;
+        cin >> date.month;
+        cin >> slash;
+        cin >> date.year;
+        if (date.day >= 1 && date.day <= 31 && date.month >= 1 && date.month <= 12 && date.year >= 2025 && date.year <= 2050)
+        {
+            fechaValida = true;
+            bool pesoValido = false;
+            float weight;
+            string peso;
+            // Pedimos Peso
+            do
+            {
+                cout << "Enter weight:" << endl;
+                getline(cin, peso);
+                weight = stof(peso);
+                if (weight > 0)
+                {
+                    pesoValido = true;
+                    bool alturaValida = false;
+                    float height;
+                    string altura;
+                    do
+                    {
+                        cout << "Enter height:" << endl;
+                        getline(cin, altura);
+                        height = stof(altura);
+
+                        if (height > 0)
+                        {
+                            alturaValida = true;
+                            // Crear el analisis y guardarlo en la Database
+                            Analysis newAnalysis;
+                            newAnalysis.id = data.nextId;
+                            data.nextId++;
+                            strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF);
+                            newAnalysis.dateAnalysis = date;
+                            newAnalysis.weight = weight;
+                            newAnalysis.height = height;
+                            data.analysis.push_back(newAnalysis);
+                        }
+                        else
+                        {
+                            error(ERR_WRONG_NUMBER);
+                        }
+                    } while (!alturaValida);
+                }
+                else
+                {
+                    error(ERR_WRONG_NUMBER);
+                }
+            } while (!pesoValido);
+        }
+        else
+        {
+            error(ERR_WRONG_DATE);
+        }
+    } while (!fechaValida);
 }
 
 void exportAnalysis(const Database &data)
@@ -482,8 +488,6 @@ void exportAnalysis(const Database &data)
         fichero.close();
     }
 }
-
-
 
 void importAnalysis(Database &data)
 {
