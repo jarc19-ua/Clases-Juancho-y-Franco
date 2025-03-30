@@ -295,7 +295,7 @@ void viewPatient(Database &data)
         {
             if (hayAnalisis)
             {
-                cout << "id\tdate\theight\tweight" << endl;
+                cout << "Id\tDate\tHeight\tWeight" << endl;
                 hayAnalisis = false;
             }
             for (size_t j = 0; j < data.analysis.size(); j++)
@@ -304,8 +304,8 @@ void viewPatient(Database &data)
                 cout << data.analysis[j].dateAnalysis.day << "/";
                 cout << data.analysis[j].dateAnalysis.month << "/";
                 cout << data.analysis[j].dateAnalysis.year << "\t";
-                cout << data.analysis[j].weight << "\t";
-                cout << data.analysis[j].height << endl;
+                cout << data.analysis[j].height << "\t";
+                cout << data.analysis[j].weight << endl;
             }
         }
     }

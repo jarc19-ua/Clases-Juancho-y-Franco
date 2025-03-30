@@ -8,8 +8,7 @@ ERROR: cannot open file
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: 
-NIF: 44444444P
+Option: Enter NIF: NIF: 44444444P
 Name: Laura Ramos
 Telephone: +55555555555
 1- Add patient
@@ -21,8 +20,7 @@ Telephone: +55555555555
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: 
-NIF: 44333222Q
+Option: Enter NIF: NIF: 44333222Q
 Name: Manuel Rodriguez
 Telephone: +34667743662
 1- Add patient
@@ -34,8 +32,7 @@ Telephone: +34667743662
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: 
-NIF: 99888777A
+Option: Enter NIF: NIF: 99888777A
 Name: Brhadaranyakopanishadvivekachudamani Erreh
 Telephone: +45999888876
 1- Add patient

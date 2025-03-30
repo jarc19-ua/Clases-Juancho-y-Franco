@@ -42,13 +42,9 @@ Enter date (day/month/year):ERROR: wrong date
 Enter date (day/month/year):ERROR: wrong date
 Enter date (day/month/year):ERROR: wrong date
 Enter date (day/month/year):ERROR: wrong date
-Enter date (day/month/year):Enter weight:
-ERROR: wrong name 
-Enter weight:
-Enter height:
-ERROR: wrong name 
-Enter height:
-1- Add patient
+Enter date (day/month/year):Enter weight:ERROR: wrong number 
+Enter weight:Enter height:ERROR: wrong number 
+Enter height:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -57,9 +53,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:Enter date (day/month/year):Enter weight:
-Enter height:
-1- Add patient
+Option: Enter NIF:Enter date (day/month/year):Enter weight:Enter height:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -68,9 +62,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:Enter date (day/month/year):Enter weight:
-Enter height:
-1- Add patient
+Option: Enter NIF:Enter date (day/month/year):Enter weight:Enter height:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -79,9 +71,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:Enter date (day/month/year):Enter weight:
-Enter height:
-1- Add patient
+Option: Enter NIF:Enter date (day/month/year):Enter weight:Enter height:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -90,9 +80,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:Enter date (day/month/year):Enter weight:
-Enter height:
-1- Add patient
+Option: Enter NIF:Enter date (day/month/year):Enter weight:Enter height:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -101,9 +89,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:Enter date (day/month/year):Enter weight:
-Enter height:
-1- Add patient
+Option: Enter NIF:Enter date (day/month/year):Enter weight:Enter height:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients

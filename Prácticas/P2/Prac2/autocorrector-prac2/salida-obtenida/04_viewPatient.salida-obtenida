@@ -16,9 +16,7 @@ Option: Enter NIF: Enter name: Enter telephone: 1- Add patient
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:Enter date (day/month/year):Enter weight:
-Enter height:
-1- Add patient
+Option: Enter NIF:Enter date (day/month/year):Enter weight:Enter height:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -27,9 +25,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:Enter date (day/month/year):Enter weight:
-Enter height:
-1- Add patient
+Option: Enter NIF:Enter date (day/month/year):Enter weight:Enter height:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -38,9 +34,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:Enter date (day/month/year):Enter weight:
-Enter height:
-1- Add patient
+Option: Enter NIF:Enter date (day/month/year):Enter weight:Enter height:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -49,9 +43,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:Enter date (day/month/year):Enter weight:
-Enter height:
-1- Add patient
+Option: Enter NIF:Enter date (day/month/year):Enter weight:Enter height:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -60,9 +52,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:Enter date (day/month/year):Enter weight:
-Enter height:
-1- Add patient
+Option: Enter NIF:Enter date (day/month/year):Enter weight:Enter height:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -71,10 +61,8 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: 
-ERROR: patient does not exist
-Enter NIF: 
-1- Add patient
+Option: Enter NIF: ERROR: patient does not exist
+Enter NIF: 1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -83,21 +71,20 @@ Enter NIF:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: 
-NIF: 44444444P
+Option: Enter NIF: NIF: 44444444P
 Name: Laura Ramos
 Telephone: +55555555555
-id	date	height	weight
-1	30/2/2030	105	210
-2	1/1/2050	90	150
-3	7/7/2030	45	190
-4	24/3/2041	56.0106	174
-5	31/12/2050	150	160
-1	30/2/2030	105	210
-2	1/1/2050	90	150
-3	7/7/2030	45	190
-4	24/3/2041	56.0106	174
-5	31/12/2050	150	160
+Id	Date	Height	Weight
+1	30/2/2030	210	105
+2	1/1/2050	150	90
+3	7/7/2030	190	45
+4	24/3/2041	174	56.0106
+5	31/12/2050	160	150
+1	30/2/2030	210	105
+2	1/1/2050	150	90
+3	7/7/2030	190	45
+4	24/3/2041	174	56.0106
+5	31/12/2050	160	150
 1- Add patient
 2- View Patient
 3- Delete patient
@@ -107,16 +94,15 @@ id	date	height	weight
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: 
-NIF: 44333222Q
+Option: Enter NIF: NIF: 44333222Q
 Name: Manuel Rodriguez
 Telephone: +34667743662
-id	date	height	weight
-1	30/2/2030	105	210
-2	1/1/2050	90	150
-3	7/7/2030	45	190
-4	24/3/2041	56.0106	174
-5	31/12/2050	150	160
+Id	Date	Height	Weight
+1	30/2/2030	210	105
+2	1/1/2050	150	90
+3	7/7/2030	190	45
+4	24/3/2041	174	56.0106
+5	31/12/2050	160	150
 1- Add patient
 2- View Patient
 3- Delete patient
@@ -126,25 +112,22 @@ id	date	height	weight
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: 
-ERROR: patient does not exist
-Enter NIF: 
-ERROR: patient does not exist
-Enter NIF: 
-NIF: 21444709T
+Option: Enter NIF: ERROR: patient does not exist
+Enter NIF: ERROR: patient does not exist
+Enter NIF: NIF: 21444709T
 Name: Carlos Sainz
 Telephone: +346198344678
-id	date	height	weight
-1	30/2/2030	105	210
-2	1/1/2050	90	150
-3	7/7/2030	45	190
-4	24/3/2041	56.0106	174
-5	31/12/2050	150	160
-1	30/2/2030	105	210
-2	1/1/2050	90	150
-3	7/7/2030	45	190
-4	24/3/2041	56.0106	174
-5	31/12/2050	150	160
+Id	Date	Height	Weight
+1	30/2/2030	210	105
+2	1/1/2050	150	90
+3	7/7/2030	190	45
+4	24/3/2041	174	56.0106
+5	31/12/2050	160	150
+1	30/2/2030	210	105
+2	1/1/2050	150	90
+3	7/7/2030	190	45
+4	24/3/2041	174	56.0106
+5	31/12/2050	160	150
 1- Add patient
 2- View Patient
 3- Delete patient
@@ -154,8 +137,7 @@ id	date	height	weight
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF: 
-NIF: 99888777A
+Option: Enter NIF: NIF: 99888777A
 Name: Brhadaranyakopanishadvivekachudamani Erreh
 Telephone: +45999888876
 1- Add patient
