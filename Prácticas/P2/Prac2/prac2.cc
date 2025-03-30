@@ -488,8 +488,6 @@ void addAnalysis(Database &data)
     do
     {
         cout << "Enter height:";
-        // getline(cin, altura);
-        // height = stof(altura);
         cin >> height;
         if (height > 0)
         {
@@ -500,7 +498,7 @@ void addAnalysis(Database &data)
             error(ERR_WRONG_NUMBER);
         }
     } while (!alturaValida);
-    // Crear el analisis y guardarlo en la Database
+
     Analysis newAnalysis;
     newAnalysis.id = data.nextId;
     data.nextId++;
@@ -526,7 +524,7 @@ void exportAnalysis(const Database &data)
 
 void importAnalysis(Database &data)
 {
-    // Leemos fichero
+
     ifstream fichero("analysis.bin", ios::binary);
     ofstream wrongPatientsFile("wrong_patients.txt", ios::app);
 
