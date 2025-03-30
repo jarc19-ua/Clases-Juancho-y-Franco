@@ -151,9 +151,6 @@ bool Argumentos(int argc, char *argv[], bool &fichero, string &nombreFichero, bo
                 {
                     fichero = true;
                     nombreFichero = (string)argv[i + 1];
-                    // strncpy(auxiliar, argv[i + 1], 200 - 1);
-                    ////aux<<auxiliar;
-                    // nombreFichero = aux.str();
                     i += 2;
                 }
             }
@@ -282,8 +279,6 @@ void addPatient(Database &data)
                             error(ERR_WRONG_TELEPHONE);
                         }
                     } while (!telefonoValido);
-
-                    // Aqui los datos estan bien
                     Patient paciente;
                     paciente.name = name;
                     paciente.nif = nif;
@@ -325,7 +320,6 @@ void viewPatient(Database &data)
     cout << "Name: " << paciente.name << endl;
     cout << "Telephone: " << paciente.telephone << endl;
     bool hayAnalisis = true;
-    // for (size_t i = 0; i < data.analysis.size(); i++)
     {
 
         for (size_t j = 0; j < data.analysis.size(); j++)
@@ -422,8 +416,6 @@ void savePatients(const Database &data)
         fichero.close();
     }
 }
-// TODO ARREGLAR ADDanalISIS: JUAN
-// TODO Mirar en la practica del chico de la uni
 void addAnalysis(Database &data)
 {
     string nif;
@@ -453,15 +445,13 @@ void addAnalysis(Database &data)
     } while (!nifValido);
 
     nifValido = true;
-    // Pedimos Fecha
     Date date;
     string fecha;
-    char slash; // Para leer los '/' del formato de fecha
+    char slash;
     bool fechaValida = false;
     do
     {
-        cout << "Enter date (day/month/year):"; // 12/3/2025
-
+        cout << "Enter date (day/month/year):"; 
         cin >> date.day;
         cin >> slash;
         cin >> date.month;
@@ -479,8 +469,6 @@ void addAnalysis(Database &data)
 
     bool pesoValido = false;
     float weight;
-    string peso;
-    // Pedimos Peso
     do
     {
         cout << "Enter weight:";
