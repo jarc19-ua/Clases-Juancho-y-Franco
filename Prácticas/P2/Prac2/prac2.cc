@@ -402,7 +402,6 @@ void addAnalysis(Database &data)
             nifValido = true;
         }
 
-    
     } while (!nifValido);
 
     nifValido = true;
@@ -423,57 +422,61 @@ void addAnalysis(Database &data)
         if (date.day >= 1 && date.day <= 31 && date.month >= 1 && date.month <= 12 && date.year >= 2025 && date.year <= 2050)
         {
             fechaValida = true;
-            bool pesoValido = false;
-            float weight;
-            string peso;
-            // Pedimos Peso
-            do
-            {
-                cout << "Enter weight:" << endl;
-                getline(cin, peso);
-                weight = stof(peso);
-                if (weight > 0)
-                {
-                    pesoValido = true;
-                    bool alturaValida = false;
-                    float height;
-                    string altura;
-                    do
-                    {
-                        cout << "Enter height:" << endl;
-                        getline(cin, altura);
-                        height = stof(altura);
-
-                        if (height > 0)
-                        {
-                            alturaValida = true;
-                            // Crear el analisis y guardarlo en la Database
-                            Analysis newAnalysis;
-                            newAnalysis.id = data.nextId;
-                            data.nextId++;
-                            strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF);
-                            newAnalysis.dateAnalysis = date;
-                            newAnalysis.weight = weight;
-                            newAnalysis.height = height;
-                            data.analysis.push_back(newAnalysis);
-                        }
-                        else
-                        {
-                            error(ERR_WRONG_NUMBER);
-                        }
-                    } while (!alturaValida);
-                }
-                else
-                {
-                    error(ERR_WRONG_NUMBER);
-                }
-            } while (!pesoValido);
         }
         else
         {
             error(ERR_WRONG_DATE);
         }
     } while (!fechaValida);
+
+    bool pesoValido = false;
+    float weight;
+    string peso;
+    // Pedimos Peso
+    do
+    {
+        cout << "Enter weight:" << endl;
+        getline(cin, peso);
+        weight = stof(peso);
+        if (weight > 0)
+        {
+            pesoValido = true;
+        }
+        else
+        {
+            error(ERR_WRONG_NUMBER);
+        }
+    }
+}
+while (!pesoValido)
+    ;
+bool alturaValida = false;
+float height;
+string altura;
+do
+{
+    cout << "Enter height:" << endl;
+    getline(cin, altura);
+    height = stof(altura);
+
+    if (height > 0)
+    {
+        alturaValida = true;
+    }
+    else
+    {
+        error(ERR_WRONG_NUMBER);
+    }
+} while (!alturaValida);
+// Crear el analisis y guardarlo en la Database
+Analysis newAnalysis;
+newAnalysis.id = data.nextId;
+data.nextId++;
+strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF);
+newAnalysis.dateAnalysis = date;
+newAnalysis.weight = weight;
+newAnalysis.height = height;
+data.analysis.push_back(newAnalysis);
 }
 
 void exportAnalysis(const Database &data)
@@ -521,6 +524,7 @@ void importAnalysis(Database &data)
 
     fichero.close();
     wrongPatientsFile.close();
+}
 }
 /*
 // TODO:CHICO UNI
