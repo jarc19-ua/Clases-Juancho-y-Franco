@@ -396,15 +396,15 @@ void deletePatient(Database &data)
 
 void savePatients(const Database &data)
 {
-    ofstream fichero("patients.bin", ios::binary);
+    ofstream fichero("patients.bin", ios::binary | ios::trunc);
     if (fichero.is_open())
     {
         for (size_t i = 0; i < data.patients.size(); i++)
         {
             PatientBin pacienteBinario;
-            strncpy(pacienteBinario.nif, data.patients[i].nif.c_str(), KMAXNIF);
-            strncpy(pacienteBinario.name, data.patients[i].name.c_str(), KMAXNAME);
-            strncpy(pacienteBinario.telephone, data.patients[i].telephone.c_str(), KMAXTELEPHONE);
+            strncpy(pacienteBinario.nif, data.patients[i].nif.c_str(), KMAXNIF-1);
+            strncpy(pacienteBinario.name, data.patients[i].name.c_str(), KMAXNAME-1);
+            strncpy(pacienteBinario.telephone, data.patients[i].telephone.c_str(), KMAXTELEPHONE-1);
             fichero.write((const char *)&pacienteBinario, sizeof(PatientBin));
         }
         fichero.close();
