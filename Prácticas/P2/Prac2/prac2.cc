@@ -396,7 +396,7 @@ void deletePatient(Database &data)
 
 void savePatients(const Database &data)
 {
-    ofstream fichero("patients.bin", ios::binary | ios::trunc);
+    ofstream fichero("patients.bin", ios::binary);
     if (fichero.is_open())
     {
         for (size_t i = 0; i < data.patients.size(); i++)
