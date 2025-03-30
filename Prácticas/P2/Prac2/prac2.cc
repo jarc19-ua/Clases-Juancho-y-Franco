@@ -129,41 +129,64 @@ void showMenu()
          << "Option: ";
 }
 
-bool Argumentos(int argc, char *argv[], bool &fichero, string nombreFichero, bool &mostrarEstadisticas)
+bool Argumentos(int argc, char *argv[], bool &fichero, string &nombreFichero, bool &mostrarEstadisticas)
 {
-    bool resultado = true;
-    // ./prac2 -s  -f analisis.txt
-    mostrarEstadisticas = false;
     fichero = false;
+    mostrarEstadisticas = false;
+    bool argumentosMal = false;
 
-    for (int i = 1; i < argc; i++)
+    stringstream aux;
+    if (argc > 1)
     {
-        if (strcmp(argv[i], "-f") == 0)
+        int i = 1;
+        while (i < argc && !argumentosMal)
         {
-
-            if (i != argc - 1)
+            if (strcmp(argv[i], "-f") == 0)
             {
-                fichero = true;
-                nombreFichero = argv[i + 1];
-                i++;
+                if (fichero || i + 1 >= argc)
+                {
+                    argumentosMal = true;
+                }
+                else
+                {
+                    fichero = true;
+                    nombreFichero = (string)argv[i + 1];
+                    // strncpy(auxiliar, argv[i + 1], 200 - 1);
+                    ////aux<<auxiliar;
+                    // nombreFichero = aux.str();
+                    i += 2;
+                }
+            }
+            else if (strcmp(argv[i], "-s") == 0)
+            {
+                if (mostrarEstadisticas)
+                {
+                    argumentosMal = true;
+                }
+                else
+                {
+                    mostrarEstadisticas = true;
+                    i++;
+                }
             }
             else
             {
-                error(ERR_FILE_NOT_EXISTS);
+                argumentosMal = true;
             }
         }
-        else if (strcmp(argv[i], "-s") == 0)
-        {
-            mostrarEstadisticas = true;
-        }
 
-        if (mostrarEstadisticas && !fichero)
+        if (!argumentosMal && mostrarEstadisticas && !fichero)
         {
-            error(ERR_ARGS);
-            resultado = false;
+            argumentosMal = true;
         }
     }
-    return resultado;
+
+    if (argumentosMal)
+    {
+        error(ERR_ARGS);
+    }
+
+    return !argumentosMal;
 }
 
 int searchPatient(string nif, Database &data)
@@ -378,8 +401,6 @@ void deletePatient(Database &data)
             else
             {
 
-                data.patients.erase(data.patients.begin() + posicion);
-
                 for (size_t i = data.analysis.size() - 1; i > 0; i--)
                 {
                     if (strcmp(data.analysis[i].nif, nif.c_str()) == 0)
@@ -387,6 +408,8 @@ void deletePatient(Database &data)
                         data.analysis.erase(data.analysis.begin() + i);
                     }
                 }
+
+                data.patients.erase(data.patients.begin() + posicion);
 
                 nifValido = true;
             }
@@ -402,11 +425,12 @@ void savePatients(const Database &data)
         for (size_t i = 0; i < data.patients.size(); i++)
         {
             PatientBin pacienteBinario;
-            strncpy(pacienteBinario.nif, data.patients[i].nif.c_str(), KMAXNIF-1);
-            strncpy(pacienteBinario.name, data.patients[i].name.c_str(), KMAXNAME-1);
-            strncpy(pacienteBinario.telephone, data.patients[i].telephone.c_str(), KMAXTELEPHONE-1);
+            strncpy(pacienteBinario.nif, data.patients[i].nif.c_str(), KMAXNIF);
+            strncpy(pacienteBinario.name, data.patients[i].name.c_str(), KMAXNAME);
+            strncpy(pacienteBinario.telephone, data.patients[i].telephone.c_str(), KMAXTELEPHONE);
             fichero.write((const char *)&pacienteBinario, sizeof(PatientBin));
         }
+        fichero.flush();
         fichero.close();
     }
 }
@@ -598,13 +622,11 @@ void Statistics(Database &data)
     ofstream txt("statistics.txt", ios::trunc);
     float IMC = 0;
 
-    
-
     for (size_t i = 0; i < data.analysis.size(); i++)
     {
         cout << data.analysis[i].nif << ";";
-        txt <<data.analysis[i].nif << ";";
-        
+        txt << data.analysis[i].nif << ";";
+
         if (data.analysis[i].dateAnalysis.day < 10 && data.analysis[i].dateAnalysis.day >= 1)
         {
             cout << "0";
@@ -616,7 +638,6 @@ void Statistics(Database &data)
         {
             cout << "0";
             txt << "0";
-
         }
         cout << data.analysis[i].dateAnalysis.month << "/";
         txt << data.analysis[i].dateAnalysis.month << "/";
@@ -684,6 +705,7 @@ int main(int argc, char *argv[])
     char nombreFichero2[255];
     if (Argumentos(argc, argv, fichero, nombreFichero, mostrarEstadisticas))
     {
+
         strcpy(nombreFichero2, nombreFichero.c_str());
         Database data;
         data.nextId = 1;
