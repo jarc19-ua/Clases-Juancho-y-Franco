@@ -4,14 +4,9 @@
 #include <vector>  // Para usar vector
 #include <cctype>  // isdigit() isalpha()
 #include <string.h>
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
 #include <cstring>
-#include <cctype>
 #include <sstream>
-#include <iomanip>
+
 using namespace std;
 
 const int KMAXNIF = 10;
@@ -436,8 +431,9 @@ void addAnalysis(Database &data)
     do
     {
         cout << "Enter weight:" << endl;
-        getline(cin, peso);
-        weight = stof(peso);
+         //getline(cin, peso);
+         //weight = stof(peso);
+        cin >> weight;
         if (weight > 0)
         {
             pesoValido = true;
@@ -447,36 +443,35 @@ void addAnalysis(Database &data)
             error(ERR_WRONG_NUMBER);
         }
     }
-}
-while (!pesoValido)
-    ;
-bool alturaValida = false;
-float height;
-string altura;
-do
-{
-    cout << "Enter height:" << endl;
-    getline(cin, altura);
-    height = stof(altura);
 
-    if (height > 0)
+    while (!pesoValido);
+    bool alturaValida = false;
+    float height;
+    string altura;
+    do
     {
-        alturaValida = true;
-    }
-    else
-    {
-        error(ERR_WRONG_NUMBER);
-    }
-} while (!alturaValida);
-// Crear el analisis y guardarlo en la Database
-Analysis newAnalysis;
-newAnalysis.id = data.nextId;
-data.nextId++;
-strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF);
-newAnalysis.dateAnalysis = date;
-newAnalysis.weight = weight;
-newAnalysis.height = height;
-data.analysis.push_back(newAnalysis);
+        cout << "Enter height:" << endl;
+        // getline(cin, altura);
+        // height = stof(altura);
+        cin >> height;
+        if (height > 0)
+        {
+            alturaValida = true;
+        }
+        else
+        {
+            error(ERR_WRONG_NUMBER);
+        }
+    } while (!alturaValida);
+    // Crear el analisis y guardarlo en la Database
+    Analysis newAnalysis;
+    newAnalysis.id = data.nextId;
+    data.nextId++;
+    strncpy(newAnalysis.nif, nif.c_str(), KMAXNIF);
+    newAnalysis.dateAnalysis = date;
+    newAnalysis.weight = weight;
+    newAnalysis.height = height;
+    data.analysis.push_back(newAnalysis);
 }
 
 void exportAnalysis(const Database &data)
@@ -525,7 +520,7 @@ void importAnalysis(Database &data)
     fichero.close();
     wrongPatientsFile.close();
 }
-}
+
 /*
 // TODO:CHICO UNI
 void importAnalysi//  JUANs(vector<Analysis> &analysis, vector<Patient> &patients, Database &data)
@@ -639,17 +634,17 @@ int main(int argc, char *argv[])
     bool fichero;
     string nombreFichero;
     bool mostrarEstadisticas = false;
-
+    char nombreFichero2[255];
     if (Argumentos(argc, argv, fichero, nombreFichero, mostrarEstadisticas))
     {
-
+        strcpy(nombreFichero2, nombreFichero.c_str());
         Database data;
         data.nextId = 1;
         loadPatients(data);
 
         if (fichero)
         {
-            ifstream inputFile(nombreFichero);
+            ifstream inputFile(nombreFichero2);
 
             if (!inputFile)
             {
