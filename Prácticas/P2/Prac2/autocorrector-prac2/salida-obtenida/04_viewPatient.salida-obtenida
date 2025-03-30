@@ -16,9 +16,7 @@ Option: Enter NIF: Enter name: Enter telephone: 1- Add patient
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-Enter date (day/month/year):
-Enter weight:
+Option: Enter NIF:Enter date (day/month/year):Enter weight:
 Enter height:
 1- Add patient
 2- View Patient
@@ -29,9 +27,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-Enter date (day/month/year):
-Enter weight:
+Option: Enter NIF:Enter date (day/month/year):Enter weight:
 Enter height:
 1- Add patient
 2- View Patient
@@ -42,9 +38,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-Enter date (day/month/year):
-Enter weight:
+Option: Enter NIF:Enter date (day/month/year):Enter weight:
 Enter height:
 1- Add patient
 2- View Patient
@@ -55,9 +49,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-Enter date (day/month/year):
-Enter weight:
+Option: Enter NIF:Enter date (day/month/year):Enter weight:
 Enter height:
 1- Add patient
 2- View Patient
@@ -68,9 +60,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-Enter date (day/month/year):
-Enter weight:
+Option: Enter NIF:Enter date (day/month/year):Enter weight:
 Enter height:
 1- Add patient
 2- View Patient

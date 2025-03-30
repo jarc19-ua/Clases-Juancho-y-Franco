@@ -7,8 +7,7 @@
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-1- Add patient
+Option: Enter NIF:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -17,10 +16,8 @@ Option: Enter NIF:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-ERROR: patient does not exist
-Enter NIF:
-1- Add patient
+Option: Enter NIF:ERROR: patient does not exist
+Enter NIF:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients
@@ -38,23 +35,14 @@ Option: Enter NIF: Enter name: Enter telephone: 1- Add patient
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-ERROR: patient does not exist
-Enter NIF:
-Enter date (day/month/year):
-ERROR: wrong date
-Enter date (day/month/year):
-ERROR: wrong date
-Enter date (day/month/year):
-ERROR: wrong date
-Enter date (day/month/year):
-ERROR: wrong date
-Enter date (day/month/year):
-ERROR: wrong date
-Enter date (day/month/year):
-ERROR: wrong date
-Enter date (day/month/year):
-Enter weight:
+Option: Enter NIF:ERROR: patient does not exist
+Enter NIF:Enter date (day/month/year):ERROR: wrong date
+Enter date (day/month/year):ERROR: wrong date
+Enter date (day/month/year):ERROR: wrong date
+Enter date (day/month/year):ERROR: wrong date
+Enter date (day/month/year):ERROR: wrong date
+Enter date (day/month/year):ERROR: wrong date
+Enter date (day/month/year):Enter weight:
 ERROR: wrong name 
 Enter weight:
 Enter height:
@@ -69,9 +57,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-Enter date (day/month/year):
-Enter weight:
+Option: Enter NIF:Enter date (day/month/year):Enter weight:
 Enter height:
 1- Add patient
 2- View Patient
@@ -82,9 +68,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-Enter date (day/month/year):
-Enter weight:
+Option: Enter NIF:Enter date (day/month/year):Enter weight:
 Enter height:
 1- Add patient
 2- View Patient
@@ -95,9 +79,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-Enter date (day/month/year):
-Enter weight:
+Option: Enter NIF:Enter date (day/month/year):Enter weight:
 Enter height:
 1- Add patient
 2- View Patient
@@ -108,9 +90,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-Enter date (day/month/year):
-Enter weight:
+Option: Enter NIF:Enter date (day/month/year):Enter weight:
 Enter height:
 1- Add patient
 2- View Patient
@@ -121,9 +101,7 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-Enter date (day/month/year):
-Enter weight:
+Option: Enter NIF:Enter date (day/month/year):Enter weight:
 Enter height:
 1- Add patient
 2- View Patient
@@ -134,10 +112,8 @@ Enter height:
 7- Import analysis
 8- Statistics
 q- Quit
-Option: Enter NIF:
-ERROR: patient does not exist
-Enter NIF:
-1- Add patient
+Option: Enter NIF:ERROR: patient does not exist
+Enter NIF:1- Add patient
 2- View Patient
 3- Delete patient
 4- Save patients

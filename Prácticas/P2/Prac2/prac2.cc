@@ -379,7 +379,7 @@ void addAnalysis(Database &data)
 
     do
     {
-        cout << "Enter NIF:" << endl;
+        cout << "Enter NIF:" ;
         getline(cin, nif);
         if (nif.empty())
         {
@@ -407,7 +407,7 @@ void addAnalysis(Database &data)
     bool fechaValida = false;
     do
     {
-        cout << "Enter date (day/month/year):" << endl; // 12/3/2025
+        cout << "Enter date (day/month/year):"; // 12/3/2025
 
         cin >> date.day;
         cin >> slash;
